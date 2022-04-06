@@ -1,0 +1,45 @@
+@use '../abstracts';
+
+main{
+    width: 100%;
+    .photographer_section {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 70px;
+        margin-top: 100px;
+        a{
+            text-decoration: none;
+            
+        }
+        article {
+            cursor: pointer;
+            justify-self: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            img {
+                height: 200px;
+                width: 200px;
+                border-radius: 50%;
+                object-fit: cover;
+            }
+            h2 {
+                color: abstracts.$color-secondary;
+                font-size: 36px;
+            }
+            h4{
+                color: abstracts.$color-secondary;
+                font-size: 13px;
+            }
+            p{
+                font-size: 10px;
+            }
+            p:last-child{
+                font-size: 9px;
+                color: abstracts.$color-tertiary;
+            }
+            
+        }
+    }
+}

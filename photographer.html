@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    <meta charset="utf-8">
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <script src="https://kit.fontawesome.com/89bb515681.js" crossorigin="anonymous"></script>
+    <title>Fisheye - photographe </title>
+  </head>
+  <body>
+    <header>
+      <a href="index.html">
+        <img src="./assets/images/logo.png" class="logo" />
+      </a>
+    </header>
+    <main id="main">
+      <section class="photograph-header">
+        <!-- <div class="presentation">
+          <h1>Mimi Keel</h1>
+          <h3>London, UK</h3>
+          <p>Voir le beau dans le quotidien</p>
+        </div>
+        <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
+        <img src="assets/photographers/MimiKeel.jpg" alt=""> -->
+      </section>
+
+      <nav>
+        <label for="tri">Trier par</label>
+        <div class="select-box">
+            <div class="options-container">
+              <hr>
+              <div class="option">
+                <input type="radio" class="radio" name="category" id="date">
+                <label for="date">Date</label>
+              </div>
+              <hr>
+              <div class="option">
+                <input type="radio" class="radio" name="category" id="date">
+                <label for="titre">Titre</label>
+              </div>
+            </div>
+            <div class="selected">
+              Popularité
+            </div>  
+            
+        </div>
+      </nav>
+
+      <div class="gallery">
+       </div>
+      
+        
+
+      <section id="contact_modal">
+        <div class="modal">
+          <header>
+            <div class="header-title">
+              <h2>Contactez-moi</h2>
+              <p class="name">Mimi Keel</p>
+            </div>
+            <img class="close-modal" src="./assets/icons/close.svg" />
+          </header>
+          <form>
+            <div class="'formData">
+              <label>Prénom</label>
+              <input type="text" name="first" id="first">
+            </div>
+            <div class="'formData">
+              <label>Nom</label>
+              <input type="text" name="last" id="last">
+            </div>
+            <div class="'formData">
+              <label>Email</label>
+              <input type="email" name="mail" id="mail">
+            </div>
+            <div class="'formData formData-message">
+              <label>Votre message</label>
+              <input type="text" name="text" id="text">
+            </div>
+            <button class="contact_button">Envoyer</button>
+          </form>
+        </div>
+      </section>
+    </main>
+    <script src="./dist/photographerDist.js"></script>
+    
+  </body>
+</html>

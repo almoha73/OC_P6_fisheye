@@ -1,55 +1,40 @@
+//const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     mode: 'development',
+
     entry: {
-        bundle: path.resolve(__dirname, 'src/index.js'),
+        main: path.resolve(__dirname, './src/scripts/pages/index.js'),
+        photographerDist: path.resolve(__dirname, './src/scripts/pages/photographer.js'),
+        
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: '[name][contenthash].js',
+        filename: '[name].js',
         clean: true,
-        assetModuleFilename: '[name][ext]'
     },
-    devtool: 'source-map',
-    devServer: {
-        static: {
-            directory: path.resolve(__dirname, 'dist')
-        },
-        port: 3000,
-        open: true,
-        hot: true,
-        compress: true,
-        historyApiFallback: true,
-    },
+
     module: {
         rules: [
-            {
-                test: /\.scss$/,
-                use: ['style-loader', 'css-loader', 'sass-loader'],
-            },
-            {
-                test: /\.js$/,
-                exclude: /node_modules/,
-                use: {
-                    loader: 'babel-loader',
-                    options: {
-                        presets: ['@babel/preset-env']
-                    }
-                }
-            },
-            {
-                test: /\.(png|jpg|jpeg|svg|gif)$/i,
-                type: 'asset/resource'
-            },
-        ]
+          {
+            test: /\.css$/i,
+            use: ['style-loader', "css-loader"],
+          },
+
+          {
+            test: /\.scss$/i,
+            use: [
+              // Creates `style` nodes from JS strings
+              'style-loader',
+              // Translates CSS into CommonJS
+              "css-loader",
+              // Compiles Sass to CSS
+              "sass-loader",
+            ],
+          },
+        ],
+
     },
-    plugins: [
-        new HtmlWebpackPlugin({
-            title: 'Webpack App',
-            filename: 'index.html',
-            template: 'src/template.html',
-        })
-    ]
+    
 }
