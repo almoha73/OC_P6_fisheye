@@ -5,7 +5,7 @@ import {fetchPhotographers} from '../pages/api'
 
 
 
-
+/// AFFICHAGE DU PROFIL DE TOUS LES PHOTOGRAPHES SUR LA PAGE D'ACCUEIL  
 init();
 
 async function init(){

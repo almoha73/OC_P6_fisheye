@@ -32,7 +32,7 @@ class MediaImages extends Medias {
         const gallery = document.querySelector('.gallery');
         gallery.innerHTML += `
         <figure>
-            <img src="assets/photographers/${this.photographerId}/${this.image}" alt="">    
+            <img class="media" src="assets/photographers/${this.photographerId}/${this.image}" alt="">    
             <figcaption>
             <span>${this.title}</span><span>${this.likes}<i class="far fa-regular fa-heart"></i></span>
             </figcaption>
@@ -56,7 +56,7 @@ class Videos extends Medias {
         const gallery = document.querySelector('.gallery');
         gallery.innerHTML += `
         <figure>
-            <video preload="metadata" src="assets/photographers/videos/${this.video}" id="video_media" type="video/mp4" loop></video>
+            <video class="media" preload="metadata" src="assets/photographers/videos/${this.video}" id="video_media" type="video/mp4" loop></video>
             
             <div class="bar">
                 <div class="bar-line"></div>
