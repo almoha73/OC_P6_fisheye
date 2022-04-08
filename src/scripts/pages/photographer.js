@@ -50,20 +50,27 @@ async function displayLightbox(){
     const dataMedia = await fetchPhotographersMedias();
    console.log(dataMedia);
    const mediaLightbox = Array.from(document.querySelectorAll('.media'));
-   console.log(mediaLightbox);
-   const mediaLightboxIterator = mediaLightbox.keys();
-   console.log(mediaLightboxIterator);
-   
-        for(let media of mediaLightbox){
-            media.addEventListener('click', (e) => {
-                    let index = mediaLightbox.indexOf(e.target);
-                    console.log(index);
-                    const lightboxDisplay = new LightboxFactory(dataMedia[index]);
-                    console.log(lightboxDisplay);
-                    lightboxDisplay.getLightbox();
+    console.log(mediaLightbox);
+   for(let media of dataMedia){
+    const mediaId = media.id; 
+    console.log(mediaId);
 
-            })
-        }
-}           
+         for(let med of mediaLightbox){
+             console.log(med);
+             console.log(med.nodeName);
+             console.log(med.id);
+            if(mediaId == med.id){
+                med.addEventListener('click', () => {
+                    const lightboxDisplay = new LightboxFactory(med, media);
+                    lightboxDisplay.getLightbox();
+                    console.log(lightboxDisplay);
+                })
+            }
+            
+         }
+   }
+   
+}
+              
    
 displayLightbox();

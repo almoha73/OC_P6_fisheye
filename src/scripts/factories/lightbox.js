@@ -1,22 +1,27 @@
 import { displayMedias } from "../pages/photographer";
  
 export class LightboxFactory {
-  constructor(dataMedia){
-      if(dataMedia.video == undefined){
+  constructor(med, dataMedia){
+      if(med.nodeName === 'IMG'){
           return  new LightboxImage(dataMedia)
               
-      }else if (dataMedia.image == undefined){
+      }else if (med.nodeName === 'VIDEO'){
           return new LightboxVideo(dataMedia)
-      }
-  } 
+      };
+
+      
+     
+  }
+} 
  
-}
+
 
     
 export class Lightbox{
     constructor(dataMedia){
       this.photographerId = dataMedia.photographerId;
         this.title = dataMedia.title;
+        this.id = dataMedia.id;
        
     }
 }
@@ -27,7 +32,7 @@ class LightboxImage extends Lightbox {
     this.image = dataMedia.image;
   }
 
-  async  getLightbox(){
+  getLightbox(){
         const  wrapper = document.querySelector('.wrapper');
         if(wrapper.classList.contains('hidden')){
           wrapper.classList.add('visible')
@@ -44,7 +49,7 @@ class LightboxImage extends Lightbox {
     </div>
     <div class="lightbox">
       <div>
-        <img src="assets/photographers/${this.photographerId}/${this.image}" alt="">
+        <img id="${this.id}" src="assets/photographers/${this.photographerId}/${this.image}" alt="">
         <p>${this.title}</p>
       </div>
     </div>
@@ -68,7 +73,7 @@ class LightboxVideo extends Lightbox {
     
 }
 
-async getLightbox(){
+ getLightbox(){
   const  wrapper = document.querySelector('.wrapper');
         if(wrapper.classList.contains('hidden')){
           wrapper.classList.add('visible')
@@ -84,7 +89,7 @@ async getLightbox(){
   </div>
   <div class="lightbox">
     <div>
-    <video class="media" preload="metadata" src="assets/photographers/videos/${this.video}" id="video_media" type="video/mp4" loop></video>
+    <video id="${this.id} preload="metadata" src="assets/photographers/videos/${this.video}" type="video/mp4" loop></video>
       <p>${this.title}</p>
     </div>
   </div>

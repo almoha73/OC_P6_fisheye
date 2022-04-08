@@ -32,7 +32,7 @@ class MediaImages extends Medias {
         const gallery = document.querySelector('.gallery');
         gallery.innerHTML += `
         <figure>
-            <img class="media" src="assets/photographers/${this.photographerId}/${this.image}" alt="">    
+            <img id="${this.id}" class="media" src="assets/photographers/${this.photographerId}/${this.image}" alt="">    
             <figcaption>
             <span>${this.title}</span><span>${this.likes}<i class="far fa-regular fa-heart"></i></span>
             </figcaption>
@@ -56,7 +56,7 @@ class Videos extends Medias {
         const gallery = document.querySelector('.gallery');
         gallery.innerHTML += `
         <figure>
-            <video class="media" preload="metadata" src="assets/photographers/videos/${this.video}" id="video_media" type="video/mp4" loop></video>
+            <video id="${this.id}" class="media" preload="metadata" src="assets/photographers/videos/${this.video}" type="video/mp4" loop></video>
             
             <div class="bar">
                 <div class="bar-line"></div>
@@ -68,16 +68,7 @@ class Videos extends Medias {
       `
     }
 
-    // async controlMedia(){
-    //     const videoMedia = document.getElementById('video_media');
-
-    //             videoMedia.addEventListener('mouseenter', () => {
-    //                 videoMedia.play();
-    //             })
-    //             videoMedia.addEventListener('mouseout', () => {
-    //                 videoMedia.pause();
-    //             })
-    // }
+   
       
     
 }
