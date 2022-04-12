@@ -34,7 +34,7 @@ class MediaImages extends Medias {
         <figure>
             <img id="${this.id}" class="media" src="assets/photographers/${this.photographerId}/${this.image}" alt="">    
             <figcaption>
-            <span>${this.title}</span><span>${this.likes}<i class="far fa-regular fa-heart"></i></span>
+            <span class="title">${this.title}</span><span>${this.likes}<i class="far fa-regular fa-heart"></i></span>
             </figcaption>
         </figure>
         
@@ -62,7 +62,7 @@ class Videos extends Medias {
                 <div class="bar-line"></div>
             </div>
             <figcaption>
-            <span>${this.title}</span><span>${this.likes}<i class="far fa-regular fa-heart"></i></span>
+            <span class="title">${this.title}</span><span>${this.likes}<i class="far fa-regular fa-heart"></i></span>
             </figcaption>
         </figure>
       `

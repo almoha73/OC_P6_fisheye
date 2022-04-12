@@ -41,36 +41,7 @@ export async function displayMedias(){
     }
                    
 }           
-// displayMedias()
+
 
 //// AFFICHAGE  DE LA LIGHTBOX 
 
-async function displayLightbox(){ 
-    await displayMedias();
-    const dataMedia = await fetchPhotographersMedias();
-   console.log(dataMedia);
-   const mediaLightbox = Array.from(document.querySelectorAll('.media'));
-    console.log(mediaLightbox);
-   for(let media of dataMedia){
-    const mediaId = media.id; 
-    console.log(mediaId);
-
-         for(let med of mediaLightbox){
-             console.log(med);
-             console.log(med.nodeName);
-             console.log(med.id);
-            if(mediaId == med.id){
-                med.addEventListener('click', () => {
-                    const lightboxDisplay = new LightboxFactory(med, media);
-                    lightboxDisplay.getLightbox();
-                    console.log(lightboxDisplay);
-                })
-            }
-            
-         }
-   }
-   
-}
-              
-   
-displayLightbox();
