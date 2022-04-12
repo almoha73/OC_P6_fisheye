@@ -32,14 +32,14 @@ import { displayMedias } from "../pages/photographer";
 
     links.forEach(link => link.addEventListener('click', e => {
       e.preventDefault();
-      console.log(e.target);
+      console.log(e.target.nextElementSibling.nextElementSibling.firstChild.nextElementSibling.innerText);
       // console.log(e.target.nextElementSibling.firstChild.nextElementSibling.innerText);
       
       if(e.target.nodeName === 'IMG'){
                   return  new Lightboximage(e.currentTarget.getAttribute(`src`), linksImageGallery, e.target.nextElementSibling.firstChild.nextElementSibling.innerText)
                       
               }else if (e.target.nodeName === 'VIDEO'){
-                  return new Lightboxvideo(e.currentTarget.getAttribute('src'), linksVideoGallery, e.target.nextElementSibling.firstChild.nextElementSibling.innerText)
+                  return new Lightboxvideo(e.currentTarget.getAttribute('src'), linksVideoGallery, e.target.nextElementSibling.nextElementSibling.firstChild.nextElementSibling.innerText)
               };
      
 
@@ -134,7 +134,7 @@ import { displayMedias } from "../pages/photographer";
         </div>
         <div class="lightbox_container">
           <div>
-            <video src="${url}" alt="" controls>
+            <video src="${url}" alt="" controls></video>
             <p>${title}</p>
           </div>
         </div>
