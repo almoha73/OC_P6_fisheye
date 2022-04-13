@@ -1,5 +1,7 @@
 import { fetchPhotographersMedias } from "../pages/api";
 import { displayMedias } from "../pages/photographer";
+import {Lightboximage} from "../factories/lightboxImage";
+import {Lightboxvideo} from "../factories/lightboxVideo"
 
 class Lightbox {
   static async init() {
@@ -11,32 +13,37 @@ class Lightbox {
     
     for (let i = 0; i < links.length; i++) {
       let newIndex = i;
-
+      
       links[i].onclick = () => {
+        //AFFICHAGE DU WRAPPER DE LA LIGHTBOX SANS IMAGES/VIDEO 
         const newLightbox = new Lightbox;
         newLightbox.buildDom();
-        function preview() {
-          let selectedImgUrl = links[newIndex].getAttribute("src");
-          console.log(selectedImgUrl);
-          console.log(links[newIndex]);
-         
-          if (links[newIndex].nodeName === "IMG") {
-            const lightboxImage = new Lightboximage(
-              selectedImgUrl, links[newIndex].nextElementSibling.firstChild.nextElementSibling.innerText);
-              lightboxImage.buildDom();
 
-          } else if (links[newIndex].nodeName === "VIDEO") {
-            const lightboxVideo = new Lightboxvideo(
-              selectedImgUrl, links[newIndex].nextElementSibling.nextElementSibling.firstChild.nextElementSibling.innerText);
-              lightboxVideo.buildDom();
-          }
-         
-        }
-        preview();
+        //AFFICHAGE DE LA LIGHTBOX AVEC IMAGES ET/OU VIDEO
+              function preview() {
+                let selectedImgUrl = links[newIndex].getAttribute("src");
+                console.log(selectedImgUrl);
+                console.log(links[newIndex]);
+              
+                if (links[newIndex].nodeName === "IMG") {
+                  const lightboxImage = new Lightboximage(
+                    selectedImgUrl, links[newIndex].nextElementSibling.firstChild.nextElementSibling.innerText);
+                    lightboxImage.buildDom();
+
+                } else if (links[newIndex].nodeName === "VIDEO") {
+                  const lightboxVideo = new Lightboxvideo(
+                    selectedImgUrl, links[newIndex].nextElementSibling.nextElementSibling.firstChild.nextElementSibling.innerText);
+                    lightboxVideo.buildDom();
+                }
+              
+              }
+              preview();
 
                     const lightboxContainer = document.querySelector(".lightbox_container");
-                    const next = document.querySelectorAll(".next");
-                    next.forEach(next => next.addEventListener("click", (e) => {
+
+                    //NEXT AU CLIC SOURIS
+                    const next = document.querySelector(".next");
+                    next.addEventListener("click", (e) => {
                       e.preventDefault();
                       lightboxContainer.firstChild.remove();
                       console.log(links.length);
@@ -51,10 +58,11 @@ class Lightbox {
                         preview()
                       }
                     
-                    }))
+                    })
 
-                    const previous = document.querySelectorAll(".previous");
-                    previous.forEach(next => next.addEventListener("click", (e) => {
+                    //PREVIOUS AU CLIC SOURIS
+                    const previous = document.querySelector(".previous");
+                    previous.addEventListener("click", (e) => {
                       e.preventDefault();
                       lightboxContainer.firstChild.remove();
                       console.log(links.length);
@@ -69,7 +77,7 @@ class Lightbox {
                         preview()
                       }
                     
-                    }))
+                    })
       }
     }
   }
@@ -81,7 +89,6 @@ class Lightbox {
 
   buildDom() {
     const wrapper = document.createElement("div");
-
     wrapper.classList.add("wrapper");
 
     wrapper.innerHTML = `
@@ -120,48 +127,6 @@ class Lightbox {
   }
 }
 
-class Lightboximage {
-  constructor(url, title) {
-    this.title = title;
-    this.url = url;
-  }
 
-  buildDom() {
-    const lightboxContainer = document.querySelector('.lightbox_container');
-    console.log(lightboxContainer);
-    lightboxContainer.innerHTML = ''
-    lightboxContainer.innerHTML = `
-    <div>
-      <img src="${this.url}" alt="">
-      <p>${this.title}</p>
-    </div>
-    `
-    
-
-    // wrapper.querySelector(".next").addEventListener('click', this.next.bind(this));
-    return lightboxContainer;
-  }
-}
-
-class Lightboxvideo {
-  constructor(url, title) {
-    this.title = title;
-    this.url = url;
-  }
-
-  buildDom() {
-    const lightboxContainer = document.querySelector('.lightbox_container');
-    console.log(lightboxContainer);
-    lightboxContainer.innerHTML = ''
-    lightboxContainer.innerHTML = `
-    <div>
-      <video src="${this.url}" alt="" controls></video>
-      <p>${this.title}</p>
-    </div>
-    `
-    // wrapper.querySelector(".next").addEventListener('click', this.next.bind(this));
-    return lightboxContainer;
-  }
-}
 
 Lightbox.init();
