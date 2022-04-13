@@ -8,6 +8,9 @@
     z-index: -1;
 }
 .wrapper{
+    display: block;
+}
+.wrapper-content{
     z-index: 999;
     position: fixed;
     display: flex;
@@ -20,6 +23,8 @@
     transform: translate(-50%, -50%);
     background: #E9CACA;
     border-radius: 3px;
+    
+    
     & button{
         border: none;
         outline: none;
@@ -95,9 +100,6 @@
 }
 
 .hidden{
-    visibility: hidden;
+    display: none;
 }
-.visible{
-    visibility: visible;
-}
-    
+
