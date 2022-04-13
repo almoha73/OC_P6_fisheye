@@ -8,9 +8,7 @@ class Lightbox {
 
     const links = Array.from(document.querySelectorAll(".media"));
     console.log(links);
-    const previewImg = document.querySelector(".media");
-    console.log(previewImg.src);
-
+    
     for (let i = 0; i < links.length; i++) {
       let newIndex = i;
 
@@ -36,24 +34,42 @@ class Lightbox {
         }
         preview();
 
-            const lightboxContainer = document.querySelector(".lightbox_container");
-            const next = document.querySelectorAll(".next");
-            next.forEach(next => next.addEventListener("click", (e) => {
-              e.preventDefault();
-              lightboxContainer.firstChild.remove();
-              console.log(links.length);
-              newIndex++;
-              console.log(newIndex);
-              if(newIndex < links.length - 1){
-                newIndex++;
-                preview();
+                    const lightboxContainer = document.querySelector(".lightbox_container");
+                    const next = document.querySelectorAll(".next");
+                    next.forEach(next => next.addEventListener("click", (e) => {
+                      e.preventDefault();
+                      lightboxContainer.firstChild.remove();
+                      console.log(links.length);
+                     
+                      console.log(newIndex);
+                      if(newIndex < links.length - 1){
+                        newIndex++;
+                        preview();
 
-              }else{
-                newIndex = 0;
-                preview()
-              }
-            
-            }))
+                      }else {
+                        newIndex = 0;
+                        preview()
+                      }
+                    
+                    }))
+
+                    const previous = document.querySelectorAll(".previous");
+                    previous.forEach(next => next.addEventListener("click", (e) => {
+                      e.preventDefault();
+                      lightboxContainer.firstChild.remove();
+                      console.log(links.length);
+                     
+                      console.log(newIndex);
+                      if(newIndex > 0){
+                        newIndex--;
+                        preview();
+
+                      }else {
+                        newIndex = links.length - 1;
+                        preview()
+                      }
+                    
+                    }))
       }
     }
   }
