@@ -70,7 +70,7 @@ export async function displayMedias(){
                             const target = +likeCount[i].getAttribute('data-target');
                             console.log(target);
                             likeCount[i].innerHTML = target + 1;
-                            likeTotal.innerHTML = sum++  + `<i class="fas fa-solid fa-heart"></i>`
+                            likeTotal.innerHTML = 1 + sum++  + `<i class="fas fa-solid fa-heart"></i>`
                         }else{
                             clicked = false;
                             likeButton[i].innerHTML = `<i class="fas fa-regular fa-heart"></i>`
