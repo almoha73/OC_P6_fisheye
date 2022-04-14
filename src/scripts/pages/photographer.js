@@ -23,7 +23,7 @@ async function displayPhotographerHeader (){
 
             //AFFICHAGE DU PRIX JOURNALIER
             const tarifJour = document.querySelector('.tarif-jour');
-            tarifJour.innerHTML = article.price + '/jour';
+            tarifJour.innerHTML = article.price+ '€/jour';
         }
     }  
 }
@@ -69,7 +69,9 @@ export async function displayMedias(){
                             likeButton[i].innerHTML = `<i class="fas fa-solid fa-heart"></i>`;
                             const target = +likeCount[i].getAttribute('data-target');
                             console.log(target);
+                            //total de likes sous chaque photo actualisé à chaque clic
                             likeCount[i].innerHTML = target + 1;
+                            //total de likes general sur la page
                             likeTotal.innerHTML = 1 + sum++  + `<i class="fas fa-solid fa-heart"></i>`
                         }else{
                             clicked = false;
@@ -78,7 +80,7 @@ export async function displayMedias(){
                     })
                 }
 
-                //total
+                
                 
             }
             likes()
