@@ -2,7 +2,8 @@ import "../../styles/style.scss";
 import { PhotographerFactory } from "../factories/photographerFactory.js";
 import { MediaFactory } from "../factories/mediasFactory";
 import { fetchPhotographers, fetchPhotographersMedias} from "../pages/api.js";
-import { LightboxFactory } from "../factories/lightbox";
+import { Lightbox } from "../factories/lightbox";
+//import { likes } from "../utils/likes";
 
 
 export function getPhotographerId(){
@@ -37,8 +38,39 @@ export async function displayMedias(){
                 const mediaDisplay = new MediaFactory(media);
                  mediaDisplay.getMedias();
             } 
+
+            function likes (){
+                const likeCount = document.querySelectorAll('.like-count')
+                console.log(likeCount);
+                const likeButton = document.querySelectorAll('.like-button');
+                console.log(likeButton);
+                
+                for(let i = 0; i < likeButton.length; i++){
+                    console.log(likeButton[i]);
+                    console.log(likeCount[i]);
+                    likeCount[i].innerHTML = likeCount[i].getAttribute('data-target')
+                    let clicked = false;
+                    likeButton[i].addEventListener('click', () => {
+                        
+                        if(!clicked){
+                            clicked = true;
+                            likeButton[i].innerHTML = `<i class="fas fa-solid fa-heart"></i>`;
+                            const target = +likeCount[i].getAttribute('data-target');
+                            console.log(target);
+                            likeCount[i].innerHTML = target + 1
+                        }else{
+                            clicked = false;
+                            likeButton[i].innerHTML = `<i class="fas fa-regular fa-heart"></i>`
+                        }
+                    })
+                }
+                
+            }
+            likes()
         
     }
+
+    
                    
 }           
 

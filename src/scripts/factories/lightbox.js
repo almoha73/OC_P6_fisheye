@@ -3,11 +3,11 @@ import { displayMedias } from "../pages/photographer";
 import {Lightboximage} from "../factories/lightboxImage";
 import {Lightboxvideo} from "../factories/lightboxVideo"
 
-class Lightbox {
+export class Lightbox {
   static async init() {
     const dataMedia = await fetchPhotographersMedias();
     await displayMedias();
-
+    
     const links = Array.from(document.querySelectorAll(".media"));
     console.log(links);
     

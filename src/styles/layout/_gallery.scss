@@ -72,25 +72,29 @@
             
     }
     figcaption{
-        display: block;
         width: 100%;
-        
-        span{
-            display: inline-block;
-            line-height: 31px;
+        height: 44px;
+        display: flex;
+        p{
+            
             &:first-child{
                 font-size: 24px;
                 color: abstracts.$color-primary;
-                width: 85%;
+                width: 80%;
                 overflow: hidden;
                 text-overflow: ellipsis;
                 white-space: nowrap;
+                line-height: 44px;
             }
             &:nth-child(2){
-                float: right;
-                i{
-                    margin-left: 10px;
-                }
+                width: 10%;
+                line-height: 44px;
+                text-align: right;
+            }
+            &:nth-child(3){
+                width: 10%;
+                line-height: 44px;
+                text-align: right;
             }
             
         }
