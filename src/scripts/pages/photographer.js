@@ -3,7 +3,7 @@ import { PhotographerFactory } from "../factories/photographerFactory.js";
 import { MediaFactory } from "../factories/mediasFactory";
 import { fetchPhotographers, fetchPhotographersMedias} from "../pages/api.js";
 import { Lightbox } from "../factories/lightbox";
-//import { likes } from "../utils/likes";
+//import { Likes, likes } from "../utils/likes";
 
 
 export function getPhotographerId(){
@@ -20,6 +20,10 @@ async function displayPhotographerHeader (){
         if(article.id == articleId){
             const headerPhotographer = new PhotographerFactory(article);
             headerPhotographer.getUserSpecific();
+
+            //AFFICHAGE DU PRIX JOURNALIER
+            const tarifJour = document.querySelector('.tarif-jour');
+            tarifJour.innerHTML = article.price + '/jour';
         }
     }  
 }
@@ -33,17 +37,22 @@ export async function displayMedias(){
     console.log(dataMedia);
     const mediaId = getPhotographerId(); 
     console.log(mediaId);
+    
     for(let media of dataMedia){
         if(media.photographerId == mediaId){
+                
                 const mediaDisplay = new MediaFactory(media);
                  mediaDisplay.getMedias();
+                
             } 
-
+            /// GESTION DES LIKES
             function likes (){
                 const likeCount = document.querySelectorAll('.like-count')
                 console.log(likeCount);
                 const likeButton = document.querySelectorAll('.like-button');
                 console.log(likeButton);
+                const likeTotal = document.querySelector('.like-total-count');
+                
                 
                 for(let i = 0; i < likeButton.length; i++){
                     console.log(likeButton[i]);
@@ -57,7 +66,8 @@ export async function displayMedias(){
                             likeButton[i].innerHTML = `<i class="fas fa-solid fa-heart"></i>`;
                             const target = +likeCount[i].getAttribute('data-target');
                             console.log(target);
-                            likeCount[i].innerHTML = target + 1
+                            likeCount[i].innerHTML = target + 1;
+                            
                         }else{
                             clicked = false;
                             likeButton[i].innerHTML = `<i class="fas fa-regular fa-heart"></i>`
@@ -68,12 +78,7 @@ export async function displayMedias(){
             }
             likes()
         
-    }
-
-    
-                   
+    }                     
 }           
 
-
-//// AFFICHAGE  DE LA LIGHTBOX 
 
