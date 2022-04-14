@@ -52,28 +52,33 @@ export async function displayMedias(){
                 const likeButton = document.querySelectorAll('.like-button');
                 console.log(likeButton);
                 const likeTotal = document.querySelector('.like-total-count');
-                
-                
+                let sum = 0;
+                //incrémentation
                 for(let i = 0; i < likeButton.length; i++){
+                    sum += +likeCount[i].getAttribute('data-target');
+                    console.log(sum);
                     console.log(likeButton[i]);
                     console.log(likeCount[i]);
                     likeCount[i].innerHTML = likeCount[i].getAttribute('data-target')
+                    likeTotal.innerHTML = sum + `<i class="fas fa-solid fa-heart"></i>`;
                     let clicked = false;
                     likeButton[i].addEventListener('click', () => {
-                        
+                          
                         if(!clicked){
                             clicked = true;
                             likeButton[i].innerHTML = `<i class="fas fa-solid fa-heart"></i>`;
                             const target = +likeCount[i].getAttribute('data-target');
                             console.log(target);
                             likeCount[i].innerHTML = target + 1;
-                            
+                            likeTotal.innerHTML = sum++  + `<i class="fas fa-solid fa-heart"></i>`
                         }else{
                             clicked = false;
                             likeButton[i].innerHTML = `<i class="fas fa-regular fa-heart"></i>`
                         }
                     })
                 }
+
+                //total
                 
             }
             likes()
