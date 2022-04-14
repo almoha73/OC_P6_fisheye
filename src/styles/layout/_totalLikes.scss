@@ -1,0 +1,19 @@
+@use '../abstracts';
+
+section.like-storage{
+    width: 376px;
+    height: 80px;
+    border-radius: 5px;
+    position: fixed;
+    background-color: abstracts.$color-secondary;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    h2.like-total-count{
+        i{
+            margin-left: 15px;
+        }
+    }
+}
