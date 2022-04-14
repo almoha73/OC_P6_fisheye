@@ -88,13 +88,15 @@
                 line-height: 44px;
             }
             &:nth-child(2){
+                font-size: 18px;
+                color: abstracts.$color-primary;
                 width: 10%;
                 line-height: 44px;
                 text-align: right;
             }
             &:nth-child(3){
                 width: 10%;
-                line-height: 44px;
+                line-height: 48px;
                 text-align: right;
                 i{
                     color: abstracts.$color-primary;

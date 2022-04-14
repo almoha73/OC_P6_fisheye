@@ -1,15 +1,26 @@
-const modal = document.getElementById("contact_modal");
-const contact = document.querySelector(".contact");
-	
+import { displayPhotographerHeader } from "../pages/photographer";
 
-    contact.addEventListener('click', () => {
-        
-        modal.style.display = "block";
-    })
-
-    const closeModal = document.querySelector(".close-modal");
-    closeModal.addEventListener('click', () => {
-        modal.style.display = "none";
-    })
+export  async function contactForm(){
+     await displayPhotographerHeader();
     
+    //Variables du formulaire
+    const formModal = document.querySelector("#contact_modal")
+    console.log(formModal);
+    const contactBtn = document.querySelector("button.contact");
+	console.log(contactBtn);
+    const closeModal = document.querySelector(".close-modal");
+    
+    //ouverture du formulaire
+    contactBtn.addEventListener('click', () => {
+        formModal.style.display = 'inline-block'
+    })
+
+    //fermeture du formulaire
+    closeModal.addEventListener('click', () => {
+        formModal.style.display = 'none'
+    })
+
+}
+
+   
 
