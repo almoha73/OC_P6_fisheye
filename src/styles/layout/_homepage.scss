@@ -18,11 +18,18 @@ main{
             justify-content: center;
             align-items: center;
             flex-direction: column;
+            
             img {
+                box-shadow:2px 2px 10px 0 rgba(0,0,0,0.5);
+                transition: all 0.2s;
                 height: 200px;
                 width: 200px;
                 border-radius: 50%;
                 object-fit: cover;
+                &:hover{
+                    box-shadow:8px 8px 10px 0 rgba(0,0,0,0.5);
+                    transform: scale(1.03);
+                }
             }
             h2 {
                 color: abstracts.$color-secondary;
