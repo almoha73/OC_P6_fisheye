@@ -32,7 +32,7 @@ class MediaImages extends Medias {
         const gallery = document.querySelector('.gallery');
         gallery.innerHTML += `
         <figure>
-            <img id="${this.id}" class="media visible" src="assets/photographers/${this.photographerId}/${this.image}" alt="">    
+            <img id="${this.id}" class="media visible" src="assets/photographers/${this.photographerId}/${this.image}" srcset="assets/photographers/${this.photographerId}/${this.image}_small.jpg 1x" alt="">    
             <figcaption>
             <p class="title">${this.title}</p><p data-target="${this.likes}" class="like-count"></p><p class="like-button"><i class="far fa-regular fa-heart"></i></p>
             </figcaption>

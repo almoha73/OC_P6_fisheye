@@ -1,6 +1,8 @@
 @use '../abstracts';
 
 section.like-storage{
+    cursor: all-scroll;
+    z-index: 250;
     width: 376px;
     height: 80px;
     border-radius: 5px;

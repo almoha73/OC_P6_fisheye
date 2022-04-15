@@ -4,6 +4,7 @@ import { MediaFactory } from "../factories/mediasFactory";
 import { fetchPhotographers, fetchPhotographersMedias} from "../pages/api.js";
 import { contactForm } from "../utils/contactForm";
 import { Lightbox } from "../factories/lightbox";
+import { move } from "../utils/draggableDiv";
 //import { Likes } from "../utils/likes";
 
 
@@ -35,6 +36,8 @@ export async function displayPhotographerHeader (){
 displayPhotographerHeader();
 
 contactForm();
+
+move();
 
 ///AFFICHAGE DES MEDIAS CORRESPONDANT A CHAQUE PHOTOGRAPHE
 export async function displayMedias(){
