@@ -23,9 +23,12 @@ export async function displayPhotographerHeader (){
             const headerPhotographer = new PhotographerFactory(article);
             headerPhotographer.getUserSpecific();
 
-            //AFFICHAGE DU PRIX JOURNALIER
+            //AFFICHAGE DYNAMIQUE DU PRIX JOURNALIER
             const tarifJour = document.querySelector('.tarif-jour');
             tarifJour.innerHTML = article.price + '€/jour';
+            //AFFICHAGE DYNAMIQUE DU NOM DANS LE FORMULAIRE
+            const contactName = document.querySelector('.contact-name');
+            contactName.innerHTML = article.name;
         }
     }  
 }
