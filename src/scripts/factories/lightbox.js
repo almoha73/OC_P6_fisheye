@@ -32,7 +32,7 @@ export class Lightbox {
 
                 } else if (links[newIndex].nodeName === "VIDEO") {
                   const lightboxVideo = new Lightboxvideo(
-                    selectedImgUrl, links[newIndex].nextElementSibling.nextElementSibling.firstChild.nextElementSibling.innerText);
+                    selectedImgUrl, links[newIndex].nextElementSibling.firstChild.nextElementSibling.innerText);
                     lightboxVideo.buildDom();
                 }
               

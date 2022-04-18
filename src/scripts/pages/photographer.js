@@ -5,7 +5,7 @@ import { fetchPhotographers, fetchPhotographersMedias} from "../pages/api.js";
 import { contactForm } from "../utils/contactForm";
 import { dropdown } from "../utils/dropdown";
 import { Lightbox } from "../factories/lightbox";
-import { move } from "../utils/draggableDiv";
+//import { move } from "../utils/draggableDiv";
 
 //import { Likes } from "../utils/likes";
 
@@ -40,7 +40,7 @@ displayPhotographerHeader();  //AFFICHAGE DU HEADER PERSONNALISE POUR UN PHOTOGR
 
 contactForm(); //GESTION DU FORMULAIRE 
 
-move();  //GESTION DU DRAG AND DROP DE LA DIV DU TOTAL DES COEURS
+//move();  //GESTION DU DRAG AND DROP DE LA DIV DU TOTAL DES COEURS
 
 dropdown();  //ANIMATION DU MENU DROPDOWN
 
