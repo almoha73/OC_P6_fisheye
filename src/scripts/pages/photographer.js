@@ -69,6 +69,7 @@ export async function displayMedias(){
                 let sum = 0;
                 //incrémentation
                 for(let i = 0; i < likeButton.length; i++){
+                    const target = +likeCount[i].getAttribute('data-target');
                     sum += +likeCount[i].getAttribute('data-target');
                    
                     likeCount[i].innerHTML = likeCount[i].getAttribute('data-target')
@@ -79,10 +80,9 @@ export async function displayMedias(){
                         if(!clicked){//LIKE
                             clicked = true;
                             likeButton[i].innerHTML = `<i class="fas fa-solid fa-heart"></i>`;
-                            const target = +likeCount[i].getAttribute('data-target');
-                            
+                                
                             //total de likes sous chaque photo actualisé à chaque clic
-                            likeCount[i].innerHTML = target + 1;
+                            likeCount[i].innerText = target + 1;
                             //total de likes général actualisé sur la page
                             likeTotal.innerHTML = 1 + sum++  + `<i class="fas fa-solid fa-heart"></i>`
                         
@@ -91,7 +91,7 @@ export async function displayMedias(){
                             likeButton[i].innerHTML = `<i class="far fa-regular fa-heart"></i>`
                             
                             //total de likes sous chaque photo actualisé à chaque clic
-                            likeCount[i].innerHTML = +likeCount[i].innerHTML - 1;
+                            likeCount[i].innerText = 1 + target - 1;
                             //total de likes général actualisé sur la page
                             likeTotal.innerHTML =  -1 + sum--  + `<i class="fas fa-solid fa-heart"></i>`
                         }
