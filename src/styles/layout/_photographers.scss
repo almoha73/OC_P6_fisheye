@@ -44,6 +44,7 @@ main{
             outline: none;
             &:hover{
                 background-color: abstracts.$color-secondary;
+                transform: scale(1.03);
             }
         }
         img{

@@ -21,5 +21,5 @@ optionsList.forEach(elt => {
     })
 });
 }
-dropdown();
+
 
