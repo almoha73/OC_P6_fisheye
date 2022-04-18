@@ -74,9 +74,9 @@ export async function displayMedias(){
                     likeCount[i].innerHTML = likeCount[i].getAttribute('data-target')
                     likeTotal.innerHTML = sum + `<i class="fas fa-solid fa-heart"></i>`;
                     let clicked = false;
-
+                    
                     likeButton[i].addEventListener('click', () => {
-                        if(!clicked){
+                        if(!clicked){//LIKE
                             clicked = true;
                             likeButton[i].innerHTML = `<i class="fas fa-solid fa-heart"></i>`;
                             const target = +likeCount[i].getAttribute('data-target');
@@ -85,9 +85,15 @@ export async function displayMedias(){
                             likeCount[i].innerHTML = target + 1;
                             //total de likes général actualisé sur la page
                             likeTotal.innerHTML = 1 + sum++  + `<i class="fas fa-solid fa-heart"></i>`
-                        }else{
+                        
+                        }else{ //DISLIKE
                             clicked = false;
-                            likeButton[i].innerHTML = `<i class="fas fa-regular fa-heart"></i>`
+                            likeButton[i].innerHTML = `<i class="far fa-regular fa-heart"></i>`
+                            
+                            //total de likes sous chaque photo actualisé à chaque clic
+                            likeCount[i].innerHTML = +likeCount[i].innerHTML - 1;
+                            //total de likes général actualisé sur la page
+                            likeTotal.innerHTML =  -1 + sum--  + `<i class="fas fa-solid fa-heart"></i>`
                         }
                     })
                 }
