@@ -3,7 +3,7 @@ import { PhotographerFactory } from "../factories/photographerFactory.js";
 import { MediaFactory } from "../factories/mediasFactory";
 import { fetchPhotographers, fetchPhotographersMedias} from "../pages/api.js";
 import { contactForm } from "../utils/contactForm";
-import { dropdown } from "../utils/dropdown";
+//import { dropdown } from "../utils/dropdown";
 import { Lightbox } from "../factories/lightbox";
 //import { move } from "../utils/draggableDiv";
 
@@ -20,7 +20,7 @@ export async function displayPhotographerHeader (){
     const articleId = getPhotographerId();
     
     const articles = await fetchPhotographers();
-    console.log(articles);
+    //console.log(articles);
     for(let article of articles){
         if(article.id == articleId){
             const headerPhotographer = new PhotographerFactory(article);
@@ -42,69 +42,125 @@ contactForm(); //GESTION DU FORMULAIRE
 
 //move();  //GESTION DU DRAG AND DROP DE LA DIV DU TOTAL DES COEURS
 
-dropdown();  //ANIMATION DU MENU DROPDOWN
+//dropdown();  //ANIMATION DU MENU DROPDOWN
 
 ///AFFICHAGE DES MEDIAS CORRESPONDANT A CHAQUE PHOTOGRAPHE
 export async function displayMedias(){
-    
     const dataMedia = await fetchPhotographersMedias();
     //console.log(dataMedia);
     const mediaId = getPhotographerId(); 
     //console.log(mediaId);
-    
-    for(let media of dataMedia){
-        if(media.photographerId == mediaId){
-                
-                const mediaDisplay = new MediaFactory(media);
-                 mediaDisplay.getMedias();
-                
-            } 
-            /// GESTION DES LIKES
-            function likes (){
-                const likeCount = document.querySelectorAll('.like-count')
-                
-                const likeButton = document.querySelectorAll('.like-button');
-                
-                const likeTotal = document.querySelector('.like-total-count');
-                let sum = 0;
-                //incrémentation
-                for(let i = 0; i < likeButton.length; i++){
-                    const target = +likeCount[i].getAttribute('data-target');
-                    sum += +likeCount[i].getAttribute('data-target');
-                   
-                    likeCount[i].innerHTML = likeCount[i].getAttribute('data-target')
-                    likeTotal.innerHTML = sum + `<i class="fas fa-solid fa-heart"></i>`;
-                    let clicked = false;
-                    
-                    likeButton[i].addEventListener('click', () => {
-                        if(!clicked){//LIKE
-                            clicked = true;
-                            likeButton[i].innerHTML = `<i class="fas fa-solid fa-heart"></i>`;
-                                
-                            //total de likes sous chaque photo actualisé à chaque clic
-                            likeCount[i].innerText = target + 1;
-                            //total de likes général actualisé sur la page
-                            likeTotal.innerHTML = 1 + sum++  + `<i class="fas fa-solid fa-heart"></i>`
+
+    const selected = document.querySelector(".selected");
+    const optionsContainer = document.querySelector(".options-container");
+    const optionsList = document.querySelectorAll('.option');
+
+        selected.addEventListener('click', () => {
+            optionsContainer.classList.toggle('active');
+        });
+
+       
+        optionsList.forEach(elt => {
+            
+            elt.addEventListener("click", () => {
+                const gallery = document.querySelector('.gallery');
+                gallery.innerHTML = '';
+            
+                selected.innerHTML = elt.querySelector('label').innerHTML;
+                optionsContainer.classList.remove('active');
+               
                         
-                        }else{ //DISLIKE
-                            clicked = false;
-                            likeButton[i].innerHTML = `<i class="far fa-regular fa-heart"></i>`
-                            
-                            //total de likes sous chaque photo actualisé à chaque clic
-                            likeCount[i].innerText = 1 + target - 1;
-                            //total de likes général actualisé sur la page
-                            likeTotal.innerHTML =  -1 + sum--  + `<i class="fas fa-solid fa-heart"></i>`
+                for(let media of dataMedia){
+                    
+                    const choice = selected.innerHTML;
+                        switch (choice) {
+                            case "Popularité" :
+                                    dataMedia.sort((a, b) => {
+                                        return a.likes - b.likes;
+                                    });
+                                    
+                                break;
+
+                            case "Date" :
+                                    dataMedia.sort((a, b) => {
+                                        return new Date(b.date) - new Date(a.date);
+
+                                    }); 
+                                break;
+
+                            case "Titre" :
+                                    dataMedia.sort((a, b) => {
+                                        return a.title.localeCompare(b.title);
+                                    });
+                                    
+                                break;
+                           
                         }
-                    })
+                    if(media.photographerId == mediaId){
+                        
+                        // const mediaDisplay = new MediaFactory(media);
+                        // mediaDisplay.getMedias(); 
+                        new MediaFactory(media).getMedias()
+                        Lightbox.init()
+                          
+                    }
+                                /// GESTION DES LIKES
+                        function likes (){
+                            const likeCount = document.querySelectorAll('.like-count')
+                            
+                            const likeButton = document.querySelectorAll('.like-button');
+                            
+                            const likeTotal = document.querySelector('.like-total-count');
+                            let sum = 0;
+                            //incrémentation
+                            for(let i = 0; i < likeButton.length; i++){
+                                const target = +likeCount[i].getAttribute('data-target');
+
+                                sum += +likeCount[i].getAttribute('data-target');
+                            
+                                likeCount[i].innerHTML = likeCount[i].getAttribute('data-target')
+                                likeTotal.innerHTML = sum + `<i class="fas fa-solid fa-heart"></i>`;
+                                let clicked = false;
+                                
+                                likeButton[i].addEventListener('click', () => {
+                                    if(!clicked){//LIKE
+                                        clicked = true;
+                                        likeButton[i].innerHTML = `<i class="fas fa-solid fa-heart"></i>`;
+                                            
+                                        //total de likes sous chaque photo actualisé à chaque clic
+                                        likeCount[i].innerText = target + 1;
+                                        //total de likes général actualisé sur la page
+                                        likeTotal.innerHTML = 1 + sum++  + `<i class="fas fa-solid fa-heart"></i>`
+                                    
+                                    }else{ //DISLIKE
+                                        clicked = false;
+                                        likeButton[i].innerHTML = `<i class="far fa-regular fa-heart"></i>`
+                                        
+                                        //total de likes sous chaque photo actualisé à chaque clic
+                                        likeCount[i].innerText = 1 + target - 1;
+                                        //total de likes général actualisé sur la page
+                                        likeTotal.innerHTML =  -1 + sum--  + `<i class="fas fa-solid fa-heart"></i>`
+                                    }
+                                })
+                            }
+
+                            
+                            
+                        }
+                        
+                        likes()
+                        
+                        
+    
                 }
-
                 
-                
-            }
-            likes()
-        
+            })
+            
+            
+        });
+          
     }                     
-}           
-
-
+    displayMedias()
+    Lightbox.init()    
+    
 

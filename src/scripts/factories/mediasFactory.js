@@ -23,8 +23,10 @@ class Medias{
         this.price = dataMedia.price;
         this.media = media;
     }
+
     async getMedias(){
         const gallery = document.querySelector('.gallery');
+        //gallery.innerHTML = '';
         gallery.innerHTML += `
         <figure>
             ${this.media}

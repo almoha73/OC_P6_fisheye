@@ -6,7 +6,7 @@ export class Lightboximage {
   
     buildDom() {
       const lightboxContainer = document.querySelector('.lightbox_container');
-      console.log(lightboxContainer);
+      //console.log(lightboxContainer);
       lightboxContainer.innerHTML = ''
       lightboxContainer.innerHTML = `
       <div>

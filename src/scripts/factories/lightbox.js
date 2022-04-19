@@ -2,14 +2,14 @@ import { fetchPhotographersMedias } from "../pages/api";
 import { displayMedias } from "../pages/photographer";
 import {Lightboximage} from "../factories/lightboxImage";
 import {Lightboxvideo} from "../factories/lightboxVideo"
+import { MediaFactory } from "./mediasFactory";
 
 export class Lightbox {
-  static async init() {
-    const dataMedia = await fetchPhotographersMedias();
-    await displayMedias();
-    
+  static  init() {
+    //const dataMedia = await fetchPhotographersMedias();
+    //await displayMedias();
     const links = Array.from(document.querySelectorAll(".media"));
-    console.log(links);
+    //console.log(links);
     
     for (let i = 0; i < links.length; i++) {
       let newIndex = i;
@@ -22,8 +22,8 @@ export class Lightbox {
         //AFFICHAGE DE LA LIGHTBOX AVEC IMAGES ET/OU VIDEO
               function preview() {
                 let selectedImgUrl = links[newIndex].getAttribute("src");
-                console.log(selectedImgUrl);
-                console.log(links[newIndex]);
+                //console.log(selectedImgUrl);
+                //console.log(links[newIndex]);
               
                 if (links[newIndex].nodeName === "IMG") {
                   const lightboxImage = new Lightboximage(
@@ -46,9 +46,9 @@ export class Lightbox {
                     next.addEventListener("click", (e) => {
                       e.preventDefault();
                       lightboxContainer.firstChild.remove();
-                      console.log(links.length);
+                      //console.log(links.length);
                      
-                      console.log(newIndex);
+                      //console.log(newIndex);
                       if(newIndex < links.length - 1){
                         newIndex++;
                         preview();
@@ -65,7 +65,7 @@ export class Lightbox {
                     previous.addEventListener("click", (e) => {
                       e.preventDefault();
                       lightboxContainer.firstChild.remove();
-                      console.log(links.length);
+                      //console.log(links.length);
                      
                       console.log(newIndex);
                       if(newIndex > 0){
@@ -129,4 +129,4 @@ export class Lightbox {
 
 
 
-Lightbox.init();
+//Lightbox.init();

@@ -100,7 +100,7 @@ main{
             .options-container{
                 background-color: abstracts.$color-primary;
                 color: white;
-                height: 0;
+                height: 0px;
                 width: 100%;
                 opacity: 0;
                 transition: all 0.4s;
@@ -118,19 +118,20 @@ main{
                         background-color: abstracts.$color-secondary;
                     }
                 }
-                
                 &.active{
-                    height: 140px;
-                    opacity: 1;
-                    
-                }
-                &.active + .selected::after{
-                    transform: rotateX(180deg);
-                    top: -10px;
-    
+                height: 140px;
+                opacity: 1;
+                
                 }
                 
                 
+                
+            }
+            
+            &.active + .selected::after{
+                transform: rotateX(180deg);
+                top: -10px;
+
             }    
             
         }
