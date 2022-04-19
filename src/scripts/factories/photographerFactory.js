@@ -37,7 +37,7 @@ export class PhotographerFactory {
         <p>${this.tagline}</p>
       </div>
       <button class="contact">Contactez-moi</button>
-      <img src="assets/photographers/photo/${this.portrait}" alt="">
+      <img src="assets/photographers/photo/${this.portrait}" alt="" srcset="assets/photographers/photo/${this.portrait}_small.jpg 1x" alt="">
       `
   }
 

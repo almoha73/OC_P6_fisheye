@@ -63,12 +63,11 @@ export async function displayMedias(){
         optionsList.forEach(elt => {
             
             elt.addEventListener("click", () => {
-                const gallery = document.querySelector('.gallery');
-                gallery.innerHTML = '';
-            
+                
                 selected.innerHTML = elt.querySelector('label').innerHTML;
                 optionsContainer.classList.remove('active');
-               
+                const gallery = document.querySelector('.gallery');
+                gallery.innerHTML = '';
                         
                 for(let media of dataMedia){
                     
@@ -84,13 +83,12 @@ export async function displayMedias(){
                             case "Date" :
                                     dataMedia.sort((a, b) => {
                                         return new Date(b.date) - new Date(a.date);
-
                                     }); 
                                 break;
 
                             case "Titre" :
                                     dataMedia.sort((a, b) => {
-                                        return a.title.localeCompare(b.title);
+                                        return a.title > b.title ? 1 : -1;
                                     });
                                     
                                 break;
@@ -98,8 +96,6 @@ export async function displayMedias(){
                         }
                     if(media.photographerId == mediaId){
                         
-                        // const mediaDisplay = new MediaFactory(media);
-                        // mediaDisplay.getMedias(); 
                         new MediaFactory(media).getMedias()
                         Lightbox.init()
                           
@@ -161,6 +157,8 @@ export async function displayMedias(){
           
     }                     
     displayMedias()
+    
+            
     Lightbox.init()    
     
 
