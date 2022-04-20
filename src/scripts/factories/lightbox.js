@@ -15,11 +15,11 @@ export class Lightbox {
         //AFFICHAGE DU WRAPPER DE LA LIGHTBOX SANS IMAGES/VIDEO
         const newLightbox = new Lightbox();
         newLightbox.buildDom();
-
+        
         //AFFICHAGE DE LA LIGHTBOX AVEC IMAGES ET/OU VIDEO
         function preview() {
           let selectedImgUrl = links[newIndex].getAttribute("src");
-          
+          // console.log(links[newIndex].nextElementSibling.nextElementSibling.firstChild.nextElementSibling.innerText);
           if (links[newIndex].nodeName === "IMG") {
             const lightboxImage = new Lightboximage(
               selectedImgUrl,
@@ -31,10 +31,7 @@ export class Lightbox {
           } else if (links[newIndex].nodeName === "VIDEO") {
             const lightboxVideo = new Lightboxvideo(
               selectedImgUrl,
-              links[
-                newIndex
-              ].nextElementSibling.firstChild.nextElementSibling.innerText
-            );
+              links[newIndex].nextElementSibling.nextElementSibling.firstChild.nextElementSibling.innerText);
             lightboxVideo.buildDom();
           }
         }
@@ -63,7 +60,6 @@ export class Lightbox {
           e.preventDefault();
           lightboxContainer.firstChild.remove();
 
-          console.log(newIndex);
           if (newIndex > 0) {
             newIndex--;
             preview();

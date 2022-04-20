@@ -6,14 +6,14 @@ export async function contactForm() {
   const articles = await fetchPhotographers();
   //Variables du formulaire
   const formModal = document.querySelector("#contact_modal"); //formulaire
-  console.log(formModal);
+  
   const contactBtn = document.querySelector("button.contact"); //ouverture
-  console.log(contactBtn);
+  
   const closeModal = document.querySelector(".close-modal"); //fermeture
   let inputField = document.querySelectorAll("input.input-control"); // inputs
-  console.log(inputField);
+  
   const sendButton = document.querySelector(".send_button"); //bouton envoyer
-  console.log(sendButton);
+  
 
   //ouverture du formulaire
   contactBtn.addEventListener("click", () => {
