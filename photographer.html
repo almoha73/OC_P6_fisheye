@@ -10,8 +10,8 @@
   </head>
   <body>
     <header>
-      <a href="index.html">
-        <img src="./assets/images/logo.png" class="logo" alt="Logo FishEye" />
+      <a href="index.html" tabindex="0">
+        <img src="./assets/images/logo.png" class="logo" alt="Logo FishEye lien vers l'accueil" />
       </a>
     </header>
     <main id="main">
@@ -22,25 +22,25 @@
       
       <nav>
         <label for="tri">Trier par</label>
-        <div class="select-box">
-            <div class="options-container">
+        <div id="tri" role="button" aria-haspopup="listbox" aria-expanded="false"  class="select-box" tabindex="0">
+            <div role="listbox" class="options-container">
               <hr>
-              <div class="option">
+              <div class="option" tabindex="-1">
                 <input type="radio" class="radio" name="category" id="date">
                 <label for="date">Date</label>
               </div>
               <hr>
-              <div class="option">
+              <div class="option" tabindex="-1">
                 <input type="radio" class="radio" name="category" id="titre">
                 <label for="titre">Titre</label>
               </div>
               <hr>
-              <div class="option">
+              <div class="option" tabindex="-1">
                 <input type="radio" class="radio" name="category" id="popularite">
                 <label for="popularite">Popularité</label>
               </div>
             </div>
-            <div class="selected">
+            <div tabindex="0" class="selected">
               Selection
             </div>  
             
@@ -87,7 +87,7 @@
         </div>
       </section>
 
-     <section class="like-storage">
+     <section tabindex="0" class="like-storage">
         <h2 class="like-total-count">&nbsp;</h2>
         <h2 class ="tarif-jour">&nbsp;</h2>
       </section>

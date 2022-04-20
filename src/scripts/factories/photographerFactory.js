@@ -14,9 +14,11 @@ export class PhotographerFactory {
       const photographerSection = document.querySelector('.photographer_section');
       photographerSection.innerHTML += `
            <a href="photographer.html?index=${this.id}">
-                <article data-filter = "${this.id}" class="photographer_article">
+                <article tabindex="0" data-filter = "${this.id}" class="photographer_article">
                     <img src="assets/photographers/photo/${this.portrait}" srcset="assets/photographers/photo/${this.portrait}_small.jpg 1x" alt="${this.name}">
-                    <h2>${this.name}</h2>
+                    <h2 aria-label="${this.name}">${this.name}</h2>
+                </article>
+                <article tabindex="0">
                     <h3>${this.city}, ${this.country}</h4>
                     <p>${this.tagline}</p>
                     <p>${this.price}€/jour</p>
@@ -32,12 +34,12 @@ export class PhotographerFactory {
     
       `
       <div class="presentation">
-        <h1>${this.name}</h1>
-        <h3>${this.city}, ${this.country}</h3>
-        <p>${this.tagline}</p>
+        <h1 tabindex="0">${this.name}</h1>
+        <h3 tabindex="0">${this.city}, ${this.country}</h3>
+        <p tabindex="0">${this.tagline}</p>
       </div>
-      <button class="contact">Contactez-moi</button>
-      <img src="assets/photographers/photo/${this.portrait}" alt="" srcset="assets/photographers/photo/${this.portrait}_small.jpg 1x" alt="${this.name}">
+      <button class="contact" aria-labelledby="Contactez-moi">Contactez-moi</button>
+      <img src="assets/photographers/photo/${this.portrait}" srcset="assets/photographers/photo/${this.portrait}_small.jpg 1x" alt="${this.name}">
       `
   }
 

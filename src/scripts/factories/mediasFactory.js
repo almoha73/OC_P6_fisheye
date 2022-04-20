@@ -25,7 +25,7 @@ class Medias {
         <figure>
             ${this.media}
             <figcaption>
-            <p class="title">${this.title}</p><p data-target="${this.likes}" class="like-count"></p><p class="like-button"><i class="far fa-regular fa-heart"></i></p>
+            <p class="title" tabindex="0">${this.title}</p><p data-target="${this.likes}" class="like-count" aria-label="nombre de j'aime"></p><p class="like-button" aria-label="bouton j'aime en forme de coeur"><i class="far fa-regular fa-heart" aria-hidden="false"></i></p>
             </figcaption>
         </figure>
         
@@ -37,7 +37,7 @@ class MediaImages extends Medias {
   constructor(dataMedia) {
     super(dataMedia);
     this.image = dataMedia.image;
-    this.media = `<img id="${this.id}" class="media" src="assets/photographers/${this.photographerId}/${this.image}" srcset="assets/photographers/${this.photographerId}/${this.image}_small.jpg 1x" alt="${this.title}">`;
+    this.media = `<img id="${this.id}" class="media" src="assets/photographers/${this.photographerId}/${this.image}" srcset="assets/photographers/${this.photographerId}/${this.image}_small.jpg 1x" alt="${this.title}" tabindex="0">`;
   }
 }
 
@@ -46,7 +46,7 @@ class Videos extends Medias {
     super(dataMedia);
     this.video = dataMedia.video;
     this.media = `
-        <video id="${this.id}" class="media" preload="metadata" src="assets/photographers/videos/${this.video}" type="video/mp4" loop></video>
+        <video id="${this.id}" class="media" preload="metadata" src="assets/photographers/videos/${this.video}" type="video/mp4" loop tabindex="0"></video>
         <div class="bar">
                 <div class="bar-line"></div>
         </div>
