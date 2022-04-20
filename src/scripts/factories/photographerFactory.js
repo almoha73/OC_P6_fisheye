@@ -17,7 +17,7 @@ export class PhotographerFactory {
                 <article data-filter = "${this.id}" class="photographer_article">
                     <img src="assets/photographers/photo/${this.portrait}" srcset="assets/photographers/photo/${this.portrait}_small.jpg 1x" alt="${this.name}">
                     <h2>${this.name}</h2>
-                    <h4>${this.city}, ${this.country}</h4>
+                    <h3>${this.city}, ${this.country}</h4>
                     <p>${this.tagline}</p>
                     <p>${this.price}€/jour</p>
                 </article>
