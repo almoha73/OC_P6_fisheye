@@ -15,7 +15,7 @@ export class PhotographerFactory {
       photographerSection.innerHTML += `
            <a href="photographer.html?index=${this.id}">
                 <article data-filter = "${this.id}" class="photographer_article">
-                    <img src="assets/photographers/photo/${this.portrait}" srcset="assets/photographers/photo/${this.portrait}_small.jpg 1x" alt="">
+                    <img src="assets/photographers/photo/${this.portrait}" srcset="assets/photographers/photo/${this.portrait}_small.jpg 1x" alt="${this.name}">
                     <h2>${this.name}</h2>
                     <h4>${this.city}, ${this.country}</h4>
                     <p>${this.tagline}</p>
@@ -37,7 +37,7 @@ export class PhotographerFactory {
         <p>${this.tagline}</p>
       </div>
       <button class="contact">Contactez-moi</button>
-      <img src="assets/photographers/photo/${this.portrait}" alt="" srcset="assets/photographers/photo/${this.portrait}_small.jpg 1x" alt="">
+      <img src="assets/photographers/photo/${this.portrait}" alt="" srcset="assets/photographers/photo/${this.portrait}_small.jpg 1x" alt="${this.name}">
       `
   }
 

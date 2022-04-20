@@ -37,7 +37,7 @@ class MediaImages extends Medias {
   constructor(dataMedia) {
     super(dataMedia);
     this.image = dataMedia.image;
-    this.media = `<img id="${this.id}" class="media" src="assets/photographers/${this.photographerId}/${this.image}" srcset="assets/photographers/${this.photographerId}/${this.image}_small.jpg 1x" alt="">`;
+    this.media = `<img id="${this.id}" class="media" src="assets/photographers/${this.photographerId}/${this.image}" srcset="assets/photographers/${this.photographerId}/${this.image}_small.jpg 1x" alt="${this.title}">`;
   }
 }
 

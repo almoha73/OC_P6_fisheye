@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
   <head>
     
     <meta charset="utf-8">
@@ -10,7 +10,7 @@
   <body>
     <header>
       <a href="index.html">
-        <img src="./assets/images/logo.png" class="logo" />
+        <img src="./assets/images/logo.png" class="logo" alt="Logo FishEye" />
       </a>
     </header>
     <main id="main">
@@ -55,30 +55,30 @@
         <div class="modal">
           <header>
             <div class="header-title">
-              <h2 class=>Contactez-moi</h2>
+              <h2 class="">Contactez-moi</h2>
               <p class="contact-name">Mimi Keel</p>
             </div>
-           <button class="close-modal"><img src="./assets/icons/close.svg" /></button> 
+           <button class="close-modal"><img src="./assets/icons/close.svg" alt="close modal"/></button> 
           </header>
           <form>
             <div class="'formData">
-              <label>Prénom</label>
-              <input class="input-control" type="text" name="first" id="first">
+              <label for="first">Prénom</label>
+              <input tabindex="1" class="input-control" type="text" name="first" id="first" aria-label="Entrez votre prénom">
               <p></p>
             </div>
             <div class="'formData">
-              <label>Nom</label>
-              <input class="input-control" type="text" name="last" id="last">
+              <labe for="last">Nom</label>
+              <input tabindex="2" class="input-control" type="text" name="last" id="last" aria-label="Entrez votre nom">
               <p></p>
             </div>
             <div class="'formData">
-              <label>Email</label>
-              <input class="input-control" type="email" name="mail" id="mail">
+              <label for="mail">Email</label>
+              <input tabindex="3" class="input-control" type="email" name="mail" id="mail" aria-label="Entrez votre mail">
               <p></p>
             </div>
             <div class="'formData formData-message">
-              <label>Votre message</label>
-              <input class="input-control input-message" type="text" name="text" id="text">
+              <label for="text">Votre message</label>
+              <input tabindex="4" class="input-control input-message" type="text" name="text" id="text" aria-label="Entrez votre message">
               <p></p>
             </div>
             <button type="submit" class="send_button">Envoyer</button>
@@ -87,8 +87,8 @@
       </section>
 
      <section class="like-storage">
-        <h2 class="like-total-count"></h2>
-        <h2 class ="tarif-jour"></h2>
+        <h2 class="like-total-count">&nbsp;</h2>
+        <h2 class ="tarif-jour">&nbsp;</h2>
       </section>
     </main>
     <script src="./dist/photographerDist.js"></script>
