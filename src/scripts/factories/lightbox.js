@@ -1,84 +1,78 @@
 import { fetchPhotographersMedias } from "../pages/api";
 import { displayMedias } from "../pages/photographer";
-import {Lightboximage} from "../factories/lightboxImage";
-import {Lightboxvideo} from "../factories/lightboxVideo"
+import { Lightboximage } from "../factories/lightboxImage";
+import { Lightboxvideo } from "../factories/lightboxVideo";
 import { MediaFactory } from "./mediasFactory";
 
 export class Lightbox {
-  static  init() {
-    //const dataMedia = await fetchPhotographersMedias();
-    //await displayMedias();
+  static init() {
     const links = Array.from(document.querySelectorAll(".media"));
-    //console.log(links);
     
     for (let i = 0; i < links.length; i++) {
       let newIndex = i;
-      
+
       links[i].onclick = () => {
-        //AFFICHAGE DU WRAPPER DE LA LIGHTBOX SANS IMAGES/VIDEO 
-        const newLightbox = new Lightbox;
+        //AFFICHAGE DU WRAPPER DE LA LIGHTBOX SANS IMAGES/VIDEO
+        const newLightbox = new Lightbox();
         newLightbox.buildDom();
 
         //AFFICHAGE DE LA LIGHTBOX AVEC IMAGES ET/OU VIDEO
-              function preview() {
-                let selectedImgUrl = links[newIndex].getAttribute("src");
-                //console.log(selectedImgUrl);
-                //console.log(links[newIndex]);
-              
-                if (links[newIndex].nodeName === "IMG") {
-                  const lightboxImage = new Lightboximage(
-                    selectedImgUrl, links[newIndex].nextElementSibling.firstChild.nextElementSibling.innerText);
-                    lightboxImage.buildDom();
+        function preview() {
+          let selectedImgUrl = links[newIndex].getAttribute("src");
+          
+          if (links[newIndex].nodeName === "IMG") {
+            const lightboxImage = new Lightboximage(
+              selectedImgUrl,
+              links[
+                newIndex
+              ].nextElementSibling.firstChild.nextElementSibling.innerText
+            );
+            lightboxImage.buildDom();
+          } else if (links[newIndex].nodeName === "VIDEO") {
+            const lightboxVideo = new Lightboxvideo(
+              selectedImgUrl,
+              links[
+                newIndex
+              ].nextElementSibling.firstChild.nextElementSibling.innerText
+            );
+            lightboxVideo.buildDom();
+          }
+        }
+        preview();
 
-                } else if (links[newIndex].nodeName === "VIDEO") {
-                  const lightboxVideo = new Lightboxvideo(
-                    selectedImgUrl, links[newIndex].nextElementSibling.firstChild.nextElementSibling.innerText);
-                    lightboxVideo.buildDom();
-                }
-              
-              }
-              preview();
+        const lightboxContainer = document.querySelector(".lightbox_container");
 
-                    const lightboxContainer = document.querySelector(".lightbox_container");
+        //NEXT AU CLIC SOURIS
+        const next = document.querySelector(".next");
+        next.addEventListener("click", (e) => {
+          e.preventDefault();
+          lightboxContainer.firstChild.remove();
 
-                    //NEXT AU CLIC SOURIS
-                    const next = document.querySelector(".next");
-                    next.addEventListener("click", (e) => {
-                      e.preventDefault();
-                      lightboxContainer.firstChild.remove();
-                      //console.log(links.length);
-                     
-                      //console.log(newIndex);
-                      if(newIndex < links.length - 1){
-                        newIndex++;
-                        preview();
+          if (newIndex < links.length - 1) {
+            newIndex++;
+            preview();
+          } else {
+            newIndex = 0;
+            preview();
+          }
+        });
 
-                      }else {
-                        newIndex = 0;
-                        preview()
-                      }
-                    
-                    })
+        //PREVIOUS AU CLIC SOURIS
+        const previous = document.querySelector(".previous");
+        previous.addEventListener("click", (e) => {
+          e.preventDefault();
+          lightboxContainer.firstChild.remove();
 
-                    //PREVIOUS AU CLIC SOURIS
-                    const previous = document.querySelector(".previous");
-                    previous.addEventListener("click", (e) => {
-                      e.preventDefault();
-                      lightboxContainer.firstChild.remove();
-                      //console.log(links.length);
-                     
-                      console.log(newIndex);
-                      if(newIndex > 0){
-                        newIndex--;
-                        preview();
-
-                      }else {
-                        newIndex = links.length - 1;
-                        preview()
-                      }
-                    
-                    })
-      }
+          console.log(newIndex);
+          if (newIndex > 0) {
+            newIndex--;
+            preview();
+          } else {
+            newIndex = links.length - 1;
+            preview();
+          }
+        });
+      };
     }
   }
 
@@ -117,7 +111,6 @@ export class Lightbox {
       .querySelector(".close-lightbox")
       .addEventListener("click", this.close.bind(this));
 
-    // wrapper.querySelector(".next").addEventListener('click', this.next.bind(this));
     return wrapper;
   }
 
@@ -128,5 +121,3 @@ export class Lightbox {
 }
 
 
-
-//Lightbox.init();
