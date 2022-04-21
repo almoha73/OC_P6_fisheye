@@ -7,17 +7,19 @@ import { MediaFactory } from "./mediasFactory";
 export class Lightbox {
   static init() {
     const links = Array.from(document.querySelectorAll(".media"));
-    
+
     for (let i = 0; i < links.length; i++) {
       let newIndex = i;
 
       links[i].onclick = () => {
+        
         //AFFICHAGE DU WRAPPER DE LA LIGHTBOX SANS IMAGES/VIDEO
         const newLightbox = new Lightbox();
         newLightbox.buildDom();
-        
+
         //AFFICHAGE DE LA LIGHTBOX AVEC IMAGES ET/OU VIDEO
         function preview() {
+          
           let selectedImgUrl = links[newIndex].getAttribute("src");
           // console.log(links[newIndex].nextElementSibling.nextElementSibling.firstChild.nextElementSibling.innerText);
           if (links[newIndex].nodeName === "IMG") {
@@ -31,7 +33,10 @@ export class Lightbox {
           } else if (links[newIndex].nodeName === "VIDEO") {
             const lightboxVideo = new Lightboxvideo(
               selectedImgUrl,
-              links[newIndex].nextElementSibling.nextElementSibling.firstChild.nextElementSibling.innerText);
+              links[
+                newIndex
+              ].nextElementSibling.nextElementSibling.firstChild.nextElementSibling.innerText
+            );
             lightboxVideo.buildDom();
           }
         }
@@ -53,7 +58,42 @@ export class Lightbox {
             preview();
           }
         });
+        //NEXT ET PREVIOUS AU CLIC CLAVIER
+        window.addEventListener("keydown", (e) => {
+         
+          e.preventDefault();
+          if (e.keyCode === 39) {
+            lightboxContainer.firstChild.remove();
 
+            if (newIndex < links.length - 1) {
+              newIndex++;
+              preview();
+            } else {
+              newIndex = 0;
+              preview();
+            }
+          } else if (e.keyCode === 37) {
+            e.preventDefault();
+            lightboxContainer.firstChild.remove();
+
+            if (newIndex > 0) {
+              newIndex--;
+              preview();
+            } else {
+              newIndex = links.length - 1;
+              preview();
+            }
+          // }else if(e.keyCode === 27){
+          //   e.preventDefault();
+          //   const wrapper = document.querySelector(".wrapper");
+          //   wrapper.innerHTML = '';
+            
+          //   wrapper.style.display = 'none'
+            
+          
+          // 
+        }
+      })
         //PREVIOUS AU CLIC SOURIS
         const previous = document.querySelector(".previous");
         previous.addEventListener("click", (e) => {
@@ -75,6 +115,7 @@ export class Lightbox {
   constructor() {
     this.element = this.buildDom();
     document.body.appendChild(this.element);
+    
   }
 
   buildDom() {
@@ -115,5 +156,3 @@ export class Lightbox {
     document.body.removeChild(this.element);
   }
 }
-
-
