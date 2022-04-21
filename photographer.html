@@ -14,7 +14,7 @@
         <img src="./assets/images/logo.png" class="logo" alt="Logo FishEye lien vers l'accueil" />
       </a>
     </header>
-    <main id="main">
+    <main aria-hidden="false" id="main">
 
       <section class="photograph-header">
         
@@ -49,50 +49,48 @@
       </nav>
 
       <div class="gallery"></div>
-        
-      
-
-      <section id="contact_modal" class="displayForm">
-        <div class="modal">
-          <header>
-            <div class="header-title">
-              <h2 class="">Contactez-moi</h2>
-              <p class="contact-name">Mimi Keel</p>
-            </div>
-           <button class="close-modal"><img src="./assets/icons/close.svg" alt="close modal"/></button> 
-          </header>
-          <form>
-            <div class="'formData">
-              <label for="first">Prénom</label>
-              <input tabindex="1" class="input-control" type="text" name="first" id="first" aria-label="Entrez votre prénom">
-              <p></p>
-            </div>
-            <div class="'formData">
-              <labe for="last">Nom</label>
-              <input tabindex="2" class="input-control" type="text" name="last" id="last" aria-label="Entrez votre nom">
-              <p></p>
-            </div>
-            <div class="'formData">
-              <label for="mail">Email</label>
-              <input tabindex="3" class="input-control" type="email" name="mail" id="mail" aria-label="Entrez votre mail">
-              <p></p>
-            </div>
-            <div class="'formData formData-message">
-              <label for="text">Votre message</label>
-              <input tabindex="4" class="input-control input-message" type="text" name="text" id="text" aria-label="Entrez votre message">
-              <p></p>
-            </div>
-            <button type="submit" class="send_button">Envoyer</button>
-          </form>
-        </div>
-      </section>
 
      <section tabindex="0" class="like-storage">
         <h2 class="like-total-count">&nbsp;</h2>
         <h2 class ="tarif-jour">&nbsp;</h2>
       </section>
     </main>
-    <script src="./dist/photographerDist.js"></script>
+
     
+    <section id="contact_modal" class="displayForm" aria-hidden="false" role="dialog" aria-describedby="dialogue avec le photographe">
+      <div class="modal">
+        <header>
+          <div class="header-title">
+            <h1 tabindex="1" class="">Contactez-moi</h1>
+            <h2 tabindex="2" class="contact-name">Mimi Keel</h2>
+          </div>
+         <button tabindex="0" class="close-modal"><img src="./assets/icons/close.svg" alt="croix de fermeture du formulaire"/></button> 
+        </header>
+        <form action="GET">
+          <div class="'formData">
+            <label for="first" tabindex="3">Prénom<span aria-hidden="true" style="color:red"> *</span></label>
+            <input tabindex="4" class="input-control" type="text" name="first" id="first" aria-label="Entrez votre prénom" aria-required="true">
+            <p tabindex="5"></p>
+          </div>
+          <div class="'formData">
+            <label for="last" tabindex="6">Nom<span aria-hidden="true" style="color:red"> *</span></label>
+            <input tabindex="7" class="input-control" type="text" name="last" id="last" aria-label="Entrez votre nom">
+            <p tabindex="8"></p>
+          </div>
+          <div class="'formData">
+            <label for="mail" tabindex="9">Email<span aria-hidden="true" style="color:red"> *</span></label>
+            <input tabindex="10" class="input-control" type="email" name="mail" id="mail" aria-label="Entrez votre mail">
+            <p tabindex="11"></p>
+          </div>
+          <div class="'formData formData-message">
+            <label for="text" tabindex="12">Votre message</label>
+            <input tabindex="13" class="input-control input-message" type="text" name="text" id="text" aria-label="Entrez votre message">
+            <p tabindex="14"></p>
+          </div>
+          <button tabindex="15" type="submit" aria-label="Envoi"  class="send_button">Envoyer</button>
+        </form>
+      </div>
+    </section>
+    <script src="./dist/photographerDist.js"></script>
   </body>
 </html>

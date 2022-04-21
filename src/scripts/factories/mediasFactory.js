@@ -19,7 +19,7 @@ class Medias {
     this.media = media;
   }
 
-  async getMedias() {
+  getMedias() {
     const gallery = document.querySelector(".gallery");
     gallery.innerHTML += `
         <figure>

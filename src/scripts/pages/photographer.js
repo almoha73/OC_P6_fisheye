@@ -6,8 +6,7 @@ import { contactForm } from "../utils/contactForm";
 //import { dropdown } from "../utils/dropdown";
 import { Lightbox } from "../factories/lightbox";
 //import { move } from "../utils/draggableDiv";
-
-//import { Likes } from "../utils/likes";
+import { likes } from "../utils/likes";
 
 export function getPhotographerId() {
   return new URL(location.href).searchParams.get("index");
@@ -38,11 +37,9 @@ displayPhotographerHeader(); //AFFICHAGE DU HEADER PERSONNALISE POUR UN PHOTOGRA
 
 contactForm(); //GESTION DU FORMULAIRE
 
-//move();  //GESTION DU DRAG AND DROP DE LA DIV DU TOTAL DES COEURS
 
-//dropdown();  //ANIMATION DU MENU DROPDOWN
 
-///AFFICHAGE DES MEDIAS CORRESPONDANT A CHAQUE PHOTOGRAPHE
+///AFFICHAGE DES MEDIAS CORRESPONDANT A CHAQUE PHOTOGRAPHE ----> AFFICHAGE PAR DEFAUT
 export async function displayMedias() {
   const dataMedia = await fetchPhotographersMedias();
   const mediaId = getPhotographerId();
@@ -50,6 +47,17 @@ export async function displayMedias() {
   const optionsContainer = document.querySelector(".options-container");
   const optionsList = document.querySelectorAll(".option");
 
+  for (let media of dataMedia) {
+    if (media.photographerId == mediaId) {
+      new MediaFactory(media).getMedias();
+      Lightbox.init();
+
+      likes()
+      
+
+    }
+  }
+  
   //TOGGLE OUVERTURE FERMETURE DU MENU DROPDOWN
   selected.addEventListener("click", () => {
     optionsContainer.classList.toggle("active");
@@ -62,10 +70,10 @@ export async function displayMedias() {
       optionsContainer.classList.remove("active");
       const gallery = document.querySelector(".gallery");
       gallery.innerHTML = ""; //ON VIDE LA GALERIE
-
       // TRI EN FONCTION DE L'ELEMENT CHOISI (Popularité, Date ou Titre)
       for (let media of dataMedia) {
         const choice = selected.innerHTML;
+
         switch (choice) {
           case "Popularité":
             dataMedia.sort((a, b) => {
@@ -88,60 +96,21 @@ export async function displayMedias() {
             break;
         }
 
-        //LANCEMENT DE L'AFFICHAGE UNE FOIS LE TRI EFFECTUE
-        if (media.photographerId == mediaId) {
+         //LANCEMENT DE L'AFFICHAGE UNE FOIS LE TRI EFFECTUE
+         if (media.photographerId == mediaId) {
           new MediaFactory(media).getMedias();
+          likes();
           Lightbox.init();
         }
-        /// GESTION DES LIKES
-        function likes() {
-          const likeCount = document.querySelectorAll(".like-count");
-          const likeButton = document.querySelectorAll(".like-button");
-          const likeTotal = document.querySelector(".like-total-count");
-          let sum = 0;
-          //incrémentation
-          for (let i = 0; i < likeButton.length; i++) {
-            const target = +likeCount[i].getAttribute("data-target");
-            sum += +likeCount[i].getAttribute("data-target");
-            likeCount[i].innerHTML = likeCount[i].getAttribute("data-target");
-            likeTotal.innerHTML = sum + `<i class="fas fa-solid fa-heart"></i>`;
-            let clicked = false;
-
-            //EVENEMENT SUR LE BOUTON LIKE
-            likeButton[i].addEventListener("click", () => {
-              if (!clicked) {
-                clicked = true;
-                likeButton[
-                  i
-                ].innerHTML = `<i class="fas fa-solid fa-heart"></i>`;
-
-                //total de likes sous chaque photo actualisé à chaque clic
-                likeCount[i].innerText = target + 1;
-                //total de likes général actualisé sur la page
-                likeTotal.innerHTML =
-                  1 + sum++ + `<i class="fas fa-solid fa-heart"></i>`;
-              } else {
-                //DISLIKE
-                clicked = false;
-                likeButton[
-                  i
-                ].innerHTML = `<i class="far fa-regular fa-heart"></i>`;
-
-                //total de likes sous chaque photo actualisé à chaque dislike
-                likeCount[i].innerText = 1 + target - 1;
-                //total de likes général actualisé sur la page
-                likeTotal.innerHTML =
-                  -1 + sum-- + `<i class="fas fa-solid fa-heart"></i>`;
-              }
-            });
-          }
-        }
-
-        likes();
+        
       }
     });
   });
 }
+
 displayMedias();
 
-Lightbox.init();
+
+        
+
+       

@@ -13,12 +13,13 @@ export async function contactForm() {
   let inputField = document.querySelectorAll("input.input-control"); // inputs
   
   const sendButton = document.querySelector(".send_button"); //bouton envoyer
-  
+  const main = document.getElementById('main')
 
   //ouverture du formulaire
   contactBtn.addEventListener("click", () => {
     formModal.style.display = "inline-block";
-    focusBlur();
+    closeModal.focus();
+    //focusBlur();
   });
 
   //fermeture du formulaire
@@ -157,7 +158,7 @@ export async function contactForm() {
             inputField[i].classList.remove("blueBorder");
             okMessageRemove(paragraphe, inputField[i]);
             okMessage(paragraphe, `Merci !`, inputField[i]);
-            //inputField[i + 1].focus();
+            sendButton.focus();
             console.log(inputField[i].value);
           }
       }

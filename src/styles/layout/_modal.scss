@@ -29,8 +29,20 @@
                 background-color: transparent;
                 border: none;
                 outline: none;
+                &:hover{
+                    background-color: abstracts.$color-primary;
+                    padding: 10px;
+                    border-radius: 6px;
+                    border: 3px solid abstracts.$color-white;
+                }
+                &:focus{
+                    background-color: abstracts.$color-primary;
+                    padding: 10px;
+                    border-radius: 6px;
+                    border: 3px solid abstracts.$color-white;
+                }
             }
-            h2, p {
+            h1, h2 {
                 font-size: 45px;
                 font-weight: normal;
             }
@@ -51,7 +63,9 @@
                 label {
                     color: #312E2E;
                     font-size: 25px;
+                    display: inline-block;
                 }
+                
                 input{
                     &.greenBorder{
                         border: 3px solid green!important;
@@ -103,6 +117,13 @@
                 border: none;
                 outline: none;
                 cursor: pointer;
+                &:hover{
+                    border: 3px solid abstracts.$color-white;
+                    
+                }
+                &:focus{
+                    border: 3px solid abstracts.$color-white;
+                }
             }
         }
     }

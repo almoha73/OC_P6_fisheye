@@ -44,6 +44,14 @@ main{
             outline: none;
             &:hover{
                 background-color: abstracts.$color-secondary;
+                color: abstracts.$color-black;
+                border: 2px solid abstracts.$color-black;
+                transform: scale(1.03);
+            }
+            &:focus{
+                background-color: abstracts.$color-secondary;
+                color: abstracts.$color-black;
+                border: 2px solid abstracts.$color-black;
                 transform: scale(1.03);
             }
         }
