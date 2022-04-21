@@ -13,7 +13,7 @@ export async function contactForm() {
   let inputField = document.querySelectorAll("input.input-control"); // inputs
   
   const sendButton = document.querySelector(".send_button"); //bouton envoyer
-  const main = document.getElementById('main')
+  const main = document.getElementById('main');
 
   //ouverture du formulaire
   contactBtn.addEventListener("click", () => {

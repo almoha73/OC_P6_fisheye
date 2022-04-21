@@ -46,15 +46,13 @@ export async function displayMedias() {
   const selected = document.querySelector(".selected");
   const optionsContainer = document.querySelector(".options-container");
   const optionsList = document.querySelectorAll(".option");
-
+  let mediaArray = [];
   for (let media of dataMedia) {
     if (media.photographerId == mediaId) {
+      mediaArray.push(media);
       new MediaFactory(media).getMedias();
       Lightbox.init();
-
-      likes()
-      
-
+      likes();
     }
   }
   
@@ -71,25 +69,25 @@ export async function displayMedias() {
       const gallery = document.querySelector(".gallery");
       gallery.innerHTML = ""; //ON VIDE LA GALERIE
       // TRI EN FONCTION DE L'ELEMENT CHOISI (Popularité, Date ou Titre)
-      for (let media of dataMedia) {
+      
         const choice = selected.innerHTML;
 
         switch (choice) {
           case "Popularité":
-            dataMedia.sort((a, b) => {
+            mediaArray.sort((a, b) => {
               return a.likes - b.likes;
             });
 
             break;
 
           case "Date":
-            dataMedia.sort((a, b) => {
+            mediaArray.sort((a, b) => {
               return new Date(b.date) - new Date(a.date);
             });
             break;
 
           case "Titre":
-            dataMedia.sort((a, b) => {
+            mediaArray.sort((a, b) => {
               return a.title > b.title ? 1 : -1;
             });
 
@@ -97,14 +95,15 @@ export async function displayMedias() {
         }
 
          //LANCEMENT DE L'AFFICHAGE UNE FOIS LE TRI EFFECTUE
+         for (let media of mediaArray) { 
          if (media.photographerId == mediaId) {
           new MediaFactory(media).getMedias();
           likes();
           Lightbox.init();
         }
-        
       }
-    });
+    })
+    
   });
 }
 
