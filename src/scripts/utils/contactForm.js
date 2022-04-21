@@ -19,7 +19,7 @@ export async function contactForm() {
   contactBtn.addEventListener("click", () => {
     formModal.style.display = "inline-block";
     closeModal.focus();
-    //focusBlur();
+    focusBlur();
   });
 
   //fermeture du formulaire
