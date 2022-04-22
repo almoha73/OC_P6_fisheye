@@ -12,18 +12,22 @@ export class Lightbox {
       let newIndex = i;
 
       links[i].onclick = () => {
-        
         //AFFICHAGE DU WRAPPER DE LA LIGHTBOX SANS IMAGES/VIDEO
         const newLightbox = new Lightbox();
         newLightbox.buildDom();
 
         //AFFICHAGE DE LA LIGHTBOX AVEC IMAGES ET/OU VIDEO
-
-        let selectedImgUrl;
-        newLightbox.preview(selectedImgUrl, links[newIndex]);
-
         const lightboxContainer = document.querySelector(".lightbox_container");
         const lightBoxRemove = lightboxContainer.firstChild.remove();
+
+        let selectedImgUrl;
+        const newLightboxPreview = function () {
+          newLightbox.preview(selectedImgUrl, links[newIndex]);
+        };
+        
+        newLightboxPreview();
+
+        
 
         //NEXT AU CLIC SOURIS
         const next = document.querySelector(".next");
@@ -31,13 +35,13 @@ export class Lightbox {
         next.addEventListener("click", (e) => {
           e.preventDefault();
           lightBoxRemove;
-          
+
           if (newIndex < links.length - 1) {
             newIndex++;
-            newLightbox.preview(selectedImgUrl, links[newIndex]);
+            newLightboxPreview();
           } else {
             newIndex = 0;
-            newLightbox.preview(selectedImgUrl, links[newIndex]);
+            newLightboxPreview();
           }
         });
         //PREVIOUS AU CLIC SOURIS
@@ -49,41 +53,44 @@ export class Lightbox {
 
           if (newIndex > 0) {
             newIndex--;
-            newLightbox.preview(selectedImgUrl, links[newIndex]);
+            newLightboxPreview();
           } else {
             newIndex = links.length - 1;
-            newLightbox.preview(selectedImgUrl, links[newIndex]);
+            newLightboxPreview();
           }
         });
 
         //NEXT ET PREVIOUS AUX TOUCHES CLAVIER
         window.addEventListener("keydown", (e) => {
-         
-          if (e.keyCode === 39) {
+          console.log(e);
+          if (e.key === 'ArrowRight') {
             e.preventDefault();
             lightBoxRemove;
 
             if (newIndex < links.length - 1) {
               newIndex++;
-              newLightbox.preview(selectedImgUrl, links[newIndex]);
+              newLightboxPreview();
             } else {
               newIndex = 0;
-              newLightbox.preview(selectedImgUrl, links[newIndex]);
+              newLightboxPreview();
             }
-          } else if (e.keyCode === 37) {
+          } else if (e.key === 'ArrowLeft') {
             e.preventDefault();
             lightBoxRemove;
 
             if (newIndex > 0) {
               newIndex--;
-              newLightbox.preview(selectedImgUrl, links[newIndex]);
+              newLightboxPreview();
             } else {
               newIndex = links.length - 1;
-              newLightbox.preview(selectedImgUrl, links[newIndex]);
+              newLightboxPreview();
             }
-        }
-      })
-        
+          } else if(e.key === 'Escape'){
+            
+            newLightbox.close(e);
+            
+          }
+        });
       };
     }
   }
@@ -127,13 +134,13 @@ export class Lightbox {
   }
 
   preview(url, index) {
-          
     let selectedImgUrl = url;
     url = index.getAttribute("src");
     // console.log(links[newIndex].nextElementSibling.nextElementSibling.firstChild.nextElementSibling.innerText);
     if (index.nodeName === "IMG") {
       const lightboxImage = new Lightboximage(
-        url,index.nextElementSibling.firstChild.nextElementSibling.innerText
+        url,
+        index.nextElementSibling.firstChild.nextElementSibling.innerText
       );
       lightboxImage.buildDom();
     } else if (index.nodeName === "VIDEO") {
