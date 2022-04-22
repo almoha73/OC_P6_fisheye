@@ -16,14 +16,21 @@ export async function contactForm() {
   const main = document.getElementById('main');
 
   //ouverture du formulaire
-  contactBtn.addEventListener("click", () => {
+  contactBtn.addEventListener("click", (e) => {
     formModal.style.display = "inline-block";
+    formModal.setAttribute('aria-modal', true);
     closeModal.focus();
     focusBlur();
   });
 
   //fermeture du formulaire
-  closeModal.addEventListener("click", () => {
+  window.addEventListener('keydown', (e) => {
+    if(e.key === 'Escape'){
+      console.log(e);
+      closeModal.focus();
+    }
+  })
+  closeModal.addEventListener("click", (e) => {
     formModal.style.display = "none";
     setTimeout(() => {
       resetField();
@@ -164,6 +171,7 @@ export async function contactForm() {
       }
     }
     return error <= 0;
+
   }
 
   function errorMessage(nodeElt, message, input) {

@@ -83,15 +83,6 @@ export class Lightbox {
               newIndex = links.length - 1;
               preview();
             }
-          // }else if(e.keyCode === 27){
-          //   e.preventDefault();
-          //   const wrapper = document.querySelector(".wrapper");
-          //   wrapper.innerHTML = '';
-            
-          //   wrapper.style.display = 'none'
-            
-          
-          // 
         }
       })
         //PREVIOUS AU CLIC SOURIS

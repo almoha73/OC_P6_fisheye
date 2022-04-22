@@ -47,6 +47,8 @@ export async function displayMedias() {
   const optionsContainer = document.querySelector(".options-container");
   const optionsList = document.querySelectorAll(".option");
   let mediaArray = [];
+
+  // APPARITION DES MEDIAS PAR ID PHOTOGRAPHE PAR DEFAUT (date)
   for (let media of dataMedia) {
     if (media.photographerId == mediaId) {
       mediaArray.push(media);
