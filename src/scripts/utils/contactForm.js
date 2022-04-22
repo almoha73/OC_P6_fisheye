@@ -6,30 +6,30 @@ export async function contactForm() {
   const articles = await fetchPhotographers();
   //Variables du formulaire
   const formModal = document.querySelector("#contact_modal"); //formulaire
-  
+
   const contactBtn = document.querySelector("button.contact"); //ouverture
-  
+
   const closeModal = document.querySelector(".close-modal"); //fermeture
   let inputField = document.querySelectorAll("input.input-control"); // inputs
-  
+
   const sendButton = document.querySelector(".send_button"); //bouton envoyer
-  const main = document.getElementById('main');
+  const main = document.getElementById("main");
 
   //ouverture du formulaire
   contactBtn.addEventListener("click", (e) => {
     formModal.style.display = "inline-block";
-    formModal.setAttribute('aria-modal', true);
+    formModal.setAttribute("aria-modal", true);
     closeModal.focus();
     focusBlur();
   });
 
   //fermeture du formulaire
-  window.addEventListener('keydown', (e) => {
-    if(e.key === 'Escape'){
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
       console.log(e);
       closeModal.focus();
     }
-  })
+  });
   closeModal.addEventListener("click", (e) => {
     formModal.style.display = "none";
     setTimeout(() => {
@@ -37,10 +37,7 @@ export async function contactForm() {
     }, 1000);
   });
 
-  // AFFICHAGE DYNAMIQUE DU NOM --> photographer.js
-
-  //VALIDATION DES CHAMPS
-
+  // Fonction RESET après envoi du formulaire
   function resetField() {
     for (let i = 0; i < inputField.length; i++) {
       inputField[i].value = "";
@@ -64,6 +61,10 @@ export async function contactForm() {
       }
     }
   }
+
+  // AFFICHAGE DYNAMIQUE DU NOM --> photographer.js
+
+  //VALIDATION DES CHAMPS
 
   function valideForm() {
     let error = 0;
@@ -171,7 +172,6 @@ export async function contactForm() {
       }
     }
     return error <= 0;
-
   }
 
   function errorMessage(nodeElt, message, input) {
@@ -194,12 +194,10 @@ export async function contactForm() {
   formModal.addEventListener("submit", (e) => {
     e.preventDefault();
     if (valideForm()) {
-      sendButton.addEventListener("click", () => {
-        formModal.style.display = "none";
-        setTimeout(() => {
-          resetField();
-        }, 1000);
-      });
+      formModal.style.display = "none";
+      setTimeout(() => {
+        resetField();
+      }, 1000);
     }
   });
 }
