@@ -18,87 +18,72 @@ export class Lightbox {
         newLightbox.buildDom();
 
         //AFFICHAGE DE LA LIGHTBOX AVEC IMAGES ET/OU VIDEO
-        function preview() {
-          
-          let selectedImgUrl = links[newIndex].getAttribute("src");
-          // console.log(links[newIndex].nextElementSibling.nextElementSibling.firstChild.nextElementSibling.innerText);
-          if (links[newIndex].nodeName === "IMG") {
-            const lightboxImage = new Lightboximage(
-              selectedImgUrl,
-              links[
-                newIndex
-              ].nextElementSibling.firstChild.nextElementSibling.innerText
-            );
-            lightboxImage.buildDom();
-          } else if (links[newIndex].nodeName === "VIDEO") {
-            const lightboxVideo = new Lightboxvideo(
-              selectedImgUrl,
-              links[
-                newIndex
-              ].nextElementSibling.nextElementSibling.firstChild.nextElementSibling.innerText
-            );
-            lightboxVideo.buildDom();
-          }
-        }
-        preview();
+
+        let selectedImgUrl;
+        newLightbox.preview(selectedImgUrl, links[newIndex]);
 
         const lightboxContainer = document.querySelector(".lightbox_container");
+        const lightBoxRemove = lightboxContainer.firstChild.remove();
 
         //NEXT AU CLIC SOURIS
         const next = document.querySelector(".next");
+
         next.addEventListener("click", (e) => {
           e.preventDefault();
-          lightboxContainer.firstChild.remove();
-
+          lightBoxRemove;
+          
           if (newIndex < links.length - 1) {
             newIndex++;
-            preview();
+            newLightbox.preview(selectedImgUrl, links[newIndex]);
           } else {
             newIndex = 0;
-            preview();
+            newLightbox.preview(selectedImgUrl, links[newIndex]);
           }
         });
-        //NEXT ET PREVIOUS AU CLIC CLAVIER
-        window.addEventListener("keydown", (e) => {
-         
-          e.preventDefault();
-          if (e.keyCode === 39) {
-            lightboxContainer.firstChild.remove();
-
-            if (newIndex < links.length - 1) {
-              newIndex++;
-              preview();
-            } else {
-              newIndex = 0;
-              preview();
-            }
-          } else if (e.keyCode === 37) {
-            e.preventDefault();
-            lightboxContainer.firstChild.remove();
-
-            if (newIndex > 0) {
-              newIndex--;
-              preview();
-            } else {
-              newIndex = links.length - 1;
-              preview();
-            }
-        }
-      })
         //PREVIOUS AU CLIC SOURIS
         const previous = document.querySelector(".previous");
+
         previous.addEventListener("click", (e) => {
           e.preventDefault();
-          lightboxContainer.firstChild.remove();
+          lightBoxRemove;
 
           if (newIndex > 0) {
             newIndex--;
-            preview();
+            newLightbox.preview(selectedImgUrl, links[newIndex]);
           } else {
             newIndex = links.length - 1;
-            preview();
+            newLightbox.preview(selectedImgUrl, links[newIndex]);
           }
         });
+
+        //NEXT ET PREVIOUS AUX TOUCHES CLAVIER
+        window.addEventListener("keydown", (e) => {
+         
+          if (e.keyCode === 39) {
+            e.preventDefault();
+            lightBoxRemove;
+
+            if (newIndex < links.length - 1) {
+              newIndex++;
+              newLightbox.preview(selectedImgUrl, links[newIndex]);
+            } else {
+              newIndex = 0;
+              newLightbox.preview(selectedImgUrl, links[newIndex]);
+            }
+          } else if (e.keyCode === 37) {
+            e.preventDefault();
+            lightBoxRemove;
+
+            if (newIndex > 0) {
+              newIndex--;
+              newLightbox.preview(selectedImgUrl, links[newIndex]);
+            } else {
+              newIndex = links.length - 1;
+              newLightbox.preview(selectedImgUrl, links[newIndex]);
+            }
+        }
+      })
+        
       };
     }
   }
@@ -106,7 +91,6 @@ export class Lightbox {
   constructor() {
     this.element = this.buildDom();
     document.body.appendChild(this.element);
-    
   }
 
   buildDom() {
@@ -140,6 +124,25 @@ export class Lightbox {
       .addEventListener("click", this.close.bind(this));
 
     return wrapper;
+  }
+
+  preview(url, index) {
+          
+    let selectedImgUrl = url;
+    url = index.getAttribute("src");
+    // console.log(links[newIndex].nextElementSibling.nextElementSibling.firstChild.nextElementSibling.innerText);
+    if (index.nodeName === "IMG") {
+      const lightboxImage = new Lightboximage(
+        url,index.nextElementSibling.firstChild.nextElementSibling.innerText
+      );
+      lightboxImage.buildDom();
+    } else if (index.nodeName === "VIDEO") {
+      const lightboxVideo = new Lightboxvideo(
+        url,
+        index.nextElementSibling.nextElementSibling.firstChild.nextElementSibling.innerText
+      );
+      lightboxVideo.buildDom();
+    }
   }
 
   close(e) {
