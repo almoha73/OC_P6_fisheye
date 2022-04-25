@@ -9,8 +9,8 @@ export class Lightboximage {
       lightboxContainer.innerHTML = ''
       lightboxContainer.innerHTML = `
       <div>
-        <img src="${this.url}" alt="">
-        <p>${this.title}</p>
+        <img src="${this.url}" alt="${this.title}" tabindex="4">
+        <p tabindex="5">${this.title}</p>
       </div>
       `
       // wrapper.querySelector(".next").addEventListener('click', this.next.bind(this));

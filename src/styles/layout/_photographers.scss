@@ -41,7 +41,7 @@ main{
             font-weight: bold;
             padding: 11px;
             border: none;
-            outline: none;
+            //outline: none;
             &:hover{
                 background-color: abstracts.$color-secondary;
                 color: abstracts.$color-black;

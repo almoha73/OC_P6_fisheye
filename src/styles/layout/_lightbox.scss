@@ -29,7 +29,7 @@
     
     & button{
         border: none;
-        outline: none;
+        //outline: none;
         background-color: transparent;
         cursor: pointer;
     }
@@ -98,15 +98,24 @@
                 height: calc(90vh - 90px);
                 margin-top: 10px;
                 border-radius: 5px;
+                &:focus{
+                    border: 2px solid abstracts.$color-white;
+                }
             }
             video{
                 width: 100%;
                 height: calc(90vh - 90px);
                 border-radius: 5px;
+                &:focus{
+                    border: 2px solid abstracts.$color-white;
+                }
             }
             p{
                 margin: auto;
                 margin-top: 20px;
+                &:focus{
+                    border: 2px solid abstracts.$color-white;
+                }
             }
         }
         

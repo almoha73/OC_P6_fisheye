@@ -13,28 +13,46 @@ export async function contactForm() {
   let inputField = document.querySelectorAll("input.input-control"); // inputs
 
   const sendButton = document.querySelector(".send_button"); //bouton envoyer
-  const main = document.getElementById("main");
-
+  const body = document.querySelector('body');
+  const header = document.querySelector('header');
+  const main = document.querySelector('main');
   //ouverture du formulaire
   contactBtn.addEventListener("click", (e) => {
     formModal.style.display = "inline-block";
     formModal.setAttribute("aria-modal", true);
+    header.style.display = 'none'
+    main.style.display = 'none'
+    body.style.backgroundColor = '#901C1C';
     closeModal.focus();
     focusBlur();
   });
 
   //fermeture du formulaire
-  window.addEventListener("keydown", (e) => {
+  formModal.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
-      console.log(e);
-      closeModal.focus();
+      body.style.backgroundColor = 'transparent';
+      setTimeout(() => {
+        
+        formModal.style.display = "none";
+      header.style.display = 'block'
+        main.style.display = 'block'
+        
+        resetField();
+      }, 1000);
     }
+    
   });
   closeModal.addEventListener("click", (e) => {
-    formModal.style.display = "none";
+    body.style.backgroundColor = 'transparent';
     setTimeout(() => {
+      
+      formModal.style.display = "none";
+    header.style.display = 'block'
+      main.style.display = 'block'
+      
       resetField();
     }, 1000);
+    
   });
 
   // Fonction RESET après envoi du formulaire
@@ -45,6 +63,7 @@ export async function contactForm() {
       inputField[i].classList.remove("greenBorder");
       inputField[i].nextElementSibling.innerHTML = "";
     }
+    contactBtn.focus();
   }
 
   function focusBlur() {
@@ -166,7 +185,7 @@ export async function contactForm() {
             inputField[i].classList.remove("blueBorder");
             okMessageRemove(paragraphe, inputField[i]);
             okMessage(paragraphe, `Merci !`, inputField[i]);
-            sendButton.focus();
+            //sendButton.focus();
             console.log(inputField[i].value);
           }
       }
@@ -194,10 +213,16 @@ export async function contactForm() {
   formModal.addEventListener("submit", (e) => {
     e.preventDefault();
     if (valideForm()) {
-      formModal.style.display = "none";
+      
       setTimeout(() => {
+        formModal.style.display = "none";
+      header.style.display = 'block'
+      main.style.display = 'block'
+      body.style.backgroundColor = 'transparent';
         resetField();
       }, 1000);
+      
     }
+   
   });
 }

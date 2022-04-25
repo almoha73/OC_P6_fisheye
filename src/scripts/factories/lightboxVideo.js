@@ -10,8 +10,8 @@ export class Lightboxvideo {
       lightboxContainer.innerHTML = ''
       lightboxContainer.innerHTML = `
       <div>
-        <video src="${this.url}" alt="" controls></video>
-        <p>${this.title}</p>
+        <video src="${this.url}" alt="${this.title}" tabindex="4" controls></video>
+        <p tabindex="5">${this.title}</p>
       </div>
       `
       // wrapper.querySelector(".next").addEventListener('click', this.next.bind(this));

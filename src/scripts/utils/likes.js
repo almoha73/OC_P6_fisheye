@@ -13,8 +13,7 @@ export function likes() {
       likeTotal.innerHTML = sum + `<i class="fas fa-solid fa-heart"></i>`;
       let clicked = false;
 
-      //EVENEMENT SUR LE BOUTON LIKE
-      likeButton[i].addEventListener("click", () => {
+      function evtLike(){
         if (!clicked) {
           clicked = true;
           likeButton[
@@ -39,6 +38,22 @@ export function likes() {
           likeTotal.innerHTML =
             -1 + sum-- + `<i class="fas fa-solid fa-heart"></i>`;
         }
+      }
+
+      //EVENEMENT AU CLIC SUR LE BOUTON LIKE
+      likeButton[i].addEventListener("click", () => {
+        evtLike();
+      });
+
+      //EVENEMENT TOUCHE ENTREE SUR LE BOUTON LIKE
+
+      likeButton[i].addEventListener("keydown", (e) => {
+       
+        console.log(e);
+        if(e.key === "Enter"){
+          evtLike();  
+        }
+        
       });
     }
   }
