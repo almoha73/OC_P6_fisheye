@@ -22,25 +22,25 @@
       
       <nav>
         <label for="tri">Trier par</label>
-        <div id="tri" role="button" aria-haspopup="listbox" aria-expanded="false"  class="select-box" tabindex="0">
+        <div id="tri" role="button" aria-haspopup="listbox" class="select-box" tabindex="0">
             <div role="listbox" class="options-container">
               <hr>
-              <div class="option" tabindex="-1">
+              <div class="option" tabindex="2">
                 <input type="radio" class="radio" name="category" id="date">
-                <label for="date">Date</label>
+                <label for="date" class="optionsDropdown">Date</label>
               </div>
               <hr>
-              <div class="option" tabindex="-1">
+              <div class="option" tabindex="3">
                 <input type="radio" class="radio" name="category" id="titre">
-                <label for="titre">Titre</label>
+                <label for="titre" class="optionsDropdown">Titre</label>
               </div>
               <hr>
-              <div class="option" tabindex="-1">
+              <div class="option" tabindex="4" >
                 <input type="radio" class="radio" name="category" id="popularite">
-                <label for="popularite">Popularité</label>
+                <label for="popularite" class="optionsDropdown">Popularité</label>
               </div>
             </div>
-            <div tabindex="0" class="selected">
+            <div tabindex="1" class="selected optionsDropdown">
               Selection
             </div>  
             

@@ -139,9 +139,16 @@ main{
                     &:hover{
                         background-color: abstracts.$color-secondary;
                     }
+                    &:focus{
+                        background-color: abstracts.$color-secondary;
+                        color: abstracts.$color-black;
+                        font-weight: 900;
+                        border: 3px solid abstracts.$color-black;
+                        border-radius: 6px;
+                    }
                 }
                 &.active{
-                height: 140px;
+                height: 145px;
                 opacity: 1;
                 
                 }

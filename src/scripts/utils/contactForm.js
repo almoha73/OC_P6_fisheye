@@ -7,83 +7,82 @@ export async function contactForm() {
   //Variables du formulaire
   const formModal = document.querySelector("#contact_modal"); //formulaire
   const contactBtn = document.querySelector("button.contact"); //ouverture
-  const titreForm = document.querySelector('h1')
+  const titreForm = document.querySelector("h1");
   const closeModal = document.querySelector(".close-modal"); //fermeture
   let inputField = document.querySelectorAll("input.input-control"); // inputs
   //const sendButton = document.querySelector(".send_button"); //bouton envoyer
-  const body = document.querySelector('body');
-  const header = document.querySelector('header');
-  const main = document.querySelector('main');
+  const body = document.querySelector("body");
+  const header = document.querySelector("header");
+  const main = document.querySelector("main");
   //ouverture du formulaire
   contactBtn.addEventListener("click", (e) => {
-    e.preventDefault()
+    e.preventDefault();
     formModal.style.display = "inline-block";
     formModal.setAttribute("aria-modal", true);
-    header.style.display = 'none'
-    main.style.display = 'none'
-    body.style.backgroundColor = '#901C1C';
-    titreForm.focus()
+    header.style.display = "none";
+    main.style.display = "none";
+    body.style.backgroundColor = "#901C1C";
+    titreForm.focus();
     focusBlur();
   });
 
   ///FONCTION GARDE DU FOCUS DANS LE FORMULAIRE
-  const focusInModal = function(e){
-    e.preventDefault()
-    const focusablesForm = Array.from(document.querySelectorAll('.modalForm'));
-    let index = focusablesForm.findIndex(elt => elt === formModal.querySelector(':focus'));
+  const focusInModal = function (e) {
+    e.preventDefault();
+    const focusablesForm = Array.from(document.querySelectorAll(".modalForm"));
+    let index = focusablesForm.findIndex(
+      (elt) => elt === formModal.querySelector(":focus")
+    );
 
-    if(e.shiftKey === true){
-      index--
-    }else {
-      index++
+    if (e.shiftKey === true) {
+      index--;
+    } else {
+      index++;
     }
-    
-    if(index >= focusablesForm.length){
+
+    if (index >= focusablesForm.length) {
       index = 0;
     }
-      if(index < 0){
+    if (index < 0) {
       index = focusablesForm.length - 1;
     }
-    
-    focusablesForm[index].focus()
-  }
+
+    focusablesForm[index].focus();
+  };
   // TABULATION A L'INTERIEUR DU FORMAULAIRE EN BOUCLE
   window.addEventListener("keydown", (e) => {
-    if(e.key === 'Tab' && formModal.style.display === 'inline-block'){
-      e.preventDefault()
+    if (e.key === "Tab" && formModal.style.display === "inline-block") {
+      e.preventDefault();
       focusInModal(e);
-    }  
-  })
+    }
+  });
 
   //FERMETURE DU FORMULAIRE AVEC TOUCHE ECHAP
   window.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && formModal.style.display === 'inline-block') {
-      body.style.backgroundColor = 'transparent';
+    if (e.key === "Escape" && formModal.style.display === "inline-block") {
+      body.style.backgroundColor = "transparent";
       setTimeout(() => {
-        
         formModal.style.display = "none";
-      header.style.display = 'block'
-        main.style.display = 'block'
-        
+        header.style.display = "block";
+        main.style.display = "block";
+
         resetField();
       }, 1000);
-      contactBtn.focus()
+      contactBtn.focus();
     }
-    
   });
 
   ///FERMETURE DU FORMULAIRE AU CLIC
   closeModal.addEventListener("click", (e) => {
-    body.style.backgroundColor = 'transparent';
+    body.style.backgroundColor = "transparent";
     setTimeout(() => {
-      
       formModal.style.display = "none";
-    header.style.display = 'block'
-      main.style.display = 'block'
-      
+      header.style.display = "block";
+      main.style.display = "block";
+
       resetField();
     }, 1000);
-    contactBtn.focus()
+    contactBtn.focus();
   });
 
   // Fonction RESET après envoi du formulaire
@@ -244,16 +243,14 @@ export async function contactForm() {
   formModal.addEventListener("submit", (e) => {
     e.preventDefault();
     if (valideForm()) {
-      
       setTimeout(() => {
         formModal.style.display = "none";
-      header.style.display = 'block'
-      main.style.display = 'block'
-      body.style.backgroundColor = 'transparent';
+        header.style.display = "block";
+        main.style.display = "block";
+        body.style.backgroundColor = "transparent";
         resetField();
       }, 1000);
-      contactBtn.focus()
+      contactBtn.focus();
     }
-   
   });
 }

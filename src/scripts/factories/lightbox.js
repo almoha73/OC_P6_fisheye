@@ -7,27 +7,26 @@ import { MediaFactory } from "./mediasFactory";
 export class Lightbox {
   static init() {
     const links = Array.from(document.querySelectorAll(".media"));
-    const header = document.querySelector('header');
-    const main = document.querySelector('main');
-    const body= document.querySelector('body');
+    const header = document.querySelector("header");
+    const main = document.querySelector("main");
+    const body = document.querySelector("body");
     for (let i = 0; i < links.length; i++) {
       let newIndex = i;
       links[i].onclick = () => {
-        lightboxDisplay() 
-      }
+        lightboxDisplay();
+      };
 
       links[i].onkeydown = (e) => {
-        if(e.key === "Enter"){
-          e.preventDefault()
-          lightboxDisplay()
-          
+        if (e.key === "Enter") {
+          e.preventDefault();
+          lightboxDisplay();
         }
-      }
-        function lightboxDisplay(){
-           //AFFICHAGE DU WRAPPER DE LA LIGHTBOX SANS IMAGES/VIDEO
+      };
+      function lightboxDisplay() {
+        //AFFICHAGE DU WRAPPER DE LA LIGHTBOX SANS IMAGES/VIDEO
         const newLightbox = new Lightbox();
         newLightbox.buildDom();
-        
+
         //AFFICHAGE DE LA LIGHTBOX AVEC IMAGES ET/OU VIDEO
         const lightboxContainer = document.querySelector(".lightbox_container");
         const lightBoxRemove = lightboxContainer.firstChild.remove();
@@ -36,10 +35,10 @@ export class Lightbox {
         const newLightboxPreview = function () {
           newLightbox.preview(selectedImgUrl, links[newIndex]);
         };
-        
+
         newLightboxPreview();
-        header.style.display = 'none'
-        main.style.display = 'none'
+        header.style.display = "none";
+        main.style.display = "none";
 
         //NEXT AU CLIC SOURIS
         const next = document.querySelector(".next");
@@ -55,7 +54,6 @@ export class Lightbox {
             newIndex = 0;
             newLightboxPreview();
           }
-          
         });
         //PREVIOUS AU CLIC SOURIS
         const previous = document.querySelector(".previous");
@@ -63,7 +61,7 @@ export class Lightbox {
         previous.addEventListener("click", (e) => {
           e.preventDefault();
           lightBoxRemove;
-          
+
           if (newIndex > 0) {
             newIndex--;
             newLightboxPreview();
@@ -74,94 +72,85 @@ export class Lightbox {
         });
 
         //FONCTION CLOSE
-        const close = document.querySelector('.close-lightbox');
-        const closeLightbox = function(){
-          const header = document.querySelector('header');
-          const main = document.querySelector('main');
-          body.firstChild.remove()
-          header.style.display = 'block'
-          main.style.display = 'block'
+        const close = document.querySelector(".close-lightbox");
+        const closeLightbox = function () {
+          const header = document.querySelector("header");
+          const main = document.querySelector("main");
+          body.firstChild.remove();
+          header.style.display = "block";
+          main.style.display = "block";
           newIndex = i;
-          links[newIndex].focus()
-        }
+          links[newIndex].focus();
+        };
         //CLOSE AU CLIC
-        close.addEventListener('click', () => {
-          
+        close.addEventListener("click", () => {
           closeLightbox();
-          
-        })
-
-        //// FONCTION FOCUS EN BOUCLE EMPRISONNE DANS LA LIGHTBOX  
-
-        const focusInModal = function(e){
-          e.preventDefault()
-          const wrapper = document.querySelector('.wrapper');
-          const focusablesLightbox = Array.from(document.querySelectorAll('.modalLightbox'));
-          let index = focusablesLightbox.findIndex(elt => elt === wrapper.querySelector(':focus'));
-      
-          if(e.shiftKey === true){
-            index--
-          }else {
-            index++
-          }
-          
-          if(index >= focusablesLightbox.length){
-            index = 0;
-          }
-            if(index < 0){
-            index = focusablesLightbox.length - 1;
-          }
-          
-          focusablesLightbox[index].focus()
-        }
-        
-          
-        //NEXT / PREVIOUS / ECHAP AUX TOUCHES CLAVIER
-       
-        window.addEventListener("keydown", (e) => {
-          const wrapper = document.querySelector('.wrapper');
-            if (e.key === 'ArrowRight') {
-              e.preventDefault();
-              lightBoxRemove;
-              
-              if (newIndex < links.length - 1) {
-                newIndex++;
-                newLightboxPreview();
-                
-              } else {
-                newIndex = 0;
-                newLightboxPreview();
-                
-              }
-            } else if (e.key === 'ArrowLeft') {
-              e.preventDefault();
-              lightBoxRemove;
-              
-              if (newIndex > 0) {
-                newIndex--;
-                newLightboxPreview();
-                
-              } else {
-                newIndex = links.length - 1;
-                newLightboxPreview();
-                
-              }
-            } else if(e.key === 'Escape'){
-              e.preventDefault()
-              
-              closeLightbox();
-              
-            }
-            else if(e.key === 'Tab' && wrapper){
-              e.preventDefault()
-              focusInModal(e);
-            }  
-         
         });
 
-        
-       }  
-    
+        //// FONCTION FOCUS EN BOUCLE EMPRISONNE DANS LA LIGHTBOX
+
+        const focusInModal = function (e) {
+          e.preventDefault();
+          const wrapper = document.querySelector(".wrapper");
+          const focusablesLightbox = Array.from(
+            document.querySelectorAll(".modalLightbox")
+          );
+          let index = focusablesLightbox.findIndex(
+            (elt) => elt === wrapper.querySelector(":focus")
+          );
+
+          if (e.shiftKey === true) {
+            index--;
+          } else {
+            index++;
+          }
+
+          if (index >= focusablesLightbox.length) {
+            index = 0;
+          }
+          if (index < 0) {
+            index = focusablesLightbox.length - 1;
+          }
+
+          focusablesLightbox[index].focus();
+        };
+
+        //NEXT / PREVIOUS / ECHAP AUX TOUCHES CLAVIER
+
+        window.addEventListener("keydown", (e) => {
+          const wrapper = document.querySelector(".wrapper");
+          if (e.key === "ArrowRight") {
+            e.preventDefault();
+            lightBoxRemove;
+
+            if (newIndex < links.length - 1) {
+              newIndex++;
+              newLightboxPreview();
+            } else {
+              newIndex = 0;
+              newLightboxPreview();
+            }
+          } else if (e.key === "ArrowLeft") {
+            e.preventDefault();
+            lightBoxRemove;
+
+            if (newIndex > 0) {
+              newIndex--;
+              newLightboxPreview();
+            } else {
+              newIndex = links.length - 1;
+              newLightboxPreview();
+            }
+          } else if (e.key === "Escape") {
+            e.preventDefault();
+
+            closeLightbox();
+          } else if (e.key === "Tab" && wrapper) {
+            e.preventDefault();
+            focusInModal(e);
+          }
+        });
+      }
     }
   }
 
@@ -169,13 +158,12 @@ export class Lightbox {
     this.element = this.buildDom();
     //document.body.appendChild(this.element);
     document.body.prepend(this.element);
-    
   }
 
   buildDom() {
     const wrapper = document.createElement("div");
     wrapper.classList.add("wrapper");
-        wrapper.innerHTML = `
+    wrapper.innerHTML = `
           <div class="wrapper-content">
           <div class="bground"></div>
           <div class="wrapper-left">
@@ -198,7 +186,6 @@ export class Lightbox {
           
       `;
 
-
     return wrapper;
   }
 
@@ -220,6 +207,4 @@ export class Lightbox {
       lightboxVideo.buildDom();
     }
   }
-
-  
 }
