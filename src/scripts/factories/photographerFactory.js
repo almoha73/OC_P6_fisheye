@@ -38,8 +38,8 @@ export class PhotographerFactory {
         <h3 tabindex="0">${this.city}, ${this.country}</h3>
         <p tabindex="0">${this.tagline}</p>
       </div>
-      <button class="contact" aria-labelledby="Contactez-moi">Contactez-moi</button>
-      <img src="assets/photographers/photo/${this.portrait}" srcset="assets/photographers/photo/${this.portrait}_small.jpg 1x" alt="${this.name}">
+      <button tabindex="0" class="contact" aria-labelledby="Contactez-moi">Contactez-moi</button>
+      <img src="assets/photographers/photo/${this.portrait}" srcset="assets/photographers/photo/${this.portrait}_small.jpg 1x" alt="${this.name}" tabindex="0">
       `
   }
 

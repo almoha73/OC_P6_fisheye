@@ -10,13 +10,13 @@ export async function contactForm() {
   const titreForm = document.querySelector('h1')
   const closeModal = document.querySelector(".close-modal"); //fermeture
   let inputField = document.querySelectorAll("input.input-control"); // inputs
-
-  const sendButton = document.querySelector(".send_button"); //bouton envoyer
+  //const sendButton = document.querySelector(".send_button"); //bouton envoyer
   const body = document.querySelector('body');
   const header = document.querySelector('header');
   const main = document.querySelector('main');
   //ouverture du formulaire
   contactBtn.addEventListener("click", (e) => {
+    e.preventDefault()
     formModal.style.display = "inline-block";
     formModal.setAttribute("aria-modal", true);
     header.style.display = 'none'
@@ -49,15 +49,15 @@ export async function contactForm() {
   }
   // TABULATION A L'INTERIEUR DU FORMAULAIRE EN BOUCLE
   window.addEventListener("keydown", (e) => {
-    if(e.key === 'Tab' && formModal){
+    if(e.key === 'Tab' && formModal.style.display === 'inline-block'){
       e.preventDefault()
       focusInModal(e);
     }  
   })
 
-  //FERMETURE DU FORMUALAIRE AVECD TOUCHE ECHAP
-  formModal.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") {
+  //FERMETURE DU FORMULAIRE AVEC TOUCHE ECHAP
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && formModal.style.display === 'inline-block') {
       body.style.backgroundColor = 'transparent';
       setTimeout(() => {
         
@@ -67,6 +67,7 @@ export async function contactForm() {
         
         resetField();
       }, 1000);
+      contactBtn.focus()
     }
     
   });
@@ -82,7 +83,7 @@ export async function contactForm() {
       
       resetField();
     }, 1000);
-    
+    contactBtn.focus()
   });
 
   // Fonction RESET après envoi du formulaire
@@ -251,7 +252,7 @@ export async function contactForm() {
       body.style.backgroundColor = 'transparent';
         resetField();
       }, 1000);
-      
+      contactBtn.focus()
     }
    
   });
