@@ -6,9 +6,8 @@ export async function contactForm() {
   const articles = await fetchPhotographers();
   //Variables du formulaire
   const formModal = document.querySelector("#contact_modal"); //formulaire
-
   const contactBtn = document.querySelector("button.contact"); //ouverture
-
+  const titreForm = document.querySelector('h1')
   const closeModal = document.querySelector(".close-modal"); //fermeture
   let inputField = document.querySelectorAll("input.input-control"); // inputs
 
@@ -23,11 +22,40 @@ export async function contactForm() {
     header.style.display = 'none'
     main.style.display = 'none'
     body.style.backgroundColor = '#901C1C';
-    closeModal.focus();
+    titreForm.focus()
     focusBlur();
   });
 
-  //fermeture du formulaire
+  ///FONCTION GARDE DU FOCUS DANS LE FORMULAIRE
+  const focusInModal = function(e){
+    e.preventDefault()
+    const focusablesForm = Array.from(document.querySelectorAll('.modalForm'));
+    let index = focusablesForm.findIndex(elt => elt === formModal.querySelector(':focus'));
+
+    if(e.shiftKey === true){
+      index--
+    }else {
+      index++
+    }
+    
+    if(index >= focusablesForm.length){
+      index = 0;
+    }
+      if(index < 0){
+      index = focusablesForm.length - 1;
+    }
+    
+    focusablesForm[index].focus()
+  }
+  // TABULATION A L'INTERIEUR DU FORMAULAIRE EN BOUCLE
+  window.addEventListener("keydown", (e) => {
+    if(e.key === 'Tab' && formModal){
+      e.preventDefault()
+      focusInModal(e);
+    }  
+  })
+
+  //FERMETURE DU FORMUALAIRE AVECD TOUCHE ECHAP
   formModal.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
       body.style.backgroundColor = 'transparent';
@@ -42,6 +70,8 @@ export async function contactForm() {
     }
     
   });
+
+  ///FERMETURE DU FORMULAIRE AU CLIC
   closeModal.addEventListener("click", (e) => {
     body.style.backgroundColor = 'transparent';
     setTimeout(() => {
