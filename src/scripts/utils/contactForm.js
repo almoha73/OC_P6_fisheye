@@ -19,9 +19,9 @@ export async function contactForm() {
     e.preventDefault();
     formModal.style.display = "inline-block";
     formModal.setAttribute("aria-modal", true);
-    header.style.display = "none";
-    main.style.display = "none";
-    body.style.backgroundColor = "#901C1C";
+    // header.style.display = "none";
+    // main.style.display = "none";
+    // body.style.backgroundColor = "#901C1C";
     titreForm.focus();
     focusBlur();
   });
@@ -63,8 +63,8 @@ export async function contactForm() {
       body.style.backgroundColor = "transparent";
       setTimeout(() => {
         formModal.style.display = "none";
-        header.style.display = "block";
-        main.style.display = "block";
+        // header.style.display = "block";
+        // main.style.display = "block";
 
         resetField();
       }, 1000);
@@ -77,11 +77,11 @@ export async function contactForm() {
     body.style.backgroundColor = "transparent";
     setTimeout(() => {
       formModal.style.display = "none";
-      header.style.display = "block";
-      main.style.display = "block";
+      // header.style.display = "block";
+      // main.style.display = "block";
 
       resetField();
-    }, 1000);
+    }, 500);
     contactBtn.focus();
   });
 
@@ -245,11 +245,11 @@ export async function contactForm() {
     if (valideForm()) {
       setTimeout(() => {
         formModal.style.display = "none";
-        header.style.display = "block";
-        main.style.display = "block";
-        body.style.backgroundColor = "transparent";
+        // header.style.display = "block";
+        // main.style.display = "block";
+        // body.style.backgroundColor = "transparent";
         resetField();
-      }, 1000);
+      }, 500);
       contactBtn.focus();
     }
   });

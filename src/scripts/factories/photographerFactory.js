@@ -18,12 +18,13 @@ export class PhotographerFactory {
                     <img src="assets/photographers/photo/${this.portrait}" srcset="assets/photographers/photo/${this.portrait}_small.jpg 1x" alt="${this.name}">
                     <h2 aria-label="${this.name}">${this.name}</h2>
                 </article>
+
                 <article tabindex="0">
                     <h3>${this.city}, ${this.country}</h4>
                     <p>${this.tagline}</p>
                     <p>${this.price}€/jour</p>
                 </article>
-            </a>
+            </a>  
             `;   
      }
 

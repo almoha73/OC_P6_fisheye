@@ -7,8 +7,6 @@ import { MediaFactory } from "./mediasFactory";
 export class Lightbox {
   static init() {
     const links = Array.from(document.querySelectorAll(".media"));
-    const header = document.querySelector("header");
-    const main = document.querySelector("main");
     const body = document.querySelector("body");
     for (let i = 0; i < links.length; i++) {
       let newIndex = i;
@@ -37,8 +35,6 @@ export class Lightbox {
         };
 
         newLightboxPreview();
-        header.style.display = "none";
-        main.style.display = "none";
 
         //NEXT AU CLIC SOURIS
         const next = document.querySelector(".next");
@@ -74,11 +70,7 @@ export class Lightbox {
         //FONCTION CLOSE
         const close = document.querySelector(".close-lightbox");
         const closeLightbox = function () {
-          const header = document.querySelector("header");
-          const main = document.querySelector("main");
           body.firstChild.remove();
-          header.style.display = "block";
-          main.style.display = "block";
           newIndex = i;
           links[newIndex].focus();
         };
