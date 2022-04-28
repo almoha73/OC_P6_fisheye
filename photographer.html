@@ -22,8 +22,8 @@
       
       <nav>
         <label for="tri">Trier par</label>
-        <div id="tri" role="button" aria-haspopup="listbox" class="select-box" tabindex="0">
-            <div role="listbox" class="options-container">
+        <div id="tri" aria-selected="false" aria-label="tri des medias" class="select-box" tabindex="0">
+            <div class="options-container">
               <hr>
               <div class="option" tabindex="2">
                 <input type="radio" class="radio" name="category" id="date">
@@ -61,33 +61,33 @@
       <div class="modal">
         <header>
           <div class="header-title">
-            <h1 tabindex="1" class="modalForm">Contactez-moi</h1>
-            <h2 tabindex="2" class="contact-name modalForm">Mimi Keel</h2>
+            <h1 tabindex="0" class="modalForm">Contactez-moi</h1>
+            <h2 tabindex="0" class="contact-name modalForm">Mimi Keel</h2>
           </div>
          <button tabindex="0" class="close-modal modalForm"><img src="./assets/icons/close.svg" alt="croix de fermeture du formulaire"/></button> 
         </header>
         <form action="GET">
           <div class="'formData">
-            <label for="first" tabindex="3" class="modalForm">Prénom<span aria-hidden="true" style="color:red"> *</span></label>
+            <label for="first" tabindex="0" class="modalForm">Prénom<span aria-hidden="true" > *</span></label>
             <input tabindex="4" class="input-control modalForm" type="text" name="first" id="first" aria-label="Entrez votre prénom" aria-required="true">
-            <p tabindex="5" class="modalForm"></p>
+            <p tabindex="0" class="modalForm"></p>
           </div>
           <div class="'formData">
-            <label for="last" tabindex="6" class="modalForm">Nom<span aria-hidden="true" style="color:red"> *</span></label>
+            <label for="last" tabindex="0" class="modalForm">Nom<span aria-hidden="true" > *</span></label>
             <input tabindex="7" class="input-control modalForm" type="text" name="last" id="last" aria-label="Entrez votre nom">
-            <p tabindex="8" class="modalForm"></p>
+            <p tabindex="0" class="modalForm"></p>
           </div>
           <div class="'formData">
-            <label for="mail" tabindex="9" class="modalForm">Email<span aria-hidden="true" style="color:red" > *</span></label>
+            <label for="mail" tabindex="0" class="modalForm">Email<span aria-hidden="true" > *</span></label>
             <input tabindex="10" class="input-control modalForm" type="email" name="mail" id="mail" aria-label="Entrez votre mail">
-            <p tabindex="11" class="modalForm"></p>
+            <p tabindex="0" class="modalForm"></p>
           </div>
           <div class="'formData formData-message">
-            <label for="text" tabindex="12" class="modalForm">Votre message</label>
-            <input tabindex="13" class="input-control input-message modalForm" type="text" name="text" id="text" aria-label="Entrez votre message">
-            <p tabindex="14" class="modalForm"></p>
+            <label for="text" tabindex="0" class="modalForm">Votre message</label>
+            <input tabindex="0" class="input-control input-message modalForm" type="text" name="text" id="text" aria-label="Entrez votre message">
+            <p tabindex="0" class="modalForm"></p>
           </div>
-          <button tabindex="15" type="submit" aria-label="Envoi"  class="send_button modalForm">Envoyer</button>
+          <button tabindex="0" type="submit" aria-label="Envoi"  class="send_button modalForm">Envoyer</button>
         </form>
       </div>
     </section>

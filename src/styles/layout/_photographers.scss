@@ -11,6 +11,21 @@ main{
         grid-template-columns: repeat(3, 1fr);
         justify-items: center;
         align-items: center;
+        @media screen and (max-width: 992px){
+            display: flex;
+            flex-direction: column;
+            font-size: 2rem;
+            height: 500px;
+            justify-content: space-around;
+        }
+        @media screen and (max-width: 900px){
+            display: flex;
+            flex-direction: column;
+            font-size: 2rem;
+            height: 500px;
+            justify-content: space-around;
+            width: calc(100% - 100px);
+        }
         .presentation{
             display: flex;
             flex-direction: column;
@@ -18,10 +33,17 @@ main{
             justify-content: center;
             margin-left: 40px;
             h1{
-                font-size: 64px;
+                font-size: 3.8rem;
                 color: abstracts.$color-secondary;
+                @media screen and (max-width: 1200px){
+                    font-size: 3rem;
+                }
+                @media screen and (max-width: 550px){
+                    font-size: 2rem;
+                }
+               
             }
-            h3{
+            h2{
                 font-size: 24px;
                 color: abstracts.$color-secondary;
             }
@@ -37,10 +59,14 @@ main{
             color: abstracts.$color-white;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 20px;
+            font-size: 1.2rem;
             font-weight: bold;
             padding: 11px;
             border: none;
+            @media screen and (max-width: 1200px){
+                width: 130px;
+                font-size: 0.95rem;
+            }
             //outline: none;
             &:hover{
                 background-color: abstracts.$color-secondary;

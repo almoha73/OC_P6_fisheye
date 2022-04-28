@@ -44,10 +44,9 @@ export async function displayMedias() {
   const dataMedia = await fetchPhotographersMedias();
   const mediaId = getPhotographerId();
   const selected = document.querySelector(".selected");
-  const selectBox = document.querySelector(".select-box");
+  const selectBox = document.getElementById("tri");
   const optionsContainer = document.querySelector(".options-container");
   const optionsList = document.querySelectorAll(".option");
-  const nav = document .querySelector('nav');
   let mediaArray = [];
 
   // APPARITION DES MEDIAS PAR ID PHOTOGRAPHE PAR DEFAUT (date)
@@ -61,50 +60,34 @@ export async function displayMedias() {
   }
   
   //TOGGLE OUVERTURE FERMETURE DU MENU DROPDOWN AU CLIC
-  selected.addEventListener("click", () => {
+  selectBox.addEventListener("click", () => {
     optionsContainer.classList.toggle("active");
-    selected.focus();
+    if(optionsContainer.classList.contains('active')){
+      selectBox.setAttribute('aria-selected', true);
+      selected.focus();
+      
+    }else{
+       selectBox.setAttribute('aria-selected', false);
+       selected.focus();
+    }
+    
   });
   //TOGGLE OUVERTURE FERMETURE AU CLAVIER
  selectBox.addEventListener("keydown", (e) => {
     if(e.key === "Enter"){
       optionsContainer.classList.toggle("active");
-      selected.focus();
+      if(optionsContainer.classList.contains('active')){
+        selectBox.setAttribute('aria-selected', true);
+        selected.focus();
+      }else{
+        selectBox.setAttribute('aria-selected', false);
+        selected.focus();
+      }
+      
     }  
   });
-
-  ///FONCTION GARDE DU FOCUS DANS LA SELECTBOX
-  const focusInSelect = function (e) {
-    e.preventDefault();
-    const focusablesSelect = Array.from(document.querySelectorAll('.optionsDropdown'));
-    console.log(focusablesSelect);
-    let index = focusablesSelect.findIndex(
-      (elt) => elt === nav.querySelector(":focus")
-    );
-    console.log(index);
-
-    if (e.shiftKey === true) {
-      index--;
-    } else {
-      index++;
-    }
-
-    if (index >= focusablesSelect.length) {
-      index = 0;
-    }
-    if (index < 0) {
-      index = focusablesSelect.length - 1;
-    }
-
-    focusablesSelect[index].focus();
-  };
-  // TABULATION A L'INTERIEUR DE LA SELECTBOX EN BOUCLE
-  window.addEventListener("keydown", (e) => {
-    if (e.key === "Tab" && optionsContainer.style.opacity === '1') {
-      e.preventDefault();
-      focusInSelect(e);
-    }
-  });
+  
+ 
 
   // LORSQUE L'ON CLIQUE SUR UNE OPTION DU MENU DROPDOWN ......
   optionsList.forEach((elt) => {
@@ -121,7 +104,7 @@ export async function displayMedias() {
         switch (choice) {
           case "Popularité":
             mediaArray.sort((a, b) => {
-              return a.likes - b.likes;
+              return b.likes - a.likes;
             });
 
             break;

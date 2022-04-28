@@ -3,6 +3,7 @@
 section.like-storage{
     cursor: all-scroll;
     z-index: 250;
+    max-width: 376px;
     width: 376px;
     height: 80px;
     border-radius: 5px;
@@ -13,6 +14,9 @@ section.like-storage{
     display: flex;
     align-items: center;
     justify-content: space-around;
+    @media screen and (max-width: 500px){
+        width: 300px;
+    }
     h2.like-total-count{
         i{
             margin-left: 15px;

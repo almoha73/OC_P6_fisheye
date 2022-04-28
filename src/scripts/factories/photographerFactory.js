@@ -35,7 +35,7 @@ export class PhotographerFactory {
       `
       <div class="presentation">
         <h1 tabindex="0">${this.name}</h1>
-        <h3 tabindex="0">${this.city}, ${this.country}</h3>
+        <h2 tabindex="0">${this.city}, ${this.country}</h2>
         <p tabindex="0">${this.tagline}</p>
       </div>
       <button tabindex="0" class="contact" aria-labelledby="Contactez-moi">Contactez-moi</button>
