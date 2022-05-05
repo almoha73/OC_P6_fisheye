@@ -12,14 +12,23 @@ export class Lightbox {
     console.log(titles);
     const title = titles.map((elt) => elt.innerText);
     console.log(title);
+    
+    
+    
     for (let i = 0; i < links.length; i++) {
       const link = links[i]; //this.link
       const titlePos = title[i]; //this.titlePos
       const linkUrl = link.getAttribute("src"); //this.linkUrl
 
-      console.log(linkUrl);
+      const currentMediaPosition = tabLinks.findIndex(//this.currentPosition
+        (link) => link == linkUrl
+      );
+      const currentMediaTitle = title.findIndex(//this.currentMediaTitle
+        (link) => link == titlePos
+      );
+
       link.onclick = (e) => {
-        const light = new Lightbox(linkUrl, tabLinks, link, title, titlePos);
+        const light = new Lightbox(linkUrl, tabLinks, link, title, titlePos, currentMediaPosition, currentMediaTitle);
         light.preview();
         const next = document.querySelector(".next");
         next.focus();
@@ -28,7 +37,7 @@ export class Lightbox {
       link.onkeydown = (e) => {
         if (e.key === "Enter") {
           e.preventDefault();
-          const light = new Lightbox(linkUrl, tabLinks, link, title, titlePos);
+          const light = new Lightbox(linkUrl, tabLinks, link, title, titlePos, currentMediaPosition, currentMediaTitle);
           light.preview();
           const next = document.querySelector(".next");
           next.focus();
@@ -51,6 +60,32 @@ export class Lightbox {
       lightboxVideo.buildDom();
     }
   }
+
+  focusInModal (e) {
+    e.preventDefault();
+    const wrapper = document.querySelector(".wrapper");
+    const focusablesLightbox = Array.from(
+      document.querySelectorAll(".modalLightbox")
+    );
+    let index = focusablesLightbox.findIndex(
+      (elt) => elt === wrapper.querySelector(":focus")
+    );
+
+    if (e.shiftKey === true) {
+      index--;
+    } else {
+      index++;
+    }
+
+    if (index >= focusablesLightbox.length) {
+      index = 0;
+    }
+    if (index < 0) {
+      index = focusablesLightbox.length - 1;
+    }
+
+    focusablesLightbox[index].focus();
+  };
 
   clicEvent() {
     this.closeIcon.addEventListener("click", (e) => {
@@ -75,50 +110,38 @@ export class Lightbox {
 
   next() {
     this.lightBoxRemove;
-    let currentMediaPosition = this.tabLinks.findIndex(
-      (link) => link == this.linkUrl
-    );
-    console.log(currentMediaPosition);
-    let currentMediaTitle = this.title.findIndex(
-      (link) => link == this.titlePos
-    );
-    console.log(currentMediaTitle);
-    if (currentMediaPosition < this.links.length - 1) {
-      currentMediaPosition++;
-      currentMediaTitle++;
-      this.linkUrl = this.tabLinks[currentMediaPosition];
-      this.titlePos = this.title[currentMediaTitle];
+    
+    
+    if (this.currentMediaPosition < this.links.length - 1) {
+      this.currentMediaPosition++;
+      this.currentMediaTitle++;
+      this.linkUrl = this.tabLinks[this.currentMediaPosition];
+      this.titlePos = this.title[this.currentMediaTitle];
       this.preview();
     } else {
-      currentMediaPosition = 0;
-      currentMediaTitle = 0;
-      this.linkUrl = this.tabLinks[currentMediaPosition];
-      this.titlePos = this.title[currentMediaTitle];
+      this.currentMediaPosition = 0;
+      this.currentMediaTitle = 0;
+      this.linkUrl = this.tabLinks[this.currentMediaPosition];
+      this.titlePos = this.title[this.currentMediaTitle];
       this.preview();
     }
   }
 
   previous() {
     this.lightBoxRemove;
-    let currentMediaPosition = this.tabLinks.findIndex(
-      (mediaLink) => mediaLink == this.linkUrl
-    );
-    console.log(currentMediaPosition);
-    let currentMediaTitle = this.title.findIndex(
-      (link) => link == this.titlePos
-    );
-    console.log(currentMediaTitle);
-    if (currentMediaPosition > 0) {
-      currentMediaPosition--;
-      currentMediaTitle--;
-      this.linkUrl = this.tabLinks[currentMediaPosition];
-      this.titlePos = this.title[currentMediaTitle];
+    
+    
+    if (this.currentMediaPosition > 0) {
+      this.currentMediaPosition--;
+      this.currentMediaTitle--;
+      this.linkUrl = this.tabLinks[this.currentMediaPosition];
+      this.titlePos = this.title[this.currentMediaTitle];
       this.preview();
     } else {
-      currentMediaPosition = this.links.length - 1;
-      currentMediaTitle = this.title.length - 1;
-      this.linkUrl = this.tabLinks[currentMediaPosition];
-      this.titlePos = this.title[currentMediaTitle];
+      this.currentMediaPosition = this.links.length - 1;
+      this.currentMediaTitle = this.title.length - 1;
+      this.linkUrl = this.tabLinks[this.currentMediaPosition];
+      this.titlePos = this.title[this.currentMediaTitle];
       this.preview();
     }
   }
@@ -135,12 +158,12 @@ export class Lightbox {
         this.rightArrow.focus();
       } else if (e.key === "Tab" && this.element !== null) {
         e.preventDefault();
-        //this.focusInModal(e)
+        this.focusInModal(e);
       }
     });
   }
 
-  constructor(linkUrl, tabLinks, link, title, titlePos) {
+  constructor(linkUrl, tabLinks, link, title, titlePos, currentMediaPosition, currentMediaTitle) {
     this.linkUrl = linkUrl;
     console.log(this.linkUrl);
     this.tabLinks = tabLinks;
@@ -151,6 +174,9 @@ export class Lightbox {
     this.titlePos = titlePos;
     console.log(this.titlePos);
     this.links = Array.from(document.querySelectorAll(".media"));
+    this.currentMediaPosition = currentMediaPosition;
+    console.log(currentMediaPosition);
+    this.currentMediaTitle = currentMediaTitle;
 
     this.element = this.buildDom();
     console.log(this.element);
@@ -158,7 +184,7 @@ export class Lightbox {
     this.body.prepend(this.element);
     this.lightboxContainer = document.querySelector(".lightbox_container");
     this.lightBoxRemove = this.lightboxContainer.firstChild.remove();
-    //document.body.appendChild(this.element);
+    
 
     this.closeIcon = document.querySelector(".close-lightbox");
     this.rightArrow = document.querySelector(".next");
