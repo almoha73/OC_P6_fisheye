@@ -4,8 +4,9 @@ import { MediaFactory } from "../factories/mediasFactory";
 import { fetchPhotographers, fetchPhotographersMedias } from "../pages/api.js";
 import { contactForm } from "../utils/contactForm";
 //import { dropdown } from "../utils/dropdown";
-import { Lightbox } from "../factories/lightbox";
-//import { move } from "../utils/draggableDiv";
+//import { Lightbox } from "../factories/lightbox";
+import { Lightbox } from "./diaporama";
+import { move } from "../utils/draggableDiv";
 import { likes } from "../utils/likes";
 
 export function getPhotographerId() {
@@ -54,11 +55,11 @@ export async function displayMedias() {
     if (media.photographerId == mediaId) {
       mediaArray.push(media);
       new MediaFactory(media).getMedias();
-      Lightbox.init();
       likes();
     }
+       
   }
-  
+  Lightbox.init()
   //TOGGLE OUVERTURE FERMETURE DU MENU DROPDOWN AU CLIC
   selectBox.addEventListener("click", () => {
     optionsContainer.classList.toggle("active");
@@ -73,7 +74,10 @@ export async function displayMedias() {
     
   });
   //TOGGLE OUVERTURE FERMETURE AU CLAVIER
+  const optionsDropdown = document.querySelectorAll('.optionsDropdown')
+  console.log(optionsDropdown);
  selectBox.addEventListener("keydown", (e) => {
+   console.log(e);
     if(e.key === "Enter"){
       optionsContainer.classList.toggle("active");
       if(optionsContainer.classList.contains('active')){
@@ -84,8 +88,12 @@ export async function displayMedias() {
         selected.focus();
       }
       
-    }  
+    }
+   
+
   });
+
+  
   
  
 
