@@ -13,13 +13,10 @@ export class Lightbox {
     const title = titles.map((elt) => elt.innerText);
     console.log(title);
     
-    
-    
     for (let i = 0; i < links.length; i++) {
       const link = links[i]; //this.link
       const titlePos = title[i]; //this.titlePos
       const linkUrl = link.getAttribute("src"); //this.linkUrl
-
       const currentMediaPosition = tabLinks.findIndex(//this.currentPosition
         (link) => link == linkUrl
       );
@@ -175,27 +172,20 @@ export class Lightbox {
 
   constructor(linkUrl, tabLinks, link, title, titlePos, currentMediaPosition, currentMediaTitle) {
     this.linkUrl = linkUrl;
-    console.log(this.linkUrl);
     this.tabLinks = tabLinks;
-    console.log(this.tabLinks);
     this.link = link;
-    console.log(this.link);
     this.title = title;
     this.titlePos = titlePos;
-    console.log(this.titlePos);
     this.links = Array.from(document.querySelectorAll(".media"));
     this.currentMediaPosition = currentMediaPosition;
-    console.log(currentMediaPosition);
     this.currentMediaTitle = currentMediaTitle;
 
     this.element = this.buildDom();
-    console.log(this.element);
     this.body = document.querySelector("body");
     this.body.prepend(this.element);
     this.lightboxContainer = document.querySelector(".lightbox_container");
     this.lightBoxRemove = this.lightboxContainer.firstChild.remove();
-    
-
+  
     this.closeIcon = document.querySelector(".close-lightbox");
     this.rightArrow = document.querySelector(".next");
     this.leftArrow = document.querySelector(".previous");
