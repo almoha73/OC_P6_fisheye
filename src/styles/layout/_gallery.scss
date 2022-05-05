@@ -32,6 +32,9 @@
                 box-shadow:8px 8px 10px 0 rgba(0,0,0,0.5);
                 transform: scale(1.03);
             }
+            &:focus{
+                outline: 6px solid abstracts.$color-primary;
+            }
         }
         video{
             cursor: pointer;
@@ -47,6 +50,9 @@
                 box-shadow:8px 8px 10px 0 rgba(0,0,0,0.5);
                 
             }
+           &:focus{
+            outline: 6px solid abstracts.$color-primary;
+           }
         }
         
         .bar{
