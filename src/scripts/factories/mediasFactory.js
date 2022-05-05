@@ -25,7 +25,7 @@ class Medias {
         <figure>
             ${this.media}
             <figcaption>
-            <p class="title" tabindex="0">${this.title}</p><p tabindex="0" data-target="${this.likes}" class="like-count" aria-label="nombre de j'aime"></p><p class="like-button" aria-label="bouton j'aime" role="button" tabindex="0"><i class="far fa-regular fa-heart"></i></p>
+            <p class="title" title="${this.title}" tabindex="0">${this.title}</p><p tabindex="0" data-target="${this.likes}" class="like-count" aria-label="nombre de j'aime"></p><p class="like-button" aria-label="bouton j'aime" role="button" tabindex="0"><i class="far fa-regular fa-heart"></i></p>
             </figcaption>
         </figure>
         
