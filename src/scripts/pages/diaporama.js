@@ -50,11 +50,11 @@ export class Lightbox {
 
   //AFFICHAGE DE LA LIGHTBOX AVEC IMAGES ET/OU VIDEO
   preview() {
-    if (this.link.nodeName === "IMG") {
+    if (this.links[this.currentMediaPosition].nodeName === "IMG") {
       console.log(this.link.nodeName);
       const lightboxImage = new Lightboximage(this.linkUrl, this.titlePos);
       lightboxImage.buildDom();
-    } else if (this.link.nodeName === "VIDEO") {
+    } else{
       const lightboxVideo = new Lightboxvideo(this.linkUrl, this.titlePos);
 
       lightboxVideo.buildDom();
@@ -109,20 +109,26 @@ export class Lightbox {
   }
 
   next() {
+    
     this.lightBoxRemove;
     
-    
     if (this.currentMediaPosition < this.links.length - 1) {
+      
       this.currentMediaPosition++;
       this.currentMediaTitle++;
       this.linkUrl = this.tabLinks[this.currentMediaPosition];
       this.titlePos = this.title[this.currentMediaTitle];
+      
+      
       this.preview();
+      
     } else {
+      
       this.currentMediaPosition = 0;
       this.currentMediaTitle = 0;
       this.linkUrl = this.tabLinks[this.currentMediaPosition];
       this.titlePos = this.title[this.currentMediaTitle];
+      
       this.preview();
     }
   }

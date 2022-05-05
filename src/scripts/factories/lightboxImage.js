@@ -14,6 +14,6 @@ export class Lightboximage {
       </div>
       `
       // wrapper.querySelector(".next").addEventListener('click', this.next.bind(this));
-      return lightboxContainer;
+      
     }
   }
