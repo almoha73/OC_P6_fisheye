@@ -67,9 +67,11 @@ export class Lightbox {
     const focusablesLightbox = Array.from(
       document.querySelectorAll(".modalLightbox")
     );
+    console.log(focusablesLightbox);
     let index = focusablesLightbox.findIndex(
       (elt) => elt === wrapper.querySelector(":focus")
     );
+    console.log(index);
 
     if (e.shiftKey === true) {
       index--;
@@ -106,6 +108,8 @@ export class Lightbox {
     setTimeout(() => {
       this.body.firstChild.remove();
     }, 700);
+    this.links[this.currentMediaPosition].focus()
+    
   }
 
   next() {
@@ -153,7 +157,7 @@ export class Lightbox {
   }
 
   keyboardEvent() {
-    window.addEventListener("keydown", (e) => {
+    this.element.addEventListener("keydown", (e) => {
       if (e.key === "Escape" && this.element !== null) {
         this.close();
       } else if (e.key === "ArrowLeft") {
@@ -165,7 +169,7 @@ export class Lightbox {
       } else if (e.key === "Tab" && this.element !== null) {
         e.preventDefault();
         this.focusInModal(e);
-      }
+      } 
     });
   }
 
