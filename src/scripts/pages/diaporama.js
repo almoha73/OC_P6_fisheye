@@ -9,9 +9,9 @@ export class Lightbox {
     const links = Array.from(document.querySelectorAll(".media"));
     const tabLinks = links.map((media) => media.getAttribute("src")); //this.tabLinks
     const titles = Array.from(document.querySelectorAll(".title"));
-    console.log(titles);
+    
     const title = titles.map((elt) => elt.innerText);
-    console.log(title);
+    
     
     for (let i = 0; i < links.length; i++) {
       const link = links[i]; //this.link
@@ -48,7 +48,7 @@ export class Lightbox {
   //AFFICHAGE DE LA LIGHTBOX AVEC IMAGES ET/OU VIDEO
   preview() {
     if (this.links[this.currentMediaPosition].nodeName === "IMG") {
-      console.log(this.link.nodeName);
+      
       const lightboxImage = new Lightboximage(this.linkUrl, this.titlePos);
       lightboxImage.buildDom();
     } else{
@@ -64,7 +64,7 @@ export class Lightbox {
     const focusablesLightbox = Array.from(
       document.querySelectorAll(".modalLightbox")
     );
-    console.log(focusablesLightbox);
+    
     let index = focusablesLightbox.findIndex(
       (elt) => elt === wrapper.querySelector(":focus")
     );

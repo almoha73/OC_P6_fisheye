@@ -38,7 +38,7 @@ displayPhotographerHeader(); //AFFICHAGE DU HEADER PERSONNALISE POUR UN PHOTOGRA
 
 contactForm(); //GESTION DU FORMULAIRE
 
-
+move()
 
 ///AFFICHAGE DES MEDIAS CORRESPONDANT A CHAQUE PHOTOGRAPHE ----> AFFICHAGE PAR DEFAUT
 export async function displayMedias() {
@@ -47,7 +47,11 @@ export async function displayMedias() {
   const selected = document.querySelector(".selected");
   const selectBox = document.getElementById("tri");
   const optionsContainer = document.querySelector(".options-container");
-  const optionsList = document.querySelectorAll(".option");
+  const optionsList = Array.from(document.querySelectorAll(".option"));
+  console.log(optionsList);
+  
+  
+  
   let mediaArray = [];
 
   // APPARITION DES MEDIAS PAR ID PHOTOGRAPHE PAR DEFAUT (date)
@@ -60,6 +64,8 @@ export async function displayMedias() {
        
   }
   Lightbox.init()
+
+
   //TOGGLE OUVERTURE FERMETURE DU MENU DROPDOWN AU CLIC
   selectBox.addEventListener("click", () => {
     optionsContainer.classList.toggle("active");
@@ -74,8 +80,7 @@ export async function displayMedias() {
     
   });
   //TOGGLE OUVERTURE FERMETURE AU CLAVIER
-  const optionsDropdown = document.querySelectorAll('.optionsDropdown')
-  console.log(optionsDropdown);
+  
  selectBox.addEventListener("keydown", (e) => {
    console.log(e);
     if(e.key === "Enter"){
@@ -91,16 +96,13 @@ export async function displayMedias() {
     }
   });
 
-  
-  
- 
 
   // LORSQUE L'ON CLIQUE SUR UNE OPTION DU MENU DROPDOWN ......
-  optionsList.forEach((elt) => {
-
+  for(let i = 0; i < optionsList.length; i++){
+    optionsContainer.classList.remove("active");
     function selectOptionDisplay(){
-      selected.innerHTML = elt.querySelector("label").innerHTML;
-      optionsContainer.classList.remove("active");
+      selected.innerHTML = optionsList[i].querySelector("label").innerHTML;
+      
       const gallery = document.querySelector(".gallery");
       gallery.innerHTML = ""; //ON VIDE LA GALERIE
       // TRI EN FONCTION DE L'ELEMENT CHOISI (Popularité, Date ou Titre)
@@ -138,16 +140,24 @@ export async function displayMedias() {
         }
       }
     }
-    elt.addEventListener("click", () => {
+    optionsList[i].addEventListener("click", () => {
       selectOptionDisplay(); 
     })
-    elt.addEventListener("keydown", (e) => {
-      if(e.key === 'Enter'){
+
+    window.addEventListener("keydown", (e) => {
+      let index = optionsList.findIndex(
+        (elt) => elt === optionsContainer.querySelector(":focus")
+      );
+      console.log(index);
+      if(e.key === 'Enter' && optionsContainer.style.opacity === "1"){
+        //e.preventDefault()
         selectOptionDisplay();
       }
-    })
-    
+  
   });
+  }
+  
+    
 }
 
 displayMedias();
