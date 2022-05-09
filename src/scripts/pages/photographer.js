@@ -6,7 +6,7 @@ import { contactForm } from "../utils/contactForm";
 //import { dropdown } from "../utils/dropdown";
 //import { Lightbox } from "../factories/lightbox";
 import { Lightbox } from "./diaporama";
-import { move } from "../utils/draggableDiv";
+//import { move } from "../utils/draggableDiv";
 import { likes } from "../utils/likes";
 
 export function getPhotographerId() {
@@ -38,7 +38,7 @@ displayPhotographerHeader(); //AFFICHAGE DU HEADER PERSONNALISE POUR UN PHOTOGRA
 
 contactForm(); //GESTION DU FORMULAIRE
 
-move()
+//move()
 
 ///AFFICHAGE DES MEDIAS CORRESPONDANT A CHAQUE PHOTOGRAPHE ----> AFFICHAGE PAR DEFAUT
 export async function displayMedias() {
@@ -48,7 +48,7 @@ export async function displayMedias() {
   const selectBox = document.getElementById("tri");
   const optionsContainer = document.querySelector(".options-container");
   const optionsList = Array.from(document.querySelectorAll(".option"));
-  console.log(optionsList);
+  console.log(optionsList[0]);
   
   
   
@@ -65,18 +65,40 @@ export async function displayMedias() {
   }
   Lightbox.init()
 
-
+  const figures = Array.from(document.querySelectorAll('figure .media'));
+  console.log(figures[0]);
   //TOGGLE OUVERTURE FERMETURE DU MENU DROPDOWN AU CLIC
   selectBox.addEventListener("click", () => {
+    
     optionsContainer.classList.toggle("active");
     if(optionsContainer.classList.contains('active')){
       selectBox.setAttribute('aria-selected', true);
-      selected.focus();
+      let i = 0
+      console.log(optionsContainer.children[1]);
+      optionsContainer.children[1].focus()
+      for(let option of optionsList){
+        console.log(optionsList);
+        //i += 1
+        option.tabIndex = i;
+
+      }
+      selected.addEventListener('keydown', (e) => {
+        if(e.key === 'Tab'){
+          console.log(optionsContainer.children[1]);
+          optionsContainer.children[0].focus()
+        }
+      })
       
     }else{
        selectBox.setAttribute('aria-selected', false);
-       selected.focus();
+      selected.innerHTML = "Selection" 
+      for(let option of optionsList){
+        console.log(optionsList);
+        option.tabIndex = -1;
+      }
     }
+
+    
     
   });
   //TOGGLE OUVERTURE FERMETURE AU CLAVIER
@@ -84,16 +106,13 @@ export async function displayMedias() {
  selectBox.addEventListener("keydown", (e) => {
    console.log(e);
     if(e.key === "Enter"){
-      optionsContainer.classList.toggle("active");
-      if(optionsContainer.classList.contains('active')){
-        selectBox.setAttribute('aria-selected', true);
-        selected.focus();
-      }else{
-        selectBox.setAttribute('aria-selected', false);
-        selected.focus();
-      }
-      
+      selectBox.click();
     }
+     if(e.key === "Escape"){
+        optionsContainer.classList.remove("active");
+       
+      }           
+    
   });
 
 
@@ -142,19 +161,22 @@ export async function displayMedias() {
     }
     optionsList[i].addEventListener("click", () => {
       selectOptionDisplay(); 
+      
     })
 
-    window.addEventListener("keydown", (e) => {
-      let index = optionsList.findIndex(
-        (elt) => elt === optionsContainer.querySelector(":focus")
-      );
-      console.log(index);
-      if(e.key === 'Enter' && optionsContainer.style.opacity === "1"){
-        //e.preventDefault()
-        selectOptionDisplay();
+    optionsList[i].addEventListener("keydown", (e) => {
+      console.log(e);
+      if(e.key == "Enter"){
+        
+        e.preventDefault()
+        selectOptionDisplay(); 
+       
       }
-  
-  });
+      // if(e.key === "Escape"){
+      //   optionsContainer.classList.remove("active");
+       
+      // }           
+      })
   }
   
     
