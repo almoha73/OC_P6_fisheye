@@ -72,7 +72,8 @@ export async function displayMedias() {
     
     optionsContainer.classList.toggle("active");
     if(optionsContainer.classList.contains('active')){
-      selectBox.setAttribute('aria-selected', true);
+      selected.setAttribute('aria-expanded', true);
+      selected.setAttribute('aria-activedescendant', true);
       let i = 0
       console.log(optionsContainer.children[1]);
       optionsContainer.children[1].focus()
@@ -90,7 +91,8 @@ export async function displayMedias() {
       })
       
     }else{
-       selectBox.setAttribute('aria-selected', false);
+       selected.setAttribute('aria-expanded', false);
+       selected.setAttribute('aria-activedescendant', false);
       selected.innerHTML = "Selection" 
       for(let option of optionsList){
         console.log(optionsList);

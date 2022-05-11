@@ -12,7 +12,7 @@
   <body>
     <header>
       <a href="index.html" tabindex="0">
-        <img src="./assets/images/logo.png" class="logo" alt="Logo FishEye lien vers l'accueil" />
+        <img src="./assets/images/logo.png" class="logo" alt="Fisheye Homepage"/>
       </a>
     </header>
     <main id="main">
@@ -24,24 +24,24 @@
       <nav>
         <span>Trier par</span>
         <div id="tri" class="select-box" role="tablist">
-            <div class="options-container">
+            <div class="options-container" id="owned_listbox">
               <hr>
-              <div class="option" tabindex="-1" role="listbox">
-                <input type="radio" class="radio" name="category" id="date">
+              <div class="option" tabindex="-1" role="listbox" aria-label="date">
+                <input type="button" class="radio" name="category" value="date" id="date" role="option">
                 <label for="date" class="optionsDropdown">Date</label>
               </div>
               <hr>
-              <div class="option" tabindex="-1" role="listbox">
-                <input type="radio" class="radio" name="category" id="titre">
+              <div class="option" tabindex="-1" role="listbox" aria-label="titre">
+                <input type="button" class="radio" name="category" value="titre" id="titre" role="option">
                 <label for="titre" class="optionsDropdown">Titre</label>
               </div>
               <hr>
-              <div class="option" tabindex="-1" role="listbox">
-                <input type="radio" class="radio" name="category" id="popularite">
+              <div class="option" tabindex="-1" role="listbox" aria-label="popularité">
+                <input type="button" class="radio" name="category" value="popularite" id="popularite" role="option">
                 <label for="popularite" class="optionsDropdown">Popularité</label>
               </div>
             </div>
-            <div role="button" aria-label="selection de tri" tabindex="0" class="selected optionsDropdown" >
+            <div role="combobox" aria-haspopup="listbox" aria-activedescendant="false" aria-expanded="false" aria-owns="owned_listbox" tabindex="0" class="selected optionsDropdown">
               Selection
             </div>  
             
