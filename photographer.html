@@ -21,27 +21,27 @@
         
       </section>
       
-      <nav role="listbox">
-        <label for="tri">Trier par</label>
-        <div id="tri" aria-selected="false" aria-label="tri des medias" class="select-box" >
+      <nav>
+        <span>Trier par</span>
+        <div id="tri" class="select-box" role="tablist">
             <div class="options-container">
               <hr>
-              <div class="option" tabindex="-1" >
+              <div class="option" tabindex="-1" role="listbox">
                 <input type="radio" class="radio" name="category" id="date">
                 <label for="date" class="optionsDropdown">Date</label>
               </div>
               <hr>
-              <div class="option" tabindex="-1">
+              <div class="option" tabindex="-1" role="listbox">
                 <input type="radio" class="radio" name="category" id="titre">
                 <label for="titre" class="optionsDropdown">Titre</label>
               </div>
               <hr>
-              <div class="option" tabindex="-1">
+              <div class="option" tabindex="-1" role="listbox">
                 <input type="radio" class="radio" name="category" id="popularite">
                 <label for="popularite" class="optionsDropdown">Popularité</label>
               </div>
             </div>
-            <div tabindex="0" class="selected optionsDropdown">
+            <div role="button" aria-label="selection de tri" tabindex="0" class="selected optionsDropdown" >
               Selection
             </div>  
             
@@ -49,7 +49,9 @@
         </div>
       </nav>
 
-      <div class="gallery"></div>
+      <div class="gallery">
+
+      </div>
 
      <section tabindex="0" class="like-storage">
         <h2 class="like-total-count">&nbsp;</h2>
@@ -58,7 +60,7 @@
     </main>
 
     
-    <section id="contact_modal" class="displayForm" role="dialog" aria-describedby="dialogue avec le photographe" aria-modal="false">
+    <section id="contact_modal" class="displayForm" role="dialog" aria-modal="false">
       <div class="modal">
         <header>
           <div class="header-title">

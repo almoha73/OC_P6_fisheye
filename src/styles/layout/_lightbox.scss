@@ -10,6 +10,7 @@
 }
 .wrapper{
     display: block;
+    
 }
 .wrapper-content{
     z-index: 999;
@@ -17,14 +18,13 @@
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    
     width: 1000px;
     height: calc(100vh - 90px);
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: rgba(211, 87, 60);
-    border-radius: 3px;
+    background-color: abstracts.$color-white;
+    border-radius: 10px;
     
     
     & button{
@@ -35,7 +35,8 @@
     }
     p{
         font-size: 24px;
-        color: abstracts.$color-white;
+        font-weight: bold;
+        color: abstracts.$color-primary;
         line-height: 40px;
         
     }
@@ -45,27 +46,30 @@
         align-items: center;
         width: 100px;
         height: 100%;
+        background-color: abstracts.$color-white;
         .previous{
             width: 60px;
             height: 60px;
             font-size: 48px;
-            color: abstracts.$color-white;
+            color: abstracts.$color-primary;
             
         }
     }
     .wrapper-right{
         flex-direction: column-reverse;
         display: flex;
-        justify-content: space-between;
+        justify-content: flex-end;
         align-items: center;
         width: 100px;
-        height: 50%;
+        height: 100%;
+        background-color: abstracts.$color-white;
         .next{
             width: 60px;
             height: 60px;
+            margin-top: 360px;
             i{
                 font-size: 48px;
-                color: abstracts.$color-white;
+                color: abstracts.$color-primary;
             }
             
         }
@@ -74,7 +78,7 @@
             width: 35%; 
             color: abstracts.$color-primary;  
             svg path{
-                fill: abstracts.$color-white;
+                fill: abstracts.$color-primary;
             } 
         }
 
@@ -82,13 +86,13 @@
     
     
     .lightbox_container{
-        background-color: rgba(211, 87, 60);
+        background-color: abstracts.$color-white;
         justify-content: center;
         align-items: center;
         width: 800px;
         height: 100%;
         div{
-            background-color: rgba(211, 87, 60, 0.5);
+            background-color: abstracts.$color-white;
             display: flex;
             flex-direction: column;
             img{

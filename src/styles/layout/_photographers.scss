@@ -92,7 +92,8 @@ main{
     nav{
         display: flex;
         
-        &>label{
+        &>span{
+            display: inline-block;
             margin-left: 100px;
             margin-top: 10px;
             line-height: 50px;
@@ -101,7 +102,7 @@ main{
         .select-box{
             z-index: 10;
             border-radius: 5px;
-            margin-left: 100px;
+            margin-left: 180px;
             margin-top: 10px;
             display: flex;
             flex-direction: column;

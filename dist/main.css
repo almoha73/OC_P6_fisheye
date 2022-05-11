@@ -7,26 +7,37 @@
   \********************************************************************************************************************/
 main {
   width: 100%;
+  height: auto;
 }
 main .photographer_section {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 70px;
-  margin-top: 100px;
-}
-main .photographer_section a {
-  text-decoration: none;
-  font-weight: 700;
-}
-main .photographer_section article {
-  cursor: pointer;
-  justify-self: center;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  margin-top: 100px;
+}
+main .photographer_section .portrait {
+  width: 33%;
+  min-width: 365px;
+  margin-bottom: 60px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
   flex-direction: column;
 }
-main .photographer_section article img {
+main .photographer_section .portrait a {
+  text-decoration: none;
+  font-weight: 700;
+  display: inline-block;
+}
+main .photographer_section .portrait a article {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+main .photographer_section .portrait a article img {
   box-shadow: 2px 2px 10px 0 rgba(0, 0, 0, 0.5);
   transition: all 0.2s;
   height: 200px;
@@ -35,25 +46,31 @@ main .photographer_section article img {
   object-fit: cover;
   margin-bottom: 10px;
 }
-main .photographer_section article img:hover {
+main .photographer_section .portrait a article img:hover {
   box-shadow: 8px 8px 10px 0 rgba(0, 0, 0, 0.5);
   transform: scale(1.03);
 }
-main .photographer_section article h2 {
+main .photographer_section .portrait a article h2 {
   color: #D3573C;
   font-size: 36px;
   font-weight: 900;
 }
-main .photographer_section article h3 {
+main .photographer_section .portrait article {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+main .photographer_section .portrait article h3 {
   color: #D3573C;
   font-size: 19px;
   font-weight: 900;
 }
-main .photographer_section article p {
+main .photographer_section .portrait article p {
   font-size: 14px;
   color: #757575;
 }
-main .photographer_section article p:last-child {
+main .photographer_section .portrait article p:last-child {
   font-size: 12px;
   color: #757575;
 }
@@ -196,7 +213,8 @@ main .photograph-header img {
 main nav {
   display: flex;
 }
-main nav > label {
+main nav > span {
+  display: inline-block;
   margin-left: 100px;
   margin-top: 10px;
   line-height: 50px;
@@ -205,7 +223,7 @@ main nav > label {
 main nav .select-box {
   z-index: 10;
   border-radius: 5px;
-  margin-left: 100px;
+  margin-left: 180px;
   margin-top: 10px;
   display: flex;
   flex-direction: column;
@@ -350,10 +368,11 @@ main nav .select-box .options-container.active + .selected::after {
 #contact_modal .modal form div label {
   color: #312E2E;
   font-size: 25px;
+  font-weight: bold;
   display: inline-block;
 }
 #contact_modal .modal form div input.greenBorder {
-  border: 3px solid green !important;
+  border: 3px solid #005C00 !important;
 }
 #contact_modal .modal form div input.input-control.redBorder {
   border: 3px solid #901C1C;
@@ -365,7 +384,7 @@ main nav .select-box .options-container.active + .selected::after {
   width: 100%;
   height: 55px;
   padding: 8px;
-  border: 0.8px solid blue;
+  border: 0.8px solid #0000ff;
   outline: none;
   border-radius: 5px;
   font-size: 20px;
@@ -373,14 +392,19 @@ main nav .select-box .options-container.active + .selected::after {
 }
 #contact_modal .modal form div p {
   font-size: 16px;
+  font-weight: bold;
   width: 100%;
   height: 18px;
+  line-height: 17px;
+  padding-left: 20px;
 }
 #contact_modal .modal form div p.red {
-  color: #901C1C;
+  color: white;
+  background-color: #901C1C;
 }
 #contact_modal .modal form div p.green {
-  color: green;
+  color: white;
+  background-color: #005C00;
 }
 #contact_modal .modal form div.formData-message input.input-control.input-message {
   height: 170px;
@@ -534,8 +558,8 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: rgb(211, 87, 60);
-  border-radius: 3px;
+  background-color: #fff;
+  border-radius: 10px;
 }
 .wrapper-content button {
   border: none;
@@ -544,7 +568,8 @@ body {
 }
 .wrapper-content p {
   font-size: 24px;
-  color: #fff;
+  font-weight: bold;
+  color: #901C1C;
   line-height: 40px;
 }
 .wrapper-content .wrapper-left {
@@ -553,28 +578,31 @@ body {
   align-items: center;
   width: 100px;
   height: 100%;
+  background-color: #fff;
 }
 .wrapper-content .wrapper-left .previous {
   width: 60px;
   height: 60px;
   font-size: 48px;
-  color: #fff;
+  color: #901C1C;
 }
 .wrapper-content .wrapper-right {
   flex-direction: column-reverse;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   width: 100px;
-  height: 50%;
+  height: 100%;
+  background-color: #fff;
 }
 .wrapper-content .wrapper-right .next {
   width: 60px;
   height: 60px;
+  margin-top: 360px;
 }
 .wrapper-content .wrapper-right .next i {
   font-size: 48px;
-  color: #fff;
+  color: #901C1C;
 }
 .wrapper-content .wrapper-right .close-lightbox {
   margin-top: 15px;
@@ -582,17 +610,17 @@ body {
   color: #901C1C;
 }
 .wrapper-content .wrapper-right .close-lightbox svg path {
-  fill: #fff;
+  fill: #901C1C;
 }
 .wrapper-content .lightbox_container {
-  background-color: rgb(211, 87, 60);
+  background-color: #fff;
   justify-content: center;
   align-items: center;
   width: 800px;
   height: 100%;
 }
 .wrapper-content .lightbox_container div {
-  background-color: rgba(211, 87, 60, 0.5);
+  background-color: #fff;
   display: flex;
   flex-direction: column;
 }
