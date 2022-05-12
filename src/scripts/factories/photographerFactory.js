@@ -13,16 +13,16 @@ export class PhotographerFactory {
     const photographerSection = document.querySelector(".photographer_section");
     photographerSection.innerHTML += `
       <div class="portrait">
-           <a href="photographer.html?index=${this.id}">
-                <article tabindex="0" data-filter = "${this.id}" class="photographer_article">
+           <a href="photographer.html?index=${this.id}" tabindex="0">
+                <article data-filter = "${this.id}" class="photographer_article">
                     <img src="assets/photographers/photo/${this.portrait}" srcset="assets/photographers/photo/${this.portrait}_small.jpg 1x" alt="${this.name}">
-                    <h2 aria-label="${this.name}">${this.name}</h2>
+                    <h2>${this.name}</h2>
                 </article>
           </a> 
                 <article tabindex="0">
-                    <h3>${this.city}, ${this.country}</h4>
-                    <p>${this.tagline}</p>
-                    <p>${this.price}€/jour</p>
+                    <h3 tabindex="0" aria-label="${this.city}, ${this.country}">${this.city}, ${this.country}</h3>
+                    <p tabindex="0" aria-label="${this.tagline}">${this.tagline}</p>
+                    <p tabindex="0" aria-label="${this.price}€/jour">${this.price}€/jour</p>
                 </article>
         </div>     
             `;
