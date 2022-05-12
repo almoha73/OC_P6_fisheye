@@ -7,86 +7,126 @@ main{
         margin: auto;
         border-radius: 5px;
         width: calc(100% - 200px);
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        justify-items: center;
+        display: flex;
+        padding: 40px;
         align-items: center;
         @media screen and (max-width: 992px){
             display: flex;
             flex-direction: column;
             font-size: 2rem;
-            height: 500px;
+            height: 550px;
             justify-content: space-around;
         }
         @media screen and (max-width: 900px){
             display: flex;
             flex-direction: column;
             font-size: 2rem;
-            height: 500px;
+            height: 550px;
             justify-content: space-around;
             width: calc(100% - 100px);
         }
-        .presentation{
+        & .presentation{
             display: flex;
             flex-direction: column;
             align-items: flex-start;
             justify-content: center;
-            margin-left: 40px;
+            width: 40%;
+            @media screen and (max-width: 992px){
+                align-items: center;
+                width: 90%;
+                justify-content: center;
+            }
             h1{
+                width: 100%;
                 font-size: 3.8rem;
                 color: abstracts.$color-secondary;
                 @media screen and (max-width: 1200px){
                     font-size: 3rem;
+                    text-align: center;
                 }
                 @media screen and (max-width: 550px){
                     font-size: 2rem;
                 }
-               
+                
             }
-            h2{
-                font-size: 24px;
-                color: abstracts.$color-secondary;
+            div.identite{
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                @media screen and (max-width: 992px){
+                    align-items: center;
+                    justify-content: center;
+                }
+                h2{
+                    font-size: 24px;
+                    color: abstracts.$color-secondary;
+                    width: 100%;
+                    
+                    @media screen and (max-width: 992px){
+                        text-align: center;
+                    }
+                }
+                p{
+                    font-size: 18px;
+                    color: abstracts.$color-quaternary;
+                    width: 100%;
+                    margin-top: 20px;
+                    @media screen and (max-width: 992px){
+                        text-align: center;
+                    }
+                }
+            }   
+            
+        }
+        & div:nth-child(2){
+            width: 30%;
+            display: flex;
+            justify-content: center;
+            @media screen and (max-width: 992px){
+                width: 90%;
             }
-            p{
-                font-size: 18px;
-                color: abstracts.$color-quaternary;
+           &  button{
+            
+                width: 170px;
+                height: 69px;
+                background-color: abstracts.$color-primary;
+                color: abstracts.$color-white;
+                border-radius: 5px;
+                cursor: pointer;
+                font-size: 1.2rem;
+                font-weight: bold;
+                padding: 11px;
+                border: none;
+                &:hover{
+                    background-color: abstracts.$color-secondary;
+                    color: abstracts.$color-black;
+                    border: 2px solid abstracts.$color-black;
+                    transform: scale(1.03);
+                }
+                &:focus{
+                    background-color: abstracts.$color-secondary;
+                    color: abstracts.$color-black;
+                    border: 2px solid abstracts.$color-black;
+                    transform: scale(1.03);
+                }
             }
         }
-        button{
-            width: 170px;
-            height: 69px;
-            background-color: abstracts.$color-primary;
-            color: abstracts.$color-white;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1.2rem;
-            font-weight: bold;
-            padding: 11px;
-            border: none;
-            @media screen and (max-width: 1200px){
-                width: 130px;
-                font-size: 0.95rem;
+        
+        & :nth-child(3){
+            width: 30%;
+            display: flex;
+            justify-content: flex-end;
+            @media screen and (max-width: 992px){
+                width: 90%;
             }
-            //outline: none;
-            &:hover{
-                background-color: abstracts.$color-secondary;
-                color: abstracts.$color-black;
-                border: 2px solid abstracts.$color-black;
-                transform: scale(1.03);
-            }
-            &:focus{
-                background-color: abstracts.$color-secondary;
-                color: abstracts.$color-black;
-                border: 2px solid abstracts.$color-black;
-                transform: scale(1.03);
+            & img{
+                width: 200px;
+                height: 200px;
+                border-radius: 50%;
+                object-fit: cover;
             }
         }
-        img{
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            object-fit: cover;
-        }
+        
     }
 
     nav{

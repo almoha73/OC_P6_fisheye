@@ -88,7 +88,10 @@ export async function contactForm() {
   // Fonction RESET après envoi du formulaire
   function resetField() {
     for (let i = 0; i < inputField.length; i++) {
+      let paragraphe = inputField[i].nextElementSibling;
       inputField[i].value = "";
+      okMessageRemove(paragraphe, inputField[i]);
+      errorMessage(paragraphe, ``, inputField[i]);
       inputField[i].classList.remove("redBorder");
       inputField[i].classList.remove("greenBorder");
       inputField[i].nextElementSibling.innerHTML = "";

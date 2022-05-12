@@ -101,7 +101,7 @@ export class Lightbox {
             index = 0;
           }
           if (index < 0) {
-            index = focusablesLightbox.length - 1;  
+            index = focusablesLightbox.length - 1;
           }
 
           focusablesLightbox[index].focus();

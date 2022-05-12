@@ -121,9 +121,8 @@ main .photograph-header {
   margin: auto;
   border-radius: 5px;
   width: calc(100% - 200px);
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  justify-items: center;
+  display: flex;
+  padding: 40px;
   align-items: center;
 }
 @media screen and (max-width: 992px) {
@@ -131,7 +130,7 @@ main .photograph-header {
     display: flex;
     flex-direction: column;
     font-size: 2rem;
-    height: 500px;
+    height: 550px;
     justify-content: space-around;
   }
 }
@@ -140,7 +139,7 @@ main .photograph-header {
     display: flex;
     flex-direction: column;
     font-size: 2rem;
-    height: 500px;
+    height: 550px;
     justify-content: space-around;
     width: calc(100% - 100px);
   }
@@ -150,15 +149,24 @@ main .photograph-header .presentation {
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-  margin-left: 40px;
+  width: 40%;
+}
+@media screen and (max-width: 992px) {
+  main .photograph-header .presentation {
+    align-items: center;
+    width: 90%;
+    justify-content: center;
+  }
 }
 main .photograph-header .presentation h1 {
+  width: 100%;
   font-size: 3.8rem;
   color: #D3573C;
 }
 @media screen and (max-width: 1200px) {
   main .photograph-header .presentation h1 {
     font-size: 3rem;
+    text-align: center;
   }
 }
 @media screen and (max-width: 550px) {
@@ -166,15 +174,49 @@ main .photograph-header .presentation h1 {
     font-size: 2rem;
   }
 }
-main .photograph-header .presentation h2 {
+main .photograph-header .presentation div.identite {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+@media screen and (max-width: 992px) {
+  main .photograph-header .presentation div.identite {
+    align-items: center;
+    justify-content: center;
+  }
+}
+main .photograph-header .presentation div.identite h2 {
   font-size: 24px;
   color: #D3573C;
+  width: 100%;
 }
-main .photograph-header .presentation p {
+@media screen and (max-width: 992px) {
+  main .photograph-header .presentation div.identite h2 {
+    text-align: center;
+  }
+}
+main .photograph-header .presentation div.identite p {
   font-size: 18px;
   color: #525252;
+  width: 100%;
+  margin-top: 20px;
 }
-main .photograph-header button {
+@media screen and (max-width: 992px) {
+  main .photograph-header .presentation div.identite p {
+    text-align: center;
+  }
+}
+main .photograph-header div:nth-child(2) {
+  width: 30%;
+  display: flex;
+  justify-content: center;
+}
+@media screen and (max-width: 992px) {
+  main .photograph-header div:nth-child(2) {
+    width: 90%;
+  }
+}
+main .photograph-header div:nth-child(2) button {
   width: 170px;
   height: 69px;
   background-color: #901C1C;
@@ -186,25 +228,29 @@ main .photograph-header button {
   padding: 11px;
   border: none;
 }
-@media screen and (max-width: 1200px) {
-  main .photograph-header button {
-    width: 130px;
-    font-size: 0.95rem;
+main .photograph-header div:nth-child(2) button:hover {
+  background-color: #D3573C;
+  color: #000;
+  border: 2px solid #000;
+  transform: scale(1.03);
+}
+main .photograph-header div:nth-child(2) button:focus {
+  background-color: #D3573C;
+  color: #000;
+  border: 2px solid #000;
+  transform: scale(1.03);
+}
+main .photograph-header :nth-child(3) {
+  width: 30%;
+  display: flex;
+  justify-content: flex-end;
+}
+@media screen and (max-width: 992px) {
+  main .photograph-header :nth-child(3) {
+    width: 90%;
   }
 }
-main .photograph-header button:hover {
-  background-color: #D3573C;
-  color: #000;
-  border: 2px solid #000;
-  transform: scale(1.03);
-}
-main .photograph-header button:focus {
-  background-color: #D3573C;
-  color: #000;
-  border: 2px solid #000;
-  transform: scale(1.03);
-}
-main .photograph-header img {
+main .photograph-header :nth-child(3) img {
   width: 200px;
   height: 200px;
   border-radius: 50%;

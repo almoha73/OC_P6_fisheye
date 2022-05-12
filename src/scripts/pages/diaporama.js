@@ -9,23 +9,32 @@ export class Lightbox {
     const links = Array.from(document.querySelectorAll(".media"));
     const tabLinks = links.map((media) => media.getAttribute("src")); //this.tabLinks
     const titles = Array.from(document.querySelectorAll(".title"));
-    
+
     const title = titles.map((elt) => elt.innerText);
-    
-    
+
     for (let i = 0; i < links.length; i++) {
       const link = links[i]; //this.link
       const titlePos = title[i]; //this.titlePos
       const linkUrl = link.getAttribute("src"); //this.linkUrl
-      const currentMediaPosition = tabLinks.findIndex(//this.currentPosition
+      const currentMediaPosition = tabLinks.findIndex(
+        //this.currentPosition
         (link) => link == linkUrl
       );
-      const currentMediaTitle = title.findIndex(//this.currentMediaTitle
+      const currentMediaTitle = title.findIndex(
+        //this.currentMediaTitle
         (link) => link == titlePos
       );
 
       link.onclick = (e) => {
-        const light = new Lightbox(linkUrl, tabLinks, link, title, titlePos, currentMediaPosition, currentMediaTitle);
+        const light = new Lightbox(
+          linkUrl,
+          tabLinks,
+          link,
+          title,
+          titlePos,
+          currentMediaPosition,
+          currentMediaTitle
+        );
         light.preview();
         const next = document.querySelector(".next");
         next.focus();
@@ -34,7 +43,15 @@ export class Lightbox {
       link.onkeydown = (e) => {
         if (e.key === "Enter") {
           e.preventDefault();
-          const light = new Lightbox(linkUrl, tabLinks, link, title, titlePos, currentMediaPosition, currentMediaTitle);
+          const light = new Lightbox(
+            linkUrl,
+            tabLinks,
+            link,
+            title,
+            titlePos,
+            currentMediaPosition,
+            currentMediaTitle
+          );
           light.preview();
           const next = document.querySelector(".next");
           next.focus();
@@ -43,28 +60,25 @@ export class Lightbox {
     }
   }
 
-  
-
   //AFFICHAGE DE LA LIGHTBOX AVEC IMAGES ET/OU VIDEO
   preview() {
     if (this.links[this.currentMediaPosition].nodeName === "IMG") {
-      
       const lightboxImage = new Lightboximage(this.linkUrl, this.titlePos);
       lightboxImage.buildDom();
-    } else{
+    } else {
       const lightboxVideo = new Lightboxvideo(this.linkUrl, this.titlePos);
 
       lightboxVideo.buildDom();
     }
   }
 
-  focusInModal (e) {
+  focusInModal(e) {
     e.preventDefault();
     const wrapper = document.querySelector(".wrapper");
     const focusablesLightbox = Array.from(
       document.querySelectorAll(".modalLightbox")
     );
-    
+
     let index = focusablesLightbox.findIndex(
       (elt) => elt === wrapper.querySelector(":focus")
     );
@@ -84,7 +98,7 @@ export class Lightbox {
     }
 
     focusablesLightbox[index].focus();
-  };
+  }
 
   clicEvent() {
     this.closeIcon.addEventListener("click", (e) => {
@@ -105,39 +119,32 @@ export class Lightbox {
     setTimeout(() => {
       this.body.firstChild.remove();
     }, 700);
-    this.links[this.currentMediaPosition].focus()
-    
+    this.links[this.currentMediaPosition].focus();
   }
 
   next() {
-    
     this.lightBoxRemove;
-    
+
     if (this.currentMediaPosition < this.links.length - 1) {
-      
       this.currentMediaPosition++;
       this.currentMediaTitle++;
       this.linkUrl = this.tabLinks[this.currentMediaPosition];
       this.titlePos = this.title[this.currentMediaTitle];
-      
-      
+
       this.preview();
-      
     } else {
-      
       this.currentMediaPosition = 0;
       this.currentMediaTitle = 0;
       this.linkUrl = this.tabLinks[this.currentMediaPosition];
       this.titlePos = this.title[this.currentMediaTitle];
-      
+
       this.preview();
     }
   }
 
   previous() {
     this.lightBoxRemove;
-    
-    
+
     if (this.currentMediaPosition > 0) {
       this.currentMediaPosition--;
       this.currentMediaTitle--;
@@ -166,11 +173,19 @@ export class Lightbox {
       } else if (e.key === "Tab" && this.element !== null) {
         e.preventDefault();
         this.focusInModal(e);
-      } 
+      }
     });
   }
 
-  constructor(linkUrl, tabLinks, link, title, titlePos, currentMediaPosition, currentMediaTitle) {
+  constructor(
+    linkUrl,
+    tabLinks,
+    link,
+    title,
+    titlePos,
+    currentMediaPosition,
+    currentMediaTitle
+  ) {
     this.linkUrl = linkUrl;
     this.tabLinks = tabLinks;
     this.link = link;
@@ -185,7 +200,7 @@ export class Lightbox {
     this.body.prepend(this.element);
     this.lightboxContainer = document.querySelector(".lightbox_container");
     this.lightBoxRemove = this.lightboxContainer.firstChild.remove();
-  
+
     this.closeIcon = document.querySelector(".close-lightbox");
     this.rightArrow = document.querySelector(".next");
     this.leftArrow = document.querySelector(".previous");

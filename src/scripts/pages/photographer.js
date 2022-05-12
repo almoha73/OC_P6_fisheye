@@ -49,9 +49,7 @@ export async function displayMedias() {
   const optionsContainer = document.querySelector(".options-container");
   const optionsList = Array.from(document.querySelectorAll(".option"));
   console.log(optionsList[0]);
-  
-  
-  
+
   let mediaArray = [];
 
   // APPARITION DES MEDIAS PAR ID PHOTOGRAPHE PAR DEFAUT (date)
@@ -61,100 +59,90 @@ export async function displayMedias() {
       new MediaFactory(media).getMedias();
       likes();
     }
-       
   }
-  Lightbox.init()
+  Lightbox.init();
 
-  const figures = Array.from(document.querySelectorAll('figure .media'));
+  const figures = Array.from(document.querySelectorAll("figure .media"));
   console.log(figures[0]);
   //TOGGLE OUVERTURE FERMETURE DU MENU DROPDOWN AU CLIC
   selectBox.addEventListener("click", () => {
-    
     optionsContainer.classList.toggle("active");
-    if(optionsContainer.classList.contains('active')){
-      selected.setAttribute('aria-expanded', true);
-      selected.setAttribute('aria-activedescendant', true);
-      let i = 0
+    if (optionsContainer.classList.contains("active")) {
+      selected.setAttribute("aria-expanded", true);
+      selected.setAttribute("aria-activedescendant", true);
+      let i = 0;
       console.log(optionsContainer.children[1]);
-      optionsContainer.children[1].focus()
-      for(let option of optionsList){
+      optionsContainer.children[1].focus();
+      for (let option of optionsList) {
         console.log(optionsList);
         //i += 1
         option.tabIndex = i;
-
       }
-      selected.addEventListener('keydown', (e) => {
-        if(e.key === 'Tab'){
+      selected.addEventListener("keydown", (e) => {
+        if (e.key === "Tab") {
           console.log(optionsContainer.children[1]);
-          optionsContainer.children[0].focus()
+          optionsContainer.children[0].focus();
         }
-      })
-      
-    }else{
-       selected.setAttribute('aria-expanded', false);
-       selected.setAttribute('aria-activedescendant', false);
-      selected.innerHTML = "Selection" 
-      for(let option of optionsList){
+      });
+    } else {
+      selected.setAttribute("aria-expanded", false);
+      selected.setAttribute("aria-activedescendant", false);
+      selected.innerHTML = "Selection";
+      for (let option of optionsList) {
         console.log(optionsList);
         option.tabIndex = -1;
       }
     }
-
-    
-    
   });
   //TOGGLE OUVERTURE FERMETURE AU CLAVIER
-  
- selectBox.addEventListener("keydown", (e) => {
-   console.log(e);
-    if(e.key === "Enter"){
+
+  selectBox.addEventListener("keydown", (e) => {
+    console.log(e);
+    if (e.key === "Enter") {
       selectBox.click();
     }
-     if(e.key === "Escape"){
-        optionsContainer.classList.remove("active");
-       
-      }           
-    
+    if (e.key === "Escape") {
+      optionsContainer.classList.remove("active");
+    }
   });
 
-
   // LORSQUE L'ON CLIQUE SUR UNE OPTION DU MENU DROPDOWN ......
-  for(let i = 0; i < optionsList.length; i++){
+  for (let i = 0; i < optionsList.length; i++) {
     optionsContainer.classList.remove("active");
-    function selectOptionDisplay(){
+    function selectOptionDisplay() {
       selected.innerHTML = optionsList[i].querySelector("label").innerHTML;
-      
+
       const gallery = document.querySelector(".gallery");
       gallery.innerHTML = ""; //ON VIDE LA GALERIE
       // TRI EN FONCTION DE L'ELEMENT CHOISI (Popularité, Date ou Titre)
-      
-        const choice = selected.innerHTML;
 
-        switch (choice) {
-          case "Popularité":
-            mediaArray.sort((a, b) => {
-              return b.likes - a.likes;
-            });
+      const choice = selected.innerHTML;
 
-            break;
+      switch (choice) {
+        case "Popularité":
+          mediaArray.sort((a, b) => {
+            return b.likes - a.likes;
+          });
 
-          case "Date":
-            mediaArray.sort((a, b) => {
-              return new Date(b.date) - new Date(a.date);
-            });
-            break;
+          break;
 
-          case "Titre":
-            mediaArray.sort((a, b) => {
-              return a.title > b.title ? 1 : -1;
-            });
+        case "Date":
+          mediaArray.sort((a, b) => {
+            return new Date(b.date) - new Date(a.date);
+          });
+          break;
 
-            break;
-        }
+        case "Titre":
+          mediaArray.sort((a, b) => {
+            return a.title > b.title ? 1 : -1;
+          });
 
-         //LANCEMENT DE L'AFFICHAGE UNE FOIS LE TRI EFFECTUE
-         for (let media of mediaArray) { 
-         if (media.photographerId == mediaId) {
+          break;
+      }
+
+      //LANCEMENT DE L'AFFICHAGE UNE FOIS LE TRI EFFECTUE
+      for (let media of mediaArray) {
+        if (media.photographerId == mediaId) {
           new MediaFactory(media).getMedias();
           likes();
           Lightbox.init();
@@ -162,31 +150,21 @@ export async function displayMedias() {
       }
     }
     optionsList[i].addEventListener("click", () => {
-      selectOptionDisplay(); 
-      
-    })
+      selectOptionDisplay();
+    });
 
     optionsList[i].addEventListener("keydown", (e) => {
       console.log(e);
-      if(e.key == "Enter"){
-        
-        e.preventDefault()
-        selectOptionDisplay(); 
-       
+      if (e.key == "Enter") {
+        e.preventDefault();
+        selectOptionDisplay();
       }
       // if(e.key === "Escape"){
       //   optionsContainer.classList.remove("active");
-       
-      // }           
-      })
+
+      // }
+    });
   }
-  
-    
 }
 
 displayMedias();
-
-
-        
-
-       
