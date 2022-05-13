@@ -45,7 +45,6 @@ export async function displayMedias() {
   const selectBox = document.getElementById("tri");
   const optionsContainer = document.querySelector(".options-container");
   const optionsList = Array.from(document.querySelectorAll(".option"));
-  console.log(optionsList[0]);
 
   let mediaArray = [];
 
@@ -59,8 +58,6 @@ export async function displayMedias() {
   }
   Lightbox.init();
 
-  const figures = Array.from(document.querySelectorAll("figure .media"));
-  console.log(figures[0]);
   //TOGGLE OUVERTURE FERMETURE DU MENU DROPDOWN AU CLIC
   selectBox.addEventListener("click", () => {
     optionsContainer.classList.toggle("active");
@@ -68,16 +65,14 @@ export async function displayMedias() {
       selected.setAttribute("aria-expanded", true);
       selected.setAttribute("aria-activedescendant", true);
       let i = 0;
-      console.log(optionsContainer.children[1]);
       optionsContainer.children[1].focus();
       for (let option of optionsList) {
-        console.log(optionsList);
+        
         //i += 1
         option.tabIndex = i;
       }
       selected.addEventListener("keydown", (e) => {
         if (e.key === "Tab") {
-          console.log(optionsContainer.children[1]);
           optionsContainer.children[0].focus();
         }
       });
@@ -86,7 +81,6 @@ export async function displayMedias() {
       selected.setAttribute("aria-activedescendant", false);
       selected.innerHTML = "Selection";
       for (let option of optionsList) {
-        console.log(optionsList);
         option.tabIndex = -1;
       }
     }
@@ -94,7 +88,6 @@ export async function displayMedias() {
   //TOGGLE OUVERTURE FERMETURE AU CLAVIER
 
   selectBox.addEventListener("keydown", (e) => {
-    console.log(e);
     if (e.key === "Enter") {
       selectBox.click();
     }
@@ -151,7 +144,6 @@ export async function displayMedias() {
     });
 
     optionsList[i].addEventListener("keydown", (e) => {
-      console.log(e);
       if (e.key == "Enter") {
         e.preventDefault();
         selectOptionDisplay();
