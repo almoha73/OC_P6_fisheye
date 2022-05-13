@@ -3,25 +3,19 @@ import { displayPhotographerHeader } from "../pages/photographer";
 
 export async function contactForm() {
   await displayPhotographerHeader();
-  const articles = await fetchPhotographers();
+  //const articles = await fetchPhotographers();
   //Variables du formulaire
   const formModal = document.querySelector("#contact_modal"); //formulaire
   const contactBtn = document.querySelector("button.contact"); //ouverture
   const titreForm = document.querySelector("h1");
   const closeModal = document.querySelector(".close-modal"); //fermeture
   let inputField = document.querySelectorAll("input.input-control"); // inputs
-  //const sendButton = document.querySelector(".send_button"); //bouton envoyer
   const body = document.querySelector("body");
-  const header = document.querySelector("header");
-  const main = document.querySelector("main");
   //ouverture du formulaire
   contactBtn.addEventListener("click", (e) => {
     e.preventDefault();
     formModal.style.display = "inline-block";
     formModal.setAttribute("aria-modal", true);
-    // header.style.display = "none";
-    // main.style.display = "none";
-    // body.style.backgroundColor = "#901C1C";
     titreForm.focus();
     focusBlur();
   });
@@ -63,8 +57,7 @@ export async function contactForm() {
       body.style.backgroundColor = "transparent";
       setTimeout(() => {
         formModal.style.display = "none";
-        // header.style.display = "block";
-        // main.style.display = "block";
+        
 
         resetField();
       }, 1000);
@@ -77,8 +70,7 @@ export async function contactForm() {
     body.style.backgroundColor = "transparent";
     setTimeout(() => {
       formModal.style.display = "none";
-      // header.style.display = "block";
-      // main.style.display = "block";
+      
 
       resetField();
     }, 500);
@@ -94,6 +86,8 @@ export async function contactForm() {
       errorMessage(paragraphe, ``, inputField[i]);
       inputField[i].classList.remove("redBorder");
       inputField[i].classList.remove("greenBorder");
+      paragraphe.classList.remove("red");
+      paragraphe.classList.remove("green");
       inputField[i].nextElementSibling.innerHTML = "";
     }
     contactBtn.focus();
@@ -248,9 +242,6 @@ export async function contactForm() {
     if (valideForm()) {
       setTimeout(() => {
         formModal.style.display = "none";
-        // header.style.display = "block";
-        // main.style.display = "block";
-        // body.style.backgroundColor = "transparent";
         resetField();
       }, 500);
       contactBtn.focus();

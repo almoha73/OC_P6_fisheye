@@ -1,5 +1,5 @@
-import { fetchPhotographersMedias } from "../pages/api";
-import { displayMedias } from "../pages/photographer";
+import { fetchPhotographersMedias } from "./api";
+import { displayMedias } from "./photographer";
 import { Lightboximage } from "../factories/lightboxImage";
 import { Lightboxvideo } from "../factories/lightboxVideo";
 //import { MediaFactory } from "./mediasFactory";
@@ -14,26 +14,26 @@ export class Lightbox {
 
     for (let i = 0; i < links.length; i++) {
       const link = links[i]; //this.link
-      const titlePos = title[i]; //this.titlePos
+      const titlePosition = title[i]; //this.titlePosition
       const linkUrl = link.getAttribute("src"); //this.linkUrl
       const currentMediaPosition = tabLinks.findIndex(
         //this.currentPosition
         (link) => link == linkUrl
       );
-      const currentMediaTitle = title.findIndex(
-        //this.currentMediaTitle
-        (link) => link == titlePos
+      const currentMediaTitlePosition = title.findIndex(
+        //this.currentMediaTitlePosition
+        (link) => link == titlePosition
       );
 
-      link.onclick = (e) => {
+      link.onclick = () => {
         const light = new Lightbox(
           linkUrl,
           tabLinks,
           link,
           title,
-          titlePos,
+          titlePosition,
           currentMediaPosition,
-          currentMediaTitle
+          currentMediaTitlePosition
         );
         light.preview();
         const next = document.querySelector(".next");
@@ -43,35 +43,59 @@ export class Lightbox {
       link.onkeydown = (e) => {
         if (e.key === "Enter") {
           e.preventDefault();
-          const light = new Lightbox(
-            linkUrl,
-            tabLinks,
-            link,
-            title,
-            titlePos,
-            currentMediaPosition,
-            currentMediaTitle
-          );
-          light.preview();
-          const next = document.querySelector(".next");
-          next.focus();
+          link.onclick();
         }
       };
     }
   }
 
+  // CONSTRUCTEUR
+  constructor(
+    linkUrl,
+    tabLinks,
+    link,
+    title,
+    titlePosition,
+    currentMediaPosition,
+    currentMediaTitlePosition
+  ) {
+    console.log(this);
+    this.linkUrl = linkUrl;
+    this.tabLinks = tabLinks;
+    this.link = link;
+    this.title = title;
+    this.titlePosition = titlePosition;
+    this.links = Array.from(document.querySelectorAll(".media"));
+    this.currentMediaPosition = currentMediaPosition;
+    this.currentMediaTitlePosition = currentMediaTitlePosition;
+
+    this.element = this.buildDom();
+    this.body = document.querySelector("body");
+    this.body.prepend(this.element);
+    this.lightboxContainer = document.querySelector(".lightbox_container");
+    this.lightBoxRemove = this.lightboxContainer.firstChild.remove();
+
+    this.closeIcon = document.querySelector(".close-lightbox");
+    this.rightArrow = document.querySelector(".next");
+    this.leftArrow = document.querySelector(".previous");
+    this.clicEvent();
+    this.keyboardEvent();
+  }
+
   //AFFICHAGE DE LA LIGHTBOX AVEC IMAGES ET/OU VIDEO
   preview() {
     if (this.links[this.currentMediaPosition].nodeName === "IMG") {
-      const lightboxImage = new Lightboximage(this.linkUrl, this.titlePos);
+      const lightboxImage = new Lightboximage(this.linkUrl, this.titlePosition);
       lightboxImage.buildDom();
     } else {
-      const lightboxVideo = new Lightboxvideo(this.linkUrl, this.titlePos);
+      // si le nodeName n'est pas IMG donc ici vidéo
+      const lightboxVideo = new Lightboxvideo(this.linkUrl, this.titlePosition);
 
       lightboxVideo.buildDom();
     }
   }
 
+  // Fonction qui permet de garder le focus à l'intérieur de la modale de la lightbox
   focusInModal(e) {
     e.preventDefault();
     const wrapper = document.querySelector(".wrapper");
@@ -100,6 +124,7 @@ export class Lightbox {
     focusablesLightbox[index].focus();
   }
 
+  //Evenements du clic sur les boutons
   clicEvent() {
     this.closeIcon.addEventListener("click", (e) => {
       e.preventDefault();
@@ -118,7 +143,7 @@ export class Lightbox {
   close() {
     setTimeout(() => {
       this.body.firstChild.remove();
-    }, 700);
+    }, 500);
     this.links[this.currentMediaPosition].focus();
   }
 
@@ -127,17 +152,15 @@ export class Lightbox {
 
     if (this.currentMediaPosition < this.links.length - 1) {
       this.currentMediaPosition++;
-      this.currentMediaTitle++;
+      this.currentMediaTitlePosition++;
       this.linkUrl = this.tabLinks[this.currentMediaPosition];
-      this.titlePos = this.title[this.currentMediaTitle];
-
+      this.titlePosition = this.title[this.currentMediaTitlePosition];
       this.preview();
     } else {
       this.currentMediaPosition = 0;
-      this.currentMediaTitle = 0;
+      this.currentMediaTitlePosition = 0;
       this.linkUrl = this.tabLinks[this.currentMediaPosition];
-      this.titlePos = this.title[this.currentMediaTitle];
-
+      this.titlePosition = this.title[this.currentMediaTitlePosition];
       this.preview();
     }
   }
@@ -147,19 +170,20 @@ export class Lightbox {
 
     if (this.currentMediaPosition > 0) {
       this.currentMediaPosition--;
-      this.currentMediaTitle--;
+      this.currentMediaTitlePosition--;
       this.linkUrl = this.tabLinks[this.currentMediaPosition];
-      this.titlePos = this.title[this.currentMediaTitle];
+      this.titlePosition = this.title[this.currentMediaTitlePosition];
       this.preview();
     } else {
       this.currentMediaPosition = this.links.length - 1;
-      this.currentMediaTitle = this.title.length - 1;
+      this.currentMediaTitlePosition = this.title.length - 1;
       this.linkUrl = this.tabLinks[this.currentMediaPosition];
-      this.titlePos = this.title[this.currentMediaTitle];
+      this.titlePosition = this.title[this.currentMediaTitlePosition];
       this.preview();
     }
   }
 
+  //Evènements  du clavier
   keyboardEvent() {
     this.element.addEventListener("keydown", (e) => {
       if (e.key === "Escape" && this.element !== null) {
@@ -175,37 +199,6 @@ export class Lightbox {
         this.focusInModal(e);
       }
     });
-  }
-
-  constructor(
-    linkUrl,
-    tabLinks,
-    link,
-    title,
-    titlePos,
-    currentMediaPosition,
-    currentMediaTitle
-  ) {
-    this.linkUrl = linkUrl;
-    this.tabLinks = tabLinks;
-    this.link = link;
-    this.title = title;
-    this.titlePos = titlePos;
-    this.links = Array.from(document.querySelectorAll(".media"));
-    this.currentMediaPosition = currentMediaPosition;
-    this.currentMediaTitle = currentMediaTitle;
-
-    this.element = this.buildDom();
-    this.body = document.querySelector("body");
-    this.body.prepend(this.element);
-    this.lightboxContainer = document.querySelector(".lightbox_container");
-    this.lightBoxRemove = this.lightboxContainer.firstChild.remove();
-
-    this.closeIcon = document.querySelector(".close-lightbox");
-    this.rightArrow = document.querySelector(".next");
-    this.leftArrow = document.querySelector(".previous");
-    this.clicEvent();
-    this.keyboardEvent();
   }
 
   buildDom() {

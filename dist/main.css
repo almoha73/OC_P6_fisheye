@@ -574,6 +574,7 @@ body {
   width: 10%;
   line-height: 48px;
   text-align: right;
+  cursor: pointer;
 }
 .gallery figcaption p:nth-child(3) i {
   color: #901C1C;

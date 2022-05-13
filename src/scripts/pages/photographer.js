@@ -3,10 +3,7 @@ import { PhotographerFactory } from "../factories/photographerFactory.js";
 import { MediaFactory } from "../factories/mediasFactory";
 import { fetchPhotographers, fetchPhotographersMedias } from "../pages/api.js";
 import { contactForm } from "../utils/contactForm";
-//import { dropdown } from "../utils/dropdown";
-//import { Lightbox } from "../factories/lightbox";
-import { Lightbox } from "./diaporama";
-//import { move } from "../utils/draggableDiv";
+import { Lightbox } from "./Lightbox";
 import { likes } from "../utils/likes";
 
 export function getPhotographerId() {

@@ -13,6 +13,5 @@ export class Lightboximage {
         <p tabindex="0" class="modalLightbox">${this.title}</p>
       </div>
       `;
-    // wrapper.querySelector(".next").addEventListener('click', this.next.bind(this));
   }
 }
